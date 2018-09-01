@@ -1,0 +1,24 @@
+@import "~@seniorsistemas/primeng-theme/dist/scss/_colors";
+
+.header {
+    background-color: $default-color;
+    color: $secondary-dark-text-color;
+    display: flex;
+    height: 70px;
+    justify-content: space-between;
+    z-index: 1;
+    position: sticky;
+    top: 0;
+    left: 0;
+    box-shadow: 2px 2px 2px $default-secondary-color;
+}
+
+.header-title {
+    font-weight: normal;
+    font-size: 22px;
+    margin-right: 15px;
+    min-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

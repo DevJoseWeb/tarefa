@@ -1,0 +1,22 @@
+<p-panel styleClass="form-group" [toggleable]="true">
+    <p-header>
+        <span>Entities</span>
+    </p-header>
+    <div class="ui-fluid">
+        <div class="ui-g">
+            <div class="ui-g-12" routerLink="../total-divida" style="cursor: pointer;">{{"erp_fin.tcr_baixa.titulo_total_divida" | translate}}</div>
+        </div>
+    </div>
+</p-panel>
+<p-panel>
+    <p-header>
+        <span>Dependencies</span>
+    </p-header>
+    <div class="ui-fluid">
+        <div class="ui-g">
+            <div class="ui-g-12" *ngFor="let dep of dependencies">
+                <span>{{dep.service}}: {{dep.version}}</span>
+            </div>
+        </div>
+    </div>
+</p-panel>

@@ -1,0 +1,70 @@
+stages:
+  - build
+  - release
+  - deploy
+
+cache:
+  untracked: true
+  key: "$CI_PROJECT_ID"
+  paths:
+    - node_modules/
+
+.default_tags: &default_tags
+  tags:
+    - npm
+    - frontend
+
+build:
+  <<: *default_tags
+  stage: build
+  script:
+    - bash senior-ci/frontend/npm/bibliotecas/scripts/ci.sh -b
+
+releaseSnapshot:
+  <<: *default_tags
+  stage: release
+  when: manual
+  script:
+    - bash senior-ci/frontend/npm/bibliotecas/scripts/ci.sh -s $CI_COMMIT_REF_SLUG
+  except:
+    - master
+    - tags
+
+releasePatch:
+  <<: *default_tags
+  stage: release
+  when: manual
+  script:
+    - bash senior-ci/frontend/npm/bibliotecas/scripts/ci.sh -r patch
+  only:
+    - develop
+
+releaseMinor:
+  <<: *default_tags
+  stage: release
+  when: manual
+  script:
+    - bash senior-ci/frontend/npm/bibliotecas/scripts/ci.sh -r minor
+  only:
+    - develop
+
+releaseMajor:
+  <<: *default_tags
+  stage: release
+  when: manual
+  script:
+    - bash senior-ci/frontend/npm/bibliotecas/scripts/ci.sh -r major
+  only:
+    - develop
+
+package:
+  <<: *default_tags
+  stage: release
+  script:
+    - bash senior-ci/frontend/npm/bibliotecas/scripts/ci.sh -p
+  only:
+    - tags
+    - /^v?\d+\-\d+\-\d+\z/
+  except:
+    - master
+    - branches

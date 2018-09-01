@@ -1,0 +1,19 @@
+<p-panel styleClass="form-group">
+    <p-header>
+        <span>Fieldset</span>
+    </p-header>
+
+    <form [formGroup]="formGroup" novalidate>
+
+        <p-fieldset legend="Header do Fieldset 1" [toggleable]="true">
+            <s-dynamic-form [fields]="dynamicFormFields" [form]="formGroup"></s-dynamic-form>
+        </p-fieldset>
+
+        <p-fieldset legend="Header do Fieldset 2" [toggleable]="false">
+            <s-dynamic-form [fields]="dynamicFormFields" [form]="formGroup"></s-dynamic-form>
+        </p-fieldset>
+
+    </form>
+
+
+</p-panel>

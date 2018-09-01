@@ -1,0 +1,85 @@
+<div class="ui-fluid" [formGroup]="form">
+    <div class="ui-g">
+        <div [ngClass]="field.gridClass" *ngFor="let field of fields" [ngSwitch]="field.type">
+            <label [for]="field.name">{{field.label}}</label>
+
+            <ng-container *ngSwitchCase="'String'">
+                <input *ngIf="!field.mask" type="text" [id]="field.name" [name]="field.name" [formControlName]="field.name" [pTooltip]="field.tooltip"
+                    tooltipPosition="top" [placeholder]="field.placeholder" showDelay="500" pInputText />
+
+                <p-inputMask *ngIf="field.mask" type="text" [inputId]="field.name" [name]="field.name" [formControlName]="field.name" [mask]="field.mask"
+                    [placeholder]="field.placeholder" slotChar="_" [pTooltip]="field.tooltip" tooltipPosition="top" showDelay="500"></p-inputMask>
+            </ng-container>
+
+            <ng-container *ngSwitchCase="'Integer'">
+                <input *ngIf="!field.mask" type="number" [id]="field.name" [name]="field.name" [formControlName]="field.name" [pTooltip]="field.tooltip"
+                    tooltipPosition="top" [placeholder]="field.placeholder" showDelay="500" pInputText />
+
+                <p-inputMask *ngIf="field.mask" type="text" [inputId]="field.name" [name]="field.name" [formControlName]="field.name" [mask]="field.mask"
+                    [placeholder]="field.placeholder" slotChar="_" [pTooltip]="field.tooltip" tooltipPosition="top" showDelay="500"></p-inputMask>
+            </ng-container>
+
+            <ng-container *ngSwitchCase="'Double'">
+                <input *ngIf="!field.mask" type="number" [id]="field.name" [name]="field.name" [formControlName]="field.name" [pTooltip]="field.tooltip"
+                    tooltipPosition="top" [placeholder]="field.placeholder" showDelay="500" pInputText />
+
+                <p-inputMask *ngIf="field.mask" type="text" [inputId]="field.name" [name]="field.name" [formControlName]="field.name" [mask]="field.mask"
+                    [placeholder]="field.placeholder" slotChar="_" [pTooltip]="field.tooltip" tooltipPosition="top" showDelay="500"></p-inputMask>
+            </ng-container>
+
+            <ng-container *ngSwitchCase="'Money'">
+                <input currencyMask *ngIf="!field.mask" type="text" [id]="field.name" [name]="field.name" [formControlName]="field.name"
+                    [pTooltip]="field.tooltip" tooltipPosition="top" [placeholder]="field.placeholder" showDelay="500" pInputText
+                    [options]="field.currencyOptions" />
+
+                <p-inputMask *ngIf="field.mask" type="text" [inputId]="field.name" [name]="field.name" [formControlName]="field.name" [mask]="field.mask"
+                    [placeholder]="field.placeholder" slotChar="_" [pTooltip]="field.tooltip" tooltipPosition="top" showDelay="500"></p-inputMask>
+            </ng-container>
+
+            <ng-container *ngSwitchCase="'Boolean'">
+                <div class="ui-inputgroup">
+                    <p-checkbox [inputId]="field.name" [name]="field.name" [formControlName]="field.name" binary="true" [pTooltip]="field.tooltip"
+                        tooltipPosition="top" showDelay="500"></p-checkbox>
+                </div>
+            </ng-container>
+
+            <ng-container *ngSwitchCase="'Date'">
+                <p-calendar [inputId]="field.name" [name]="field.name" [showIcon]="true" [formControlName]="field.name" icon="fa fa-calendar"
+                    [pTooltip]="field.tooltip" tooltipPosition="top" [locale]="field.calendarOptions" [dateFormat]="field.calendarOptions.dateFormat"
+                    [placeholder]="field.placeholder" showDelay="500"></p-calendar>
+            </ng-container>
+
+            <ng-container *ngSwitchCase="'DateTime'">
+                <p-calendar [inputId]="field.name" [name]="field.name" [showIcon]="true" [showTime]="true" [showSeconds]="true" icon="fa fa-calendar"
+                    [formControlName]="field.name" [pTooltip]="field.tooltip" tooltipPosition="top" [locale]="field.calendarOptions"
+                    [dateFormat]="field.calendarOptions.dateFormat" [placeholder]="field.placeholder" [hourFormat]="field.calendarOptions.hourFormat"
+                    showDelay="500"></p-calendar>
+            </ng-container>
+
+            <ng-container *ngSwitchCase="'Time'">
+                <p-calendar [inputId]="field.name" [name]="field.name" [showIcon]="true" [timeOnly]="true" [showSeconds]="true" icon="fa fa-clock-o"
+                    [formControlName]="field.name" [pTooltip]="field.tooltip" tooltipPosition="top" [hourFormat]="field.calendarOptions.hourFormat"
+                    [placeholder]="field.placeholder" showDelay="500"></p-calendar>
+            </ng-container>
+
+            <ng-container *ngSwitchCase="'Binary'">
+                <input type="text" [id]="field.name" [name]="field.name" [formControlName]="field.name" [pTooltip]="field.tooltip" tooltipPosition="top"
+                    [placeholder]="field.placeholder" showDelay="500" pInputText />
+            </ng-container>
+
+            <ng-container *ngSwitchCase="'Enum'">
+                <p-dropdown [inputId]="field.name" [name]="field.name" [options]="field.options" [autoWidth]="false" [placeholder]="field.placeholder || ' '"
+                    [formControlName]="field.name" [pTooltip]="field.tooltip" tooltipPosition="top" showDelay="500"></p-dropdown>
+            </ng-container>
+
+            <ng-container *ngSwitchCase="'Autocomplete'">
+
+                <p-autoComplete [multiple]="field.multiple" [formControlName]="field.name" [placeholder]="field.placeholder || ' '" [pTooltip]="field.tooltip"
+                    tooltipPosition="top" [inputId]="field.name" [suggestions]="field.suggestions" [dataKey]="field.dataKey"
+                    [field]="field.displayField" (completeMethod)="field.onSearch($event.query)" showDelay="500" [dropdown]="true"></p-autoComplete>
+            </ng-container>
+
+            <s-control-errors [form]="form" [control]="form.controls[field.name]" [errorMessages]="errorMessages"></s-control-errors>
+        </div>
+    </div>
+</div>

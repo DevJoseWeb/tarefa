@@ -1,0 +1,33 @@
+.container {
+    width: 100%;
+    text-align: center;
+}
+
+.title {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.description {
+    margin-bottom: 15px;
+    color: #999999;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.description > p {
+    margin: auto;
+    max-width: 400px;
+    max-height: 80px;
+    overflow: hidden;
+}
+
+.icon {
+    color: #d8d8d8;
+    font-size: 6em;
+}
+
+.actions {
+    text-align: center;
+    width: 100%;
+}

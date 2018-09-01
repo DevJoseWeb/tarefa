@@ -1,0 +1,73 @@
+@import "~@seniorsistemas/primeng-theme/dist/scss/_colors";
+@import "~@seniorsistemas/primeng-theme/dist/scss/_queries";
+
+body .ui-sidebar.s-sidebar-panel {
+    width: 50%;
+    padding: 0;
+}
+
+@media #{$sm-devices} {
+    body .ui-sidebar.s-sidebar-panel {
+        width: 100%;
+    }
+}
+
+@media #{$md-devices} {
+    body .ui-sidebar.s-sidebar-panel {
+        width: 75%;
+    }
+}
+
+@media #{$lg-devices} {
+    body .ui-sidebar.s-sidebar-panel {
+        width: 50%;
+    }
+}
+
+body .ui-sidebar.s-sidebar-panel .s-sidebar-container {
+    height: 100%;
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+body .ui-sidebar.s-sidebar-panel .s-sidebar-close {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    color: $primary-dark-text-color;
+}
+
+body .ui-sidebar.s-sidebar-panel .s-sidebar-header {
+    border-bottom: 1px solid $default-primary-color;
+    padding-bottom: 15px;
+    padding-right: 20px;
+    margin-bottom: 15px;
+    flex-shrink: 0;
+}
+
+body .ui-sidebar.s-sidebar-panel .s-sidebar-content-container {
+    flex: 1;
+    overflow: hidden;
+}
+
+body .ui-sidebar.s-sidebar-panel .s-sidebar-content {
+    height: 100%;
+}
+
+body .ui-sidebar.s-sidebar-panel .s-sidebar-footer {
+    border-top: 1px solid $default-primary-color;
+    padding-top: 15px;
+    margin-top: 15px;
+    flex-shrink: 0;
+}
+
+body .ui-sidebar.s-sidebar-panel p-scrollpanel {
+    padding-top: 30px;
+}
+
+body .ui-sidebar.s-sidebar-panel .s-sidebar-header + p-scrollpanel {
+    padding-top: 0;
+}

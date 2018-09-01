@@ -1,0 +1,67 @@
+<div class="ui-g">
+    <div class="ui-g-4 ui-md-4 ui-sm-6 card-operacao">
+        <p-card>
+            <div class="card-operacao_content">
+                <p-button styleClass="ui-button-link">{{"erp_fin.tcr_baixa.baixa_abatimento" | translate}}
+                </p-button>
+            </div>
+        </p-card>
+    </div>
+    <div class="ui-g-4 ui-md-4 ui-sm-6 card-operacao">
+        <p-card>
+            <div class="card-operacao_content">
+                <p-button styleClass="ui-button-link" (onClick)="onBaixaPorCancelamento()" >{{"erp_fin.tcr_baixa.baixa_cancelamento" | translate}}
+                </p-button>
+            </div>
+        </p-card>
+    </div>
+    <div class="ui-g-4 ui-md-4 ui-sm-6 card-operacao">
+        <p-card>
+            <div class="card-operacao_content">
+                <p-button styleClass="ui-button-link">{{"erp_fin.tcr_baixa.baixa_devolucao" | translate}}
+                </p-button>
+            </div>
+        </p-card>
+    </div>
+    <div class="ui-g-4 ui-md-4 ui-sm-6 card-operacao">
+        <p-card>
+            <div class="card-operacao_content">
+                <p-button styleClass="ui-button-link">{{"erp_fin.tcr_baixa.baixa_lucros_perdas" | translate}}
+                </p-button>
+            </div>
+        </p-card>
+    </div>
+    <div class="ui-g-4 ui-md-4 ui-sm-6 card-operacao">
+        <p-card>
+            <div class="card-operacao_content">
+                <p-button styleClass="ui-button-link">{{"erp_fin.tcr_baixa.baixa_negociacao" | translate}}
+                </p-button>
+            </div>
+        </p-card>
+    </div>
+    <div class="ui-g-4 ui-md-4 ui-sm-6 card-operacao">
+        <p-card>
+            <div class="card-operacao_content">
+                <p-button styleClass="ui-button-link" (onClick)="onBaixaPorPagamento()">{{"erp_fin.tcr_baixa.baixa_pagamento" | translate}}
+                </p-button>
+            </div>
+        </p-card>
+    </div>
+</div>
+
+<p-dialog 
+    header="Baixa por Pagamento" 
+    [(visible)]="baixaPorPagamento" 
+    [modal]="true" 
+    [width]="960"
+>
+<baixa-pagamento [localeConfig]="localeConfig" (fecharDialog)="fecharDialogPagamento($event)"></baixa-pagamento>
+</p-dialog>
+
+<p-dialog header="Baixa por Cancelamento"
+    [(visible)]="baixaPorCancelamento" 
+    [modal]="true" 
+    [width]="960"
+>
+<baixa-cancelamento [localeConfig]="localeConfig" (fecharDialog)="fecharDialogCancelamento($event)"></baixa-cancelamento>
+</p-dialog> 

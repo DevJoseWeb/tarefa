@@ -1,0 +1,2286 @@
+{
+	"version": "0.1.0.0",
+	"edlVersion": "9.2.2",
+	"app": "erp-fin-tcr-baixa",
+	"domain": "erp_fin",
+	"service": "tcr_baixa",
+	"enumerations": {
+		"enumSituacao": {
+			"name": "enumSituacao",
+			"values": [
+				"Ativo",
+				"Inativo"
+			]
+		}
+	},
+	"entities": {
+		"tituloReceber": {
+			"id": "id",
+			"name": "tituloReceber",
+			"customizable": false,
+			"slots": {
+				"id": {
+					"name": "id",
+					"type": "string",
+					"format": "uuid",
+					"optional": true,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": true
+				},
+				"empresa": {
+					"name": "empresa",
+					"type": "empresa",
+					"optional": false,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false
+				},
+				"filial": {
+					"name": "filial",
+					"type": "filial",
+					"optional": false,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false
+				},
+				"tipoTitulo": {
+					"name": "tipoTitulo",
+					"type": "tipoTitulo",
+					"optional": false,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false
+				},
+				"numeroTitulo": {
+					"name": "numeroTitulo",
+					"type": "string",
+					"optional": false,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false,
+					"maxLength": 15
+				},
+				"cliente": {
+					"name": "cliente",
+					"type": "integer",
+					"optional": true,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false
+				},
+				"transacaoContasReceber": {
+					"name": "transacaoContasReceber",
+					"type": "transacaoContasReceber",
+					"optional": false,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false
+				},
+				"formaPagamento": {
+					"name": "formaPagamento",
+					"type": "formaPagamento",
+					"optional": true,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false
+				},
+				"situacaoTitulo": {
+					"name": "situacaoTitulo",
+					"type": "string",
+					"optional": false,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false,
+					"maxLength": 2
+				},
+				"dataEntrada": {
+					"name": "dataEntrada",
+					"type": "date",
+					"optional": false,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false
+				},
+				"dataEmissao": {
+					"name": "dataEmissao",
+					"type": "date",
+					"optional": false,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false
+				},
+				"valorOriginal": {
+					"name": "valorOriginal",
+					"type": "money",
+					"optional": false,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false
+				},
+				"valorAberto": {
+					"name": "valorAberto",
+					"type": "money",
+					"optional": false,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false
+				},
+				"usuarioGeracao": {
+					"name": "usuarioGeracao",
+					"type": "string",
+					"optional": true,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": true
+				},
+				"dataGeracao": {
+					"name": "dataGeracao",
+					"type": "dateTime",
+					"optional": true,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": true
+				},
+				"usuarioAlteracao": {
+					"name": "usuarioAlteracao",
+					"type": "string",
+					"optional": true,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": true
+				},
+				"dataAlteracao": {
+					"name": "dataAlteracao",
+					"type": "dateTime",
+					"optional": true,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": true
+				}
+			},
+			"lookup": {
+				"searchFields": [
+					"id",
+					"numeroTitulo",
+					"cliente",
+					"situacaoTitulo",
+					"dataEntrada",
+					"dataEmissao",
+					"valorOriginal",
+					"valorAberto",
+					"usuarioGeracao",
+					"dataGeracao",
+					"usuarioAlteracao",
+					"dataAlteracao"
+				],
+				"displayFields": [
+					"id",
+					"numeroTitulo",
+					"cliente",
+					"situacaoTitulo",
+					"dataEntrada",
+					"dataEmissao",
+					"valorOriginal",
+					"valorAberto",
+					"usuarioGeracao",
+					"dataGeracao",
+					"usuarioAlteracao",
+					"dataAlteracao"
+				]
+			},
+			"advancedSearch": {
+				"searchFields": [
+					"id",
+					"numeroTitulo",
+					"cliente",
+					"situacaoTitulo",
+					"dataEntrada",
+					"dataEmissao",
+					"valorOriginal",
+					"valorAberto",
+					"usuarioGeracao",
+					"dataGeracao",
+					"usuarioAlteracao",
+					"dataAlteracao"
+				],
+				"displayFields": [
+					"id",
+					"numeroTitulo",
+					"cliente",
+					"situacaoTitulo",
+					"dataEntrada",
+					"dataEmissao",
+					"valorOriginal",
+					"valorAberto",
+					"usuarioGeracao",
+					"dataGeracao",
+					"usuarioAlteracao",
+					"dataAlteracao"
+				]
+			},
+			"relationships": {
+				"empresa": [
+					{
+						"type": "aggregation",
+						"attribute": "empresa",
+						"ownerEntity": "tituloReceber",
+						"entityName": "empresa",
+						"optional": false,
+						"multivalued": false,
+						"lookup": {
+							"searchFields": [
+								"id",
+								"empresa",
+								"codigo",
+								"nome",
+								"fantasia",
+								"usuarioGeracao",
+								"dataGeracao",
+								"usuarioAlteracao",
+								"dataAlteracao"
+							],
+							"displayFields": [
+								"id",
+								"empresa",
+								"codigo",
+								"nome",
+								"fantasia",
+								"usuarioGeracao",
+								"dataGeracao",
+								"usuarioAlteracao",
+								"dataAlteracao"
+							]
+						},
+						"advancedSearch": {
+							"searchFields": [
+								"id",
+								"empresa",
+								"codigo",
+								"nome",
+								"fantasia",
+								"usuarioGeracao",
+								"dataGeracao",
+								"usuarioAlteracao",
+								"dataAlteracao"
+							],
+							"displayFields": [
+								"id",
+								"empresa",
+								"codigo",
+								"nome",
+								"fantasia",
+								"usuarioGeracao",
+								"dataGeracao",
+								"usuarioAlteracao",
+								"dataAlteracao"
+							]
+						}
+					}
+				]
+				,"filial": [
+					{
+						"type": "aggregation",
+						"attribute": "filial",
+						"ownerEntity": "tituloReceber",
+						"entityName": "filial",
+						"optional": false,
+						"multivalued": false,
+						"lookup": {
+							"searchFields": [
+								"id",
+								"filial",
+								"nome",
+								"fantasia",
+								"cnpj",
+								"cepFilial",
+								"cepEndereco",
+								"usuarioGeracao",
+								"dataGeracao",
+								"usuarioAlteracao",
+								"dataAlteracao"
+							],
+							"displayFields": [
+								"id",
+								"filial",
+								"nome",
+								"fantasia",
+								"cnpj",
+								"cepFilial",
+								"cepEndereco",
+								"usuarioGeracao",
+								"dataGeracao",
+								"usuarioAlteracao",
+								"dataAlteracao"
+							]
+						},
+						"advancedSearch": {
+							"searchFields": [
+								"id",
+								"filial",
+								"nome",
+								"fantasia",
+								"cnpj",
+								"cepFilial",
+								"cepEndereco",
+								"usuarioGeracao",
+								"dataGeracao",
+								"usuarioAlteracao",
+								"dataAlteracao"
+							],
+							"displayFields": [
+								"id",
+								"filial",
+								"nome",
+								"fantasia",
+								"cnpj",
+								"cepFilial",
+								"cepEndereco",
+								"usuarioGeracao",
+								"dataGeracao",
+								"usuarioAlteracao",
+								"dataAlteracao"
+							]
+						}
+					}
+				]
+				,"tipoTitulo": [
+					{
+						"type": "aggregation",
+						"attribute": "tipoTitulo",
+						"ownerEntity": "tituloReceber",
+						"entityName": "tipoTitulo",
+						"optional": false,
+						"multivalued": false,
+						"lookup": {
+							"searchFields": [
+								"id",
+								"tipoTitulo",
+								"descricao",
+								"somaContasReceber",
+								"somaContasPagar",
+								"aplicacaoTipo",
+								"situacao",
+								"usuarioGeracao",
+								"dataGeracao",
+								"usuarioAlteracao",
+								"dataAlteracao"
+							],
+							"displayFields": [
+								"id",
+								"tipoTitulo",
+								"descricao",
+								"somaContasReceber",
+								"somaContasPagar",
+								"aplicacaoTipo",
+								"situacao",
+								"usuarioGeracao",
+								"dataGeracao",
+								"usuarioAlteracao",
+								"dataAlteracao"
+							]
+						},
+						"advancedSearch": {
+							"searchFields": [
+								"id",
+								"tipoTitulo",
+								"descricao",
+								"somaContasReceber",
+								"somaContasPagar",
+								"aplicacaoTipo",
+								"situacao",
+								"usuarioGeracao",
+								"dataGeracao",
+								"usuarioAlteracao",
+								"dataAlteracao"
+							],
+							"displayFields": [
+								"id",
+								"tipoTitulo",
+								"descricao",
+								"somaContasReceber",
+								"somaContasPagar",
+								"aplicacaoTipo",
+								"situacao",
+								"usuarioGeracao",
+								"dataGeracao",
+								"usuarioAlteracao",
+								"dataAlteracao"
+							]
+						}
+					}
+				]
+				,"transacaoContasReceber": [
+					{
+						"type": "aggregation",
+						"attribute": "transacaoContasReceber",
+						"ownerEntity": "tituloReceber",
+						"entityName": "transacaoContasReceber",
+						"optional": false,
+						"multivalued": false,
+						"lookup": {
+							"searchFields": [
+								"id",
+								"transacao",
+								"descricao",
+								"modulo",
+								"tipoMovimento",
+								"tipoBaixa",
+								"situacao",
+								"usuarioGeracao",
+								"dataGeracao",
+								"usuarioAlteracao",
+								"dataAlteracao"
+							],
+							"displayFields": [
+								"id",
+								"transacao",
+								"descricao",
+								"modulo",
+								"tipoMovimento",
+								"tipoBaixa",
+								"situacao",
+								"usuarioGeracao",
+								"dataGeracao",
+								"usuarioAlteracao",
+								"dataAlteracao"
+							]
+						},
+						"advancedSearch": {
+							"searchFields": [
+								"id",
+								"transacao",
+								"descricao",
+								"modulo",
+								"tipoMovimento",
+								"tipoBaixa",
+								"situacao",
+								"usuarioGeracao",
+								"dataGeracao",
+								"usuarioAlteracao",
+								"dataAlteracao"
+							],
+							"displayFields": [
+								"id",
+								"transacao",
+								"descricao",
+								"modulo",
+								"tipoMovimento",
+								"tipoBaixa",
+								"situacao",
+								"usuarioGeracao",
+								"dataGeracao",
+								"usuarioAlteracao",
+								"dataAlteracao"
+							]
+						}
+					}
+				]
+				,"formaPagamento": [
+					{
+						"type": "aggregation",
+						"attribute": "formaPagamento",
+						"ownerEntity": "tituloReceber",
+						"entityName": "formaPagamento",
+						"optional": true,
+						"multivalued": false,
+						"lookup": {
+							"searchFields": [
+								"id",
+								"formaPagamento",
+								"abreviatura",
+								"descricao",
+								"situacao",
+								"usuarioGeracao",
+								"dataGeracao",
+								"usuarioAlteracao",
+								"dataAlteracao"
+							],
+							"displayFields": [
+								"id",
+								"formaPagamento",
+								"abreviatura",
+								"descricao",
+								"situacao",
+								"usuarioGeracao",
+								"dataGeracao",
+								"usuarioAlteracao",
+								"dataAlteracao"
+							]
+						},
+						"advancedSearch": {
+							"searchFields": [
+								"id",
+								"formaPagamento",
+								"abreviatura",
+								"descricao",
+								"situacao",
+								"usuarioGeracao",
+								"dataGeracao",
+								"usuarioAlteracao",
+								"dataAlteracao"
+							],
+							"displayFields": [
+								"id",
+								"formaPagamento",
+								"abreviatura",
+								"descricao",
+								"situacao",
+								"usuarioGeracao",
+								"dataGeracao",
+								"usuarioAlteracao",
+								"dataAlteracao"
+							]
+						}
+					}
+				]
+			}
+		},
+		"transacaoContasReceber": {
+			"id": "id",
+			"name": "transacaoContasReceber",
+			"customizable": false,
+			"slots": {
+				"id": {
+					"name": "id",
+					"type": "string",
+					"format": "uuid",
+					"optional": true,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": true
+				},
+				"empresa": {
+					"name": "empresa",
+					"type": "empresa",
+					"optional": false,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false
+				},
+				"transacao": {
+					"name": "transacao",
+					"type": "string",
+					"optional": false,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false,
+					"maxLength": 5
+				},
+				"descricao": {
+					"name": "descricao",
+					"type": "string",
+					"optional": false,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false,
+					"maxLength": 60
+				},
+				"modulo": {
+					"name": "modulo",
+					"type": "string",
+					"optional": false,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false,
+					"maxLength": 3
+				},
+				"tipoMovimento": {
+					"name": "tipoMovimento",
+					"type": "integer",
+					"optional": false,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false
+				},
+				"tipoBaixa": {
+					"name": "tipoBaixa",
+					"type": "string",
+					"optional": false,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false,
+					"maxLength": 2
+				},
+				"situacao": {
+					"name": "situacao",
+					"type": "enumSituacao",
+					"optional": false,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false
+				},
+				"usuarioGeracao": {
+					"name": "usuarioGeracao",
+					"type": "string",
+					"optional": true,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": true
+				},
+				"dataGeracao": {
+					"name": "dataGeracao",
+					"type": "dateTime",
+					"optional": true,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": true
+				},
+				"usuarioAlteracao": {
+					"name": "usuarioAlteracao",
+					"type": "string",
+					"optional": true,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": true
+				},
+				"dataAlteracao": {
+					"name": "dataAlteracao",
+					"type": "dateTime",
+					"optional": true,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": true
+				}
+			},
+			"lookup": {
+				"searchFields": [
+					"id",
+					"transacao",
+					"descricao",
+					"modulo",
+					"tipoMovimento",
+					"tipoBaixa",
+					"situacao",
+					"usuarioGeracao",
+					"dataGeracao",
+					"usuarioAlteracao",
+					"dataAlteracao"
+				],
+				"displayFields": [
+					"id",
+					"transacao",
+					"descricao",
+					"modulo",
+					"tipoMovimento",
+					"tipoBaixa",
+					"situacao",
+					"usuarioGeracao",
+					"dataGeracao",
+					"usuarioAlteracao",
+					"dataAlteracao"
+				]
+			},
+			"advancedSearch": {
+				"searchFields": [
+					"id",
+					"transacao",
+					"descricao",
+					"modulo",
+					"tipoMovimento",
+					"tipoBaixa",
+					"situacao",
+					"usuarioGeracao",
+					"dataGeracao",
+					"usuarioAlteracao",
+					"dataAlteracao"
+				],
+				"displayFields": [
+					"id",
+					"transacao",
+					"descricao",
+					"modulo",
+					"tipoMovimento",
+					"tipoBaixa",
+					"situacao",
+					"usuarioGeracao",
+					"dataGeracao",
+					"usuarioAlteracao",
+					"dataAlteracao"
+				]
+			},
+			"relationships": {
+				"empresa": [
+					{
+						"type": "aggregation",
+						"attribute": "empresa",
+						"ownerEntity": "transacaoContasReceber",
+						"entityName": "empresa",
+						"optional": false,
+						"multivalued": false,
+						"lookup": {
+							"searchFields": [
+								"id",
+								"empresa",
+								"codigo",
+								"nome",
+								"fantasia",
+								"usuarioGeracao",
+								"dataGeracao",
+								"usuarioAlteracao",
+								"dataAlteracao"
+							],
+							"displayFields": [
+								"id",
+								"empresa",
+								"codigo",
+								"nome",
+								"fantasia",
+								"usuarioGeracao",
+								"dataGeracao",
+								"usuarioAlteracao",
+								"dataAlteracao"
+							]
+						},
+						"advancedSearch": {
+							"searchFields": [
+								"id",
+								"empresa",
+								"codigo",
+								"nome",
+								"fantasia",
+								"usuarioGeracao",
+								"dataGeracao",
+								"usuarioAlteracao",
+								"dataAlteracao"
+							],
+							"displayFields": [
+								"id",
+								"empresa",
+								"codigo",
+								"nome",
+								"fantasia",
+								"usuarioGeracao",
+								"dataGeracao",
+								"usuarioAlteracao",
+								"dataAlteracao"
+							]
+						}
+					}
+				]
+			}
+		},
+		"empresa": {
+			"id": "id",
+			"name": "empresa",
+			"customizable": false,
+			"slots": {
+				"id": {
+					"name": "id",
+					"type": "string",
+					"format": "uuid",
+					"optional": true,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": true
+				},
+				"moeda": {
+					"name": "moeda",
+					"type": "moeda",
+					"optional": false,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false
+				},
+				"empresa": {
+					"name": "empresa",
+					"type": "integer",
+					"optional": false,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false
+				},
+				"codigo": {
+					"name": "codigo",
+					"type": "integer",
+					"optional": true,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false
+				},
+				"nome": {
+					"name": "nome",
+					"type": "string",
+					"optional": false,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false,
+					"maxLength": 100
+				},
+				"fantasia": {
+					"name": "fantasia",
+					"type": "string",
+					"optional": false,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false,
+					"maxLength": 10
+				},
+				"usuarioGeracao": {
+					"name": "usuarioGeracao",
+					"type": "string",
+					"optional": true,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": true
+				},
+				"dataGeracao": {
+					"name": "dataGeracao",
+					"type": "dateTime",
+					"optional": true,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": true
+				},
+				"usuarioAlteracao": {
+					"name": "usuarioAlteracao",
+					"type": "string",
+					"optional": true,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": true
+				},
+				"dataAlteracao": {
+					"name": "dataAlteracao",
+					"type": "dateTime",
+					"optional": true,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": true
+				}
+			},
+			"lookup": {
+				"searchFields": [
+					"id",
+					"empresa",
+					"codigo",
+					"nome",
+					"fantasia",
+					"usuarioGeracao",
+					"dataGeracao",
+					"usuarioAlteracao",
+					"dataAlteracao"
+				],
+				"displayFields": [
+					"id",
+					"empresa",
+					"codigo",
+					"nome",
+					"fantasia",
+					"usuarioGeracao",
+					"dataGeracao",
+					"usuarioAlteracao",
+					"dataAlteracao"
+				]
+			},
+			"advancedSearch": {
+				"searchFields": [
+					"id",
+					"empresa",
+					"codigo",
+					"nome",
+					"fantasia",
+					"usuarioGeracao",
+					"dataGeracao",
+					"usuarioAlteracao",
+					"dataAlteracao"
+				],
+				"displayFields": [
+					"id",
+					"empresa",
+					"codigo",
+					"nome",
+					"fantasia",
+					"usuarioGeracao",
+					"dataGeracao",
+					"usuarioAlteracao",
+					"dataAlteracao"
+				]
+			},
+			"relationships": {
+				"moeda": [
+					{
+						"type": "aggregation",
+						"attribute": "moeda",
+						"ownerEntity": "empresa",
+						"entityName": "moeda",
+						"optional": false,
+						"multivalued": false,
+						"lookup": {
+							"searchFields": [
+								"id",
+								"moeda",
+								"nome",
+								"sigla",
+								"usuarioGeracao",
+								"dataGeracao",
+								"usuarioAlteracao",
+								"dataAlteracao"
+							],
+							"displayFields": [
+								"id",
+								"moeda",
+								"nome",
+								"sigla",
+								"usuarioGeracao",
+								"dataGeracao",
+								"usuarioAlteracao",
+								"dataAlteracao"
+							]
+						},
+						"advancedSearch": {
+							"searchFields": [
+								"id",
+								"moeda",
+								"nome",
+								"sigla",
+								"usuarioGeracao",
+								"dataGeracao",
+								"usuarioAlteracao",
+								"dataAlteracao"
+							],
+							"displayFields": [
+								"id",
+								"moeda",
+								"nome",
+								"sigla",
+								"usuarioGeracao",
+								"dataGeracao",
+								"usuarioAlteracao",
+								"dataAlteracao"
+							]
+						}
+					}
+				]
+			}
+		},
+		"filial": {
+			"id": "id",
+			"name": "filial",
+			"customizable": false,
+			"slots": {
+				"id": {
+					"name": "id",
+					"type": "string",
+					"format": "uuid",
+					"optional": true,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": true
+				},
+				"empresa": {
+					"name": "empresa",
+					"type": "empresa",
+					"optional": false,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false
+				},
+				"filial": {
+					"name": "filial",
+					"type": "integer",
+					"optional": false,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false
+				},
+				"nome": {
+					"name": "nome",
+					"type": "string",
+					"optional": false,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false,
+					"maxLength": 100
+				},
+				"fantasia": {
+					"name": "fantasia",
+					"type": "string",
+					"optional": false,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false,
+					"maxLength": 30
+				},
+				"cnpj": {
+					"name": "cnpj",
+					"type": "integer",
+					"optional": false,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false
+				},
+				"cepFilial": {
+					"name": "cepFilial",
+					"type": "integer",
+					"optional": true,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false
+				},
+				"cepEndereco": {
+					"name": "cepEndereco",
+					"type": "integer",
+					"optional": true,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false
+				},
+				"usuarioGeracao": {
+					"name": "usuarioGeracao",
+					"type": "string",
+					"optional": true,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": true
+				},
+				"dataGeracao": {
+					"name": "dataGeracao",
+					"type": "dateTime",
+					"optional": true,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": true
+				},
+				"usuarioAlteracao": {
+					"name": "usuarioAlteracao",
+					"type": "string",
+					"optional": true,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": true
+				},
+				"dataAlteracao": {
+					"name": "dataAlteracao",
+					"type": "dateTime",
+					"optional": true,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": true
+				}
+			},
+			"lookup": {
+				"searchFields": [
+					"id",
+					"filial",
+					"nome",
+					"fantasia",
+					"cnpj",
+					"cepFilial",
+					"cepEndereco",
+					"usuarioGeracao",
+					"dataGeracao",
+					"usuarioAlteracao",
+					"dataAlteracao"
+				],
+				"displayFields": [
+					"id",
+					"filial",
+					"nome",
+					"fantasia",
+					"cnpj",
+					"cepFilial",
+					"cepEndereco",
+					"usuarioGeracao",
+					"dataGeracao",
+					"usuarioAlteracao",
+					"dataAlteracao"
+				]
+			},
+			"advancedSearch": {
+				"searchFields": [
+					"id",
+					"filial",
+					"nome",
+					"fantasia",
+					"cnpj",
+					"cepFilial",
+					"cepEndereco",
+					"usuarioGeracao",
+					"dataGeracao",
+					"usuarioAlteracao",
+					"dataAlteracao"
+				],
+				"displayFields": [
+					"id",
+					"filial",
+					"nome",
+					"fantasia",
+					"cnpj",
+					"cepFilial",
+					"cepEndereco",
+					"usuarioGeracao",
+					"dataGeracao",
+					"usuarioAlteracao",
+					"dataAlteracao"
+				]
+			},
+			"relationships": {
+				"empresa": [
+					{
+						"type": "aggregation",
+						"attribute": "empresa",
+						"ownerEntity": "filial",
+						"entityName": "empresa",
+						"optional": false,
+						"multivalued": false,
+						"lookup": {
+							"searchFields": [
+								"id",
+								"empresa",
+								"codigo",
+								"nome",
+								"fantasia",
+								"usuarioGeracao",
+								"dataGeracao",
+								"usuarioAlteracao",
+								"dataAlteracao"
+							],
+							"displayFields": [
+								"id",
+								"empresa",
+								"codigo",
+								"nome",
+								"fantasia",
+								"usuarioGeracao",
+								"dataGeracao",
+								"usuarioAlteracao",
+								"dataAlteracao"
+							]
+						},
+						"advancedSearch": {
+							"searchFields": [
+								"id",
+								"empresa",
+								"codigo",
+								"nome",
+								"fantasia",
+								"usuarioGeracao",
+								"dataGeracao",
+								"usuarioAlteracao",
+								"dataAlteracao"
+							],
+							"displayFields": [
+								"id",
+								"empresa",
+								"codigo",
+								"nome",
+								"fantasia",
+								"usuarioGeracao",
+								"dataGeracao",
+								"usuarioAlteracao",
+								"dataAlteracao"
+							]
+						}
+					}
+				]
+			}
+		},
+		"formaPagamento": {
+			"id": "id",
+			"name": "formaPagamento",
+			"customizable": false,
+			"slots": {
+				"id": {
+					"name": "id",
+					"type": "string",
+					"format": "uuid",
+					"optional": true,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": true
+				},
+				"empresa": {
+					"name": "empresa",
+					"type": "empresa",
+					"optional": false,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false
+				},
+				"formaPagamento": {
+					"name": "formaPagamento",
+					"type": "integer",
+					"optional": false,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false
+				},
+				"abreviatura": {
+					"name": "abreviatura",
+					"type": "string",
+					"optional": false,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false,
+					"maxLength": 10
+				},
+				"descricao": {
+					"name": "descricao",
+					"type": "string",
+					"optional": false,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false,
+					"maxLength": 30
+				},
+				"situacao": {
+					"name": "situacao",
+					"type": "enumSituacao",
+					"optional": false,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false
+				},
+				"usuarioGeracao": {
+					"name": "usuarioGeracao",
+					"type": "string",
+					"optional": true,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": true
+				},
+				"dataGeracao": {
+					"name": "dataGeracao",
+					"type": "dateTime",
+					"optional": true,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": true
+				},
+				"usuarioAlteracao": {
+					"name": "usuarioAlteracao",
+					"type": "string",
+					"optional": true,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": true
+				},
+				"dataAlteracao": {
+					"name": "dataAlteracao",
+					"type": "dateTime",
+					"optional": true,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": true
+				}
+			},
+			"lookup": {
+				"searchFields": [
+					"id",
+					"formaPagamento",
+					"abreviatura",
+					"descricao",
+					"situacao",
+					"usuarioGeracao",
+					"dataGeracao",
+					"usuarioAlteracao",
+					"dataAlteracao"
+				],
+				"displayFields": [
+					"id",
+					"formaPagamento",
+					"abreviatura",
+					"descricao",
+					"situacao",
+					"usuarioGeracao",
+					"dataGeracao",
+					"usuarioAlteracao",
+					"dataAlteracao"
+				]
+			},
+			"advancedSearch": {
+				"searchFields": [
+					"id",
+					"formaPagamento",
+					"abreviatura",
+					"descricao",
+					"situacao",
+					"usuarioGeracao",
+					"dataGeracao",
+					"usuarioAlteracao",
+					"dataAlteracao"
+				],
+				"displayFields": [
+					"id",
+					"formaPagamento",
+					"abreviatura",
+					"descricao",
+					"situacao",
+					"usuarioGeracao",
+					"dataGeracao",
+					"usuarioAlteracao",
+					"dataAlteracao"
+				]
+			},
+			"relationships": {
+				"empresa": [
+					{
+						"type": "aggregation",
+						"attribute": "empresa",
+						"ownerEntity": "formaPagamento",
+						"entityName": "empresa",
+						"optional": false,
+						"multivalued": false,
+						"lookup": {
+							"searchFields": [
+								"id",
+								"empresa",
+								"codigo",
+								"nome",
+								"fantasia",
+								"usuarioGeracao",
+								"dataGeracao",
+								"usuarioAlteracao",
+								"dataAlteracao"
+							],
+							"displayFields": [
+								"id",
+								"empresa",
+								"codigo",
+								"nome",
+								"fantasia",
+								"usuarioGeracao",
+								"dataGeracao",
+								"usuarioAlteracao",
+								"dataAlteracao"
+							]
+						},
+						"advancedSearch": {
+							"searchFields": [
+								"id",
+								"empresa",
+								"codigo",
+								"nome",
+								"fantasia",
+								"usuarioGeracao",
+								"dataGeracao",
+								"usuarioAlteracao",
+								"dataAlteracao"
+							],
+							"displayFields": [
+								"id",
+								"empresa",
+								"codigo",
+								"nome",
+								"fantasia",
+								"usuarioGeracao",
+								"dataGeracao",
+								"usuarioAlteracao",
+								"dataAlteracao"
+							]
+						}
+					}
+				]
+			}
+		},
+		"moeda": {
+			"id": "id",
+			"name": "moeda",
+			"customizable": false,
+			"slots": {
+				"id": {
+					"name": "id",
+					"type": "string",
+					"format": "uuid",
+					"optional": true,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": true
+				},
+				"moeda": {
+					"name": "moeda",
+					"type": "string",
+					"optional": false,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false,
+					"maxLength": 4
+				},
+				"nome": {
+					"name": "nome",
+					"type": "string",
+					"optional": false,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false,
+					"maxLength": 30
+				},
+				"sigla": {
+					"name": "sigla",
+					"type": "string",
+					"optional": false,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false,
+					"maxLength": 5
+				},
+				"usuarioGeracao": {
+					"name": "usuarioGeracao",
+					"type": "string",
+					"optional": true,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": true
+				},
+				"dataGeracao": {
+					"name": "dataGeracao",
+					"type": "dateTime",
+					"optional": true,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": true
+				},
+				"usuarioAlteracao": {
+					"name": "usuarioAlteracao",
+					"type": "string",
+					"optional": true,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": true
+				},
+				"dataAlteracao": {
+					"name": "dataAlteracao",
+					"type": "dateTime",
+					"optional": true,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": true
+				}
+			},
+			"lookup": {
+				"searchFields": [
+					"id",
+					"moeda",
+					"nome",
+					"sigla",
+					"usuarioGeracao",
+					"dataGeracao",
+					"usuarioAlteracao",
+					"dataAlteracao"
+				],
+				"displayFields": [
+					"id",
+					"moeda",
+					"nome",
+					"sigla",
+					"usuarioGeracao",
+					"dataGeracao",
+					"usuarioAlteracao",
+					"dataAlteracao"
+				]
+			},
+			"advancedSearch": {
+				"searchFields": [
+					"id",
+					"moeda",
+					"nome",
+					"sigla",
+					"usuarioGeracao",
+					"dataGeracao",
+					"usuarioAlteracao",
+					"dataAlteracao"
+				],
+				"displayFields": [
+					"id",
+					"moeda",
+					"nome",
+					"sigla",
+					"usuarioGeracao",
+					"dataGeracao",
+					"usuarioAlteracao",
+					"dataAlteracao"
+				]
+			}
+		},
+		"tipoTitulo": {
+			"id": "id",
+			"name": "tipoTitulo",
+			"customizable": false,
+			"slots": {
+				"id": {
+					"name": "id",
+					"type": "string",
+					"format": "uuid",
+					"optional": true,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": true
+				},
+				"tipoTitulo": {
+					"name": "tipoTitulo",
+					"type": "string",
+					"optional": false,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false,
+					"maxLength": 3
+				},
+				"descricao": {
+					"name": "descricao",
+					"type": "string",
+					"optional": false,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false,
+					"maxLength": 40
+				},
+				"somaContasReceber": {
+					"name": "somaContasReceber",
+					"type": "string",
+					"optional": false,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false,
+					"maxLength": 1
+				},
+				"somaContasPagar": {
+					"name": "somaContasPagar",
+					"type": "string",
+					"optional": false,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false,
+					"maxLength": 1
+				},
+				"aplicacaoTipo": {
+					"name": "aplicacaoTipo",
+					"type": "string",
+					"optional": false,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false,
+					"maxLength": 1
+				},
+				"situacao": {
+					"name": "situacao",
+					"type": "enumSituacao",
+					"optional": false,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false
+				},
+				"usuarioGeracao": {
+					"name": "usuarioGeracao",
+					"type": "string",
+					"optional": true,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": true
+				},
+				"dataGeracao": {
+					"name": "dataGeracao",
+					"type": "dateTime",
+					"optional": true,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": true
+				},
+				"usuarioAlteracao": {
+					"name": "usuarioAlteracao",
+					"type": "string",
+					"optional": true,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": true
+				},
+				"dataAlteracao": {
+					"name": "dataAlteracao",
+					"type": "dateTime",
+					"optional": true,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": true
+				}
+			},
+			"lookup": {
+				"searchFields": [
+					"id",
+					"tipoTitulo",
+					"descricao",
+					"somaContasReceber",
+					"somaContasPagar",
+					"aplicacaoTipo",
+					"situacao",
+					"usuarioGeracao",
+					"dataGeracao",
+					"usuarioAlteracao",
+					"dataAlteracao"
+				],
+				"displayFields": [
+					"id",
+					"tipoTitulo",
+					"descricao",
+					"somaContasReceber",
+					"somaContasPagar",
+					"aplicacaoTipo",
+					"situacao",
+					"usuarioGeracao",
+					"dataGeracao",
+					"usuarioAlteracao",
+					"dataAlteracao"
+				]
+			},
+			"advancedSearch": {
+				"searchFields": [
+					"id",
+					"tipoTitulo",
+					"descricao",
+					"somaContasReceber",
+					"somaContasPagar",
+					"aplicacaoTipo",
+					"situacao",
+					"usuarioGeracao",
+					"dataGeracao",
+					"usuarioAlteracao",
+					"dataAlteracao"
+				],
+				"displayFields": [
+					"id",
+					"tipoTitulo",
+					"descricao",
+					"somaContasReceber",
+					"somaContasPagar",
+					"aplicacaoTipo",
+					"situacao",
+					"usuarioGeracao",
+					"dataGeracao",
+					"usuarioAlteracao",
+					"dataAlteracao"
+				]
+			}
+		},
+		"cliente": {
+			"id": "id",
+			"name": "cliente",
+			"customizable": false,
+			"slots": {
+				"id": {
+					"name": "id",
+					"type": "string",
+					"format": "uuid",
+					"optional": true,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": true
+				},
+				"nome": {
+					"name": "nome",
+					"type": "string",
+					"optional": false,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false
+				},
+				"numeroDocumento": {
+					"name": "numeroDocumento",
+					"type": "string",
+					"optional": false,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false
+				},
+				"grupoEmpresa": {
+					"name": "grupoEmpresa",
+					"type": "grupoEmpresa",
+					"optional": false,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false
+				},
+				"usuarioGeracao": {
+					"name": "usuarioGeracao",
+					"type": "string",
+					"optional": true,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": true
+				},
+				"dataGeracao": {
+					"name": "dataGeracao",
+					"type": "dateTime",
+					"optional": true,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": true
+				},
+				"usuarioAlteracao": {
+					"name": "usuarioAlteracao",
+					"type": "string",
+					"optional": true,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": true
+				},
+				"dataAlteracao": {
+					"name": "dataAlteracao",
+					"type": "dateTime",
+					"optional": true,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": true
+				}
+			},
+			"lookup": {
+				"searchFields": [
+					"id",
+					"nome",
+					"numeroDocumento",
+					"usuarioGeracao",
+					"dataGeracao",
+					"usuarioAlteracao",
+					"dataAlteracao"
+				],
+				"displayFields": [
+					"id",
+					"nome",
+					"numeroDocumento",
+					"usuarioGeracao",
+					"dataGeracao",
+					"usuarioAlteracao",
+					"dataAlteracao"
+				]
+			},
+			"advancedSearch": {
+				"searchFields": [
+					"id",
+					"nome",
+					"numeroDocumento",
+					"usuarioGeracao",
+					"dataGeracao",
+					"usuarioAlteracao",
+					"dataAlteracao"
+				],
+				"displayFields": [
+					"id",
+					"nome",
+					"numeroDocumento",
+					"usuarioGeracao",
+					"dataGeracao",
+					"usuarioAlteracao",
+					"dataAlteracao"
+				]
+			},
+			"relationships": {
+				"grupoEmpresa": [
+					{
+						"type": "aggregation",
+						"attribute": "grupoEmpresa",
+						"ownerEntity": "cliente",
+						"entityName": "grupoEmpresa",
+						"optional": false,
+						"multivalued": false,
+						"lookup": {
+							"searchFields": [
+								"id",
+								"grupo",
+								"nomeGrupo",
+								"cnpjRaiz",
+								"usuarioGeracao",
+								"dataGeracao",
+								"usuarioAlteracao",
+								"dataAlteracao"
+							],
+							"displayFields": [
+								"id",
+								"grupo",
+								"nomeGrupo",
+								"cnpjRaiz",
+								"usuarioGeracao",
+								"dataGeracao",
+								"usuarioAlteracao",
+								"dataAlteracao"
+							]
+						},
+						"advancedSearch": {
+							"searchFields": [
+								"id",
+								"grupo",
+								"nomeGrupo",
+								"cnpjRaiz",
+								"usuarioGeracao",
+								"dataGeracao",
+								"usuarioAlteracao",
+								"dataAlteracao"
+							],
+							"displayFields": [
+								"id",
+								"grupo",
+								"nomeGrupo",
+								"cnpjRaiz",
+								"usuarioGeracao",
+								"dataGeracao",
+								"usuarioAlteracao",
+								"dataAlteracao"
+							]
+						}
+					}
+				]
+			}
+		},
+		"grupoEmpresa": {
+			"id": "id",
+			"name": "grupoEmpresa",
+			"customizable": false,
+			"slots": {
+				"id": {
+					"name": "id",
+					"type": "string",
+					"format": "uuid",
+					"optional": true,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": true
+				},
+				"grupo": {
+					"name": "grupo",
+					"type": "integer",
+					"optional": false,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false
+				},
+				"nomeGrupo": {
+					"name": "nomeGrupo",
+					"type": "string",
+					"optional": false,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false
+				},
+				"cnpjRaiz": {
+					"name": "cnpjRaiz",
+					"type": "string",
+					"optional": true,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false
+				},
+				"usuarioGeracao": {
+					"name": "usuarioGeracao",
+					"type": "string",
+					"optional": true,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": true
+				},
+				"dataGeracao": {
+					"name": "dataGeracao",
+					"type": "dateTime",
+					"optional": true,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": true
+				},
+				"usuarioAlteracao": {
+					"name": "usuarioAlteracao",
+					"type": "string",
+					"optional": true,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": true
+				},
+				"dataAlteracao": {
+					"name": "dataAlteracao",
+					"type": "dateTime",
+					"optional": true,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": true
+				}
+			},
+			"lookup": {
+				"searchFields": [
+					"id",
+					"grupo",
+					"nomeGrupo",
+					"cnpjRaiz",
+					"usuarioGeracao",
+					"dataGeracao",
+					"usuarioAlteracao",
+					"dataAlteracao"
+				],
+				"displayFields": [
+					"id",
+					"grupo",
+					"nomeGrupo",
+					"cnpjRaiz",
+					"usuarioGeracao",
+					"dataGeracao",
+					"usuarioAlteracao",
+					"dataAlteracao"
+				]
+			},
+			"advancedSearch": {
+				"searchFields": [
+					"id",
+					"grupo",
+					"nomeGrupo",
+					"cnpjRaiz",
+					"usuarioGeracao",
+					"dataGeracao",
+					"usuarioAlteracao",
+					"dataAlteracao"
+				],
+				"displayFields": [
+					"id",
+					"grupo",
+					"nomeGrupo",
+					"cnpjRaiz",
+					"usuarioGeracao",
+					"dataGeracao",
+					"usuarioAlteracao",
+					"dataAlteracao"
+				]
+			}
+		},
+		"tituloReceberMovimento": {
+			"id": "id",
+			"name": "tituloReceberMovimento",
+			"customizable": false,
+			"slots": {
+				"id": {
+					"name": "id",
+					"type": "string",
+					"format": "uuid",
+					"optional": true,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": true
+				},
+				"tituloReceber": {
+					"name": "tituloReceber",
+					"type": "tituloReceber",
+					"optional": false,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false
+				},
+				"sequenciaMovimento": {
+					"name": "sequenciaMovimento",
+					"type": "integer",
+					"optional": false,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false
+				},
+				"transacaoContasReceber": {
+					"name": "transacaoContasReceber",
+					"type": "transacaoContasReceber",
+					"optional": false,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false
+				},
+				"formaPagamento": {
+					"name": "formaPagamento",
+					"type": "formaPagamento",
+					"optional": true,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false
+				},
+				"dataMovimento": {
+					"name": "dataMovimento",
+					"type": "date",
+					"optional": false,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false
+				},
+				"valorAberto": {
+					"name": "valorAberto",
+					"type": "money",
+					"optional": false,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false
+				},
+				"valorMovimento": {
+					"name": "valorMovimento",
+					"type": "money",
+					"optional": false,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false
+				},
+				"usuarioGeracao": {
+					"name": "usuarioGeracao",
+					"type": "string",
+					"optional": true,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": true
+				},
+				"dataGeracao": {
+					"name": "dataGeracao",
+					"type": "dateTime",
+					"optional": true,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": true
+				},
+				"usuarioAlteracao": {
+					"name": "usuarioAlteracao",
+					"type": "string",
+					"optional": true,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": true
+				},
+				"dataAlteracao": {
+					"name": "dataAlteracao",
+					"type": "dateTime",
+					"optional": true,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": true
+				}
+			},
+			"lookup": {
+				"searchFields": [
+					"id",
+					"sequenciaMovimento",
+					"dataMovimento",
+					"valorAberto",
+					"valorMovimento",
+					"usuarioGeracao",
+					"dataGeracao",
+					"usuarioAlteracao",
+					"dataAlteracao"
+				],
+				"displayFields": [
+					"id",
+					"sequenciaMovimento",
+					"dataMovimento",
+					"valorAberto",
+					"valorMovimento",
+					"usuarioGeracao",
+					"dataGeracao",
+					"usuarioAlteracao",
+					"dataAlteracao"
+				]
+			},
+			"advancedSearch": {
+				"searchFields": [
+					"id",
+					"sequenciaMovimento",
+					"dataMovimento",
+					"valorAberto",
+					"valorMovimento",
+					"usuarioGeracao",
+					"dataGeracao",
+					"usuarioAlteracao",
+					"dataAlteracao"
+				],
+				"displayFields": [
+					"id",
+					"sequenciaMovimento",
+					"dataMovimento",
+					"valorAberto",
+					"valorMovimento",
+					"usuarioGeracao",
+					"dataGeracao",
+					"usuarioAlteracao",
+					"dataAlteracao"
+				]
+			},
+			"relationships": {
+				"tituloReceber": [
+					{
+						"type": "aggregation",
+						"attribute": "tituloReceber",
+						"ownerEntity": "tituloReceberMovimento",
+						"entityName": "tituloReceber",
+						"optional": false,
+						"multivalued": false,
+						"lookup": {
+							"searchFields": [
+								"id",
+								"numeroTitulo",
+								"cliente",
+								"situacaoTitulo",
+								"dataEntrada",
+								"dataEmissao",
+								"valorOriginal",
+								"valorAberto",
+								"usuarioGeracao",
+								"dataGeracao",
+								"usuarioAlteracao",
+								"dataAlteracao"
+							],
+							"displayFields": [
+								"id",
+								"numeroTitulo",
+								"cliente",
+								"situacaoTitulo",
+								"dataEntrada",
+								"dataEmissao",
+								"valorOriginal",
+								"valorAberto",
+								"usuarioGeracao",
+								"dataGeracao",
+								"usuarioAlteracao",
+								"dataAlteracao"
+							]
+						},
+						"advancedSearch": {
+							"searchFields": [
+								"id",
+								"numeroTitulo",
+								"cliente",
+								"situacaoTitulo",
+								"dataEntrada",
+								"dataEmissao",
+								"valorOriginal",
+								"valorAberto",
+								"usuarioGeracao",
+								"dataGeracao",
+								"usuarioAlteracao",
+								"dataAlteracao"
+							],
+							"displayFields": [
+								"id",
+								"numeroTitulo",
+								"cliente",
+								"situacaoTitulo",
+								"dataEntrada",
+								"dataEmissao",
+								"valorOriginal",
+								"valorAberto",
+								"usuarioGeracao",
+								"dataGeracao",
+								"usuarioAlteracao",
+								"dataAlteracao"
+							]
+						}
+					}
+				]
+				,"transacaoContasReceber": [
+					{
+						"type": "aggregation",
+						"attribute": "transacaoContasReceber",
+						"ownerEntity": "tituloReceberMovimento",
+						"entityName": "transacaoContasReceber",
+						"optional": false,
+						"multivalued": false,
+						"lookup": {
+							"searchFields": [
+								"id",
+								"transacao",
+								"descricao",
+								"modulo",
+								"tipoMovimento",
+								"tipoBaixa",
+								"situacao",
+								"usuarioGeracao",
+								"dataGeracao",
+								"usuarioAlteracao",
+								"dataAlteracao"
+							],
+							"displayFields": [
+								"id",
+								"transacao",
+								"descricao",
+								"modulo",
+								"tipoMovimento",
+								"tipoBaixa",
+								"situacao",
+								"usuarioGeracao",
+								"dataGeracao",
+								"usuarioAlteracao",
+								"dataAlteracao"
+							]
+						},
+						"advancedSearch": {
+							"searchFields": [
+								"id",
+								"transacao",
+								"descricao",
+								"modulo",
+								"tipoMovimento",
+								"tipoBaixa",
+								"situacao",
+								"usuarioGeracao",
+								"dataGeracao",
+								"usuarioAlteracao",
+								"dataAlteracao"
+							],
+							"displayFields": [
+								"id",
+								"transacao",
+								"descricao",
+								"modulo",
+								"tipoMovimento",
+								"tipoBaixa",
+								"situacao",
+								"usuarioGeracao",
+								"dataGeracao",
+								"usuarioAlteracao",
+								"dataAlteracao"
+							]
+						}
+					}
+				]
+				,"formaPagamento": [
+					{
+						"type": "aggregation",
+						"attribute": "formaPagamento",
+						"ownerEntity": "tituloReceberMovimento",
+						"entityName": "formaPagamento",
+						"optional": true,
+						"multivalued": false,
+						"lookup": {
+							"searchFields": [
+								"id",
+								"formaPagamento",
+								"abreviatura",
+								"descricao",
+								"situacao",
+								"usuarioGeracao",
+								"dataGeracao",
+								"usuarioAlteracao",
+								"dataAlteracao"
+							],
+							"displayFields": [
+								"id",
+								"formaPagamento",
+								"abreviatura",
+								"descricao",
+								"situacao",
+								"usuarioGeracao",
+								"dataGeracao",
+								"usuarioAlteracao",
+								"dataAlteracao"
+							]
+						},
+						"advancedSearch": {
+							"searchFields": [
+								"id",
+								"formaPagamento",
+								"abreviatura",
+								"descricao",
+								"situacao",
+								"usuarioGeracao",
+								"dataGeracao",
+								"usuarioAlteracao",
+								"dataAlteracao"
+							],
+							"displayFields": [
+								"id",
+								"formaPagamento",
+								"abreviatura",
+								"descricao",
+								"situacao",
+								"usuarioGeracao",
+								"dataGeracao",
+								"usuarioAlteracao",
+								"dataAlteracao"
+							]
+						}
+					}
+				]
+			}
+		}
+	}
+}

@@ -1,0 +1,19 @@
+<p-panel styleClass="form-group" [collapsed]="colapseFiltro" toggleable="true">
+    <p-header>
+        <span>{{"erp_fin.tcr_baixa.titulo_total_divida" | translate}}</span>
+    </p-header>
+    <filtros-feature [localeConfig]="locale"></filtros-feature>
+    <p-footer>
+        <p-button id="btnFiltrar" label="{{ 'filter' | translate}}" (onClick)="onSubmit()"></p-button>
+    </p-footer>
+</p-panel>
+<p-panel styleClass="form-group">
+    <p-header>
+        <span>{{"erp_fin.tcr_baixa.titulo_baixa_titulos" | translate}}</span>
+    </p-header>
+    <totalizador-feature-component></totalizador-feature-component>
+    <s-empty-state id="empty-state" *ngIf="!mostraAcoesBaixa" iconClass="fa fa-inbox" title="{{'erp_fin.tcr_baixa.titulo_registo_nao_encontrado' | translate}}"
+        description="{{'erp_fin.tcr_baixa.descricao_realize_busca' | translate}}">
+    </s-empty-state>
+    <operacoes-baixas [localeConfig]="locale" *ngIf="mostraAcoesBaixa"></operacoes-baixas>
+</p-panel>

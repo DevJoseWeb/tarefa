@@ -1,0 +1,107 @@
+<section>
+
+    <h1 class="sds-section-title">TabView</h1>
+
+    <p-selectButton [options]="orientationOptions" [(ngModel)]="selectedOrientation" styleClass="form-group"></p-selectButton>
+
+    <p-tabView [orientation]="selectedOrientation" styleClass="form-group">
+        <p-tabPanel header="TabView 1">
+            <ng-template pTemplate="content">
+                Conteúdo 1
+            </ng-template>
+        </p-tabPanel>
+        <p-tabPanel header="TabView 2">
+            <ng-template pTemplate="content">
+                Conteúdo 2
+            </ng-template>
+        </p-tabPanel>
+        <p-tabPanel header="TabView 3">
+            <ng-template pTemplate="content">
+                Conteúdo 3
+            </ng-template>
+        </p-tabPanel>
+        <p-tabPanel header="TabView 4" [disabled]="true">
+            <ng-template pTemplate="content">
+                Conteúdo 4
+            </ng-template>
+        </p-tabPanel>
+        <p-tabPanel header="TabView 5" [disabled]="true">
+            <ng-template pTemplate="content">
+                Conteúdo 5
+            </ng-template>
+        </p-tabPanel>
+    </p-tabView>
+
+    <p-panel styleClass="form-group">
+        <p-header>
+            <span>Painel</span>
+        </p-header>
+
+        <p-tabView [orientation]="selectedOrientation">
+            <p-tabPanel header="TabView 1">
+                <ng-template pTemplate="content">
+                    Conteúdo 1
+                </ng-template>
+            </p-tabPanel>
+            <p-tabPanel header="TabView 2">
+                <ng-template pTemplate="content">
+                    Conteúdo 2
+                </ng-template>
+            </p-tabPanel>
+            <p-tabPanel header="TabView 3">
+                <ng-template pTemplate="content">
+                    Conteúdo 3
+                </ng-template>
+            </p-tabPanel>
+            <p-tabPanel header="TabView 4" [disabled]="true">
+                <ng-template pTemplate="content">
+                    Conteúdo 4
+                </ng-template>
+            </p-tabPanel>
+            <p-tabPanel header="TabView 5" [disabled]="true">
+                <ng-template pTemplate="content">
+                    Conteúdo 5
+                </ng-template>
+            </p-tabPanel>
+            <p-tabPanel header="TabView 6" [disabled]="true">
+                <ng-template pTemplate="content">
+                    Conteúdo 6
+                </ng-template>
+            </p-tabPanel>
+            <p-tabPanel header="TabView 7" [disabled]="true">
+                <ng-template pTemplate="content">
+                    Conteúdo 7
+                </ng-template>
+            </p-tabPanel>
+            <p-tabPanel header="TabView 8" [disabled]="true">
+                <ng-template pTemplate="content">
+                    Conteúdo 8
+                </ng-template>
+            </p-tabPanel>
+            <p-tabPanel header="TabView 9" [disabled]="true">
+                <ng-template pTemplate="content">
+                    Conteúdo 9
+                </ng-template>
+            </p-tabPanel>
+        </p-tabView>
+
+    </p-panel>
+
+</section>
+
+<section>
+
+    <h1 class="sds-section-title">TabMenu</h1>
+
+    <p-tabMenu [model]="tabMenus" styleClass="form-group"></p-tabMenu>
+
+    <p-panel>
+        <p-header>
+            <span>Painel</span>
+        </p-header>
+
+        <p-tabMenu [model]="tabMenus"></p-tabMenu>
+
+    </p-panel>
+
+</section>

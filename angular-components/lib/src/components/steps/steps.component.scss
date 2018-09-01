@@ -1,0 +1,174 @@
+@import "~@seniorsistemas/primeng-theme/dist/scss/_colors";
+@import "~@seniorsistemas/primeng-theme/dist/scss/_queries";
+@import "../../scss/_animations";
+
+.s-steps-container {
+    overflow: hidden;
+    padding: 20px;
+}
+
+.s-step-list {
+    padding: 0;
+    list-style-type: none;
+    display: flex;
+    height: 100%;
+}
+
+.s-step {
+    padding: 10px 15px;
+    position: relative;
+    min-width: 0;
+    flex: 1;
+
+    &:last-child .s-step-progress-bar {
+        width: calc(100% - 30px);
+    }
+}
+
+.s-step.s-step-visited {
+    .s-step-index {
+        border-color: $secondary-color;
+        color: $primary-light-text-color;
+    }
+
+    .s-step-index-bg {
+        animation: scale-up-center 0.1s ease-out alternate;
+        height: calc(100% + 2px);
+        width: calc(100% + 2px);
+    }
+
+    .s-step-progress-bar:before {
+        right: 0;
+    }
+}
+
+.s-step.s-step-disabled {
+    @include disabled();
+}
+
+.s-step.s-step-active.s-step-disabled {
+    opacity: 1;
+}
+
+.s-step-index {
+    background-color: $default-color;
+    border: 3px solid $default-primary-color;
+    border-radius: 50%;
+    color: $secondary-dark-text-color;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 18px;
+    font-weight: bold;
+    height: 40px;
+    padding: 5px;
+    position: relative;
+    text-align: center;
+    transition: background-color 200ms ease-out;
+    width: 40px;
+    z-index: 1;
+
+    &:hover {
+        background-color: highlight($default-secondary-color);
+    }
+
+    & > *:not(.s-step-index-bg) {
+        position: relative;
+        z-index: 1;
+    }
+}
+
+.s-step-index-bg {
+    background-color: $secondary-color;
+    border-radius: 50%;
+    position: absolute;
+    left: -1px;
+    top: -1px;
+    z-index: 0;
+}
+
+.s-step-label,
+.s-step-description {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-break: break-all;
+}
+
+.s-step-label {
+    color: $secondary-dark-text-color;
+    font-size: 14px;
+    font-weight: normal;
+    margin-top: 5px;
+}
+
+.s-step-description {
+    color: $secondary-dark-text-color;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.s-step-progress-bar {
+    background-color: $default-primary-color;
+    height: 3px;
+    overflow: hidden;
+    position: absolute;
+    left: 15px;
+    top: 30px;
+    width: 100%;
+
+    &:before {
+        content: "";
+        position: absolute;
+        background-color: $secondary-color;
+        bottom: 0;
+        height: 100%;
+        right: 100%;
+        width: 100%;
+        z-index: 0;
+    }
+}
+
+.s-step-previous,
+.s-step-active {
+    .s-step-progress-bar:before {
+        transition: right 100ms ease-out;
+        transition-delay: 100ms;
+    }
+}
+
+.s-step-active {
+    .s-step-index {
+        border-color: $secondary-color;
+        color: $secondary-color;
+        cursor: default;
+    }
+
+    .s-step-label {
+        color: $primary-dark-text-color;
+        font-weight: bold;
+    }
+}
+
+@media #{$sm-devices} {
+    .s-step-label,
+    .s-step-description {
+        display: none;
+    }
+}
+
+@media #{$md-devices} {
+    .s-step-label {
+        display: block;
+    }
+
+    .s-step-description {
+        display: none;
+    }
+}
+
+@media #{$lg-devices} {
+    .s-step-label,
+    .s-step-description {
+        display: block;
+    }
+}

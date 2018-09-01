@@ -1,0 +1,52 @@
+<form [formGroup]="formGroup" novalidate>
+    <p-panel styleClass="form-group">
+        <p-header>
+            <span>Custom Entity</span>
+        </p-header>
+
+        <div class="ui-fluid">
+            <div class="ui-g">
+
+                <div class="ui-g-12 ui-md-6 required">
+                    <label for="id">Id</label>
+                    <input type="number" id="id" name="id" pInputText formControlName="id" autocomplete="off" />
+                </div>
+                <div class="ui-g-12 ui-md-6 required">
+                    <label for="atributoInteger">Atributo Integer</label>
+                    <input type="number" id="atributoInteger" name="atributoInteger" pInputText formControlName="atributoInteger" autocomplete="off"
+                    />
+                </div>
+                <div class="ui-g-12 ui-md-6">
+                    <label for="atributoDouble">Atributo Double</label>
+                    <input type="number" id="atributoDouble" name="atributoDouble" pInputText formControlName="atributoDouble" autocomplete="off"
+                    />
+                </div>
+                <div class="ui-g-12 ui-md-6 required">
+                    <label for="atributoBoolean">Atributo Boolean</label>
+                    <div class="ui-inputgroup">
+                        <p-checkbox inputId="atributoBoolean" name="atributoBoolean" binary="true" formControlName="atributoBoolean"></p-checkbox>
+                    </div>
+                </div>
+                <div class="ui-g-12 ui-md-6 required">
+                    <label for="atributoString">Atributo String</label>
+                    <input type="text" id="atributoString" name="atributoString" pInputText formControlName="atributoString" autocomplete="off"
+                    />
+                </div>
+
+            </div>
+        </div>
+
+        <hr/>
+
+        <s-empty-state *ngIf="!showCustom" iconClass="fa fa-th-list" (primaryAction)="showCustom = true" primaryActionLabel="Criar"
+            title="Campos Customizados" description="Clique em &quot;Criar&quot; e aqui será exibido um formulário de exemplo com os campos customizados"></s-empty-state>
+
+        <s-custom-fields *ngIf="showCustom" domain="domain" service="service" entity="entity" formControlName="custom" invalidErrorLabel="Valor inválido"></s-custom-fields>
+
+        <p-footer>
+            <s-button id="save" type="submit" label="Save" (click)="save()"></s-button>
+            <s-button id="cancel" type="button" priority="link" label="Cancel" routerLink="../"></s-button>
+        </p-footer>
+
+    </p-panel>
+</form>

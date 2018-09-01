@@ -1,0 +1,90 @@
+<form [formGroup]="formGroup" novalidate>
+    <p-panel>
+        <p-header>
+            <span>Control Errors</span>
+        </p-header>
+
+        <div class="ui-fluid">
+
+            <div class="ui-g">
+                <h3 class="ui-g-12">
+                    Exemplo 1
+                </h3>
+                <div class="ui-g-6 required">
+                    <label for="atributoInteger">Nome</label>
+                    <input type="text" id="nome" name="nome" pInputText formControlName="nome" autocomplete="off" />
+                    <s-control-errors [control]="formGroup.controls['nome']" [errorMessages]="{
+                        required: 'Toda pessoa precisa de um nome. Caso contrário, o que seria escrito no copo do Starbucks?',
+                        minlength: 'Não aceitamos nomes tão pequenos'
+                    }">
+                    </s-control-errors>
+                </div>
+                <div class="ui-g-6">
+                    <h4>
+                        Nesse campo você pode testar as seguintes validações:
+                    </h4>
+                    <ul>
+                        <li>Obrigatoriedade</li>
+                        <li>Tamanho mínimo (3)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <hr/>
+
+            <div class="ui-g">
+                <h3 class="ui-g-12">
+                    Exemplo 2
+                </h3>
+                <div class="ui-g-6 required">
+                    <label for="idade">Idade</label>
+                    <input type="number" id="idade" name="idade" pInputText formControlName="idade" autocomplete="off" />
+                    <s-control-errors [control]="formGroup.controls['idade']" [errorMessages]="{
+                        required: 'Por favor, sua idade é muito importante para nós',
+                        min: 'Esse cadastro é apenas para maiores de idade',
+                        max: 'A medicina ainda não nos permite viver tanto!'
+                    }">
+                    </s-control-errors>
+                </div>
+                <div class="ui-g-6">
+                    <h4>
+                        Nesse campo você pode testar as seguintes validações:
+                    </h4>
+                    <ul>
+                        <li>Obrigatoriedade</li>
+                        <li>Valor mínimo (18)</li>
+                        <li>Valor máximo (120)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <hr/>
+
+            <div class="ui-g">
+                <h3 class="ui-g-12">
+                    Exemplo 3
+                </h3>
+                <div class="ui-g-6 required">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" pInputText formControlName="email" autocomplete="off" />
+                    <s-control-errors [control]="formGroup.controls['email']" [errorMessages]="{
+                        email: 'Email inválido',
+                        pattern: 'Infelizmente só aceitamos emails que contenham a palavra Sfrufles®'
+                    }">
+                    </s-control-errors>
+                </div>
+                <div class="ui-g-6">
+                    <h4>
+                        Nesse campo você pode testar as seguintes validações:
+                    </h4>
+                    <ul>
+                        <li>Email</li>
+                        <li>Pattern (/.*(sfrufles).*/i)</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </p-panel>
+
+</form>

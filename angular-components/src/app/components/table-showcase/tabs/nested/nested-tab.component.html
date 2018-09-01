@@ -1,0 +1,86 @@
+<p-selectButton [options]="options" [(ngModel)]="list" styleClass="form-group"></p-selectButton>
+
+<p-table [ngClass]="{'sds-list': list}" selectionMode="single" [(selection)]="selected" [value]="gridData" [columns]="gridColumns"
+    dataKey="code" rows="10" [paginator]="true" [totalRecords]="gridTotalRecords" [responsive]="true" [lazy]="true" (onLazyLoad)="updateGridData($event)"
+    *sLoadingState="gridLoading" sortMode="multiple">
+
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+                <div class="senior-header">
+                    <span class="senior-header-title">{{col.header}}</span>
+                    <p-sortIcon [field]="col.field"></p-sortIcon>
+                </div>
+            </th>
+        </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-rowData let-expanded="expanded" let-columns="columns">
+        <tr [pSelectableRow]="rowData" [pRowToggler]="rowData">
+            <td *ngFor="let col of columns" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis">
+                <div class="ui-column-title">{{col.header}}</div>
+                <ng-container [ngSwitch]="col.field">
+
+                    <ng-container *ngSwitchCase="'birthday'">
+                        {{rowData[col.field] | localizedDate:"L"}}
+                    </ng-container>
+
+                    <ng-container *ngSwitchDefault>
+                        {{rowData[col.field]}}
+                    </ng-container>
+
+                </ng-container>
+            </td>
+        </tr>
+    </ng-template>
+
+    <ng-template pTemplate="rowexpansion" let-rowData let-columns="columns">
+        <tr class="sds-expanded-row">
+            <td [attr.colspan]="columns.length">
+                <p-table [ngClass]="{'sds-list': list}" [value]="rowData.nestedGridData" [columns]="rowData.nestedGridColumns" dataKey="id"
+                    rows="5" [paginator]="true" [totalRecords]="rowData.nestedGridTotalRecords" [responsive]="true" [lazy]="true"
+                    (onLazyLoad)="updateNestedGridData($event, rowData)" sortMode="multiple" *sLoadingState="rowData.nestedGridLoading">
+
+                    <ng-template pTemplate="header" let-columns>
+                        <tr>
+                            <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+                                <div class="senior-header">
+                                    <span class="senior-header-title">{{col.header}}</span>
+                                    <p-sortIcon [field]="col.field"></p-sortIcon>
+                                </div>
+                            </th>
+                        </tr>
+                    </ng-template>
+
+                    <ng-template pTemplate="body" let-rowData let-columns="columns">
+                        <tr [pSelectableRow]="rowData">
+                            <td *ngFor="let col of columns" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis">
+                                <div class="ui-column-title">{{col.header}}</div>
+                                <ng-container [ngSwitch]="col.field">
+
+                                    <ng-container *ngSwitchCase="'birthday'">
+                                        {{rowData[col.field] | localizedDate:"L"}}
+                                    </ng-container>
+
+                                    <ng-container *ngSwitchDefault>
+                                        {{rowData[col.field]}}
+                                    </ng-container>
+
+                                </ng-container>
+                            </td>
+                        </tr>
+                    </ng-template>
+
+                    <ng-template pTemplate="paginatorright">
+                        <span>{{rowData.nestedGridTotalRecords}} registros encontrados</span>
+                    </ng-template>
+                </p-table>
+            </td>
+        </tr>
+    </ng-template>
+
+    <ng-template pTemplate="paginatorright">
+        <span>{{gridTotalRecords}} registros encontrados</span>
+    </ng-template>
+
+</p-table>

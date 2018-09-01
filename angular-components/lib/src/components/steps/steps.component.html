@@ -1,0 +1,40 @@
+<div [id]="id" class="s-steps-container">
+
+    <ul role="tablist" class="s-step-list">
+
+        <li [id]="id + '-step-' + (step.id || i)" *ngFor="let step of steps; let i = index;" class="s-step" [ngClass]="{
+            's-step-success': (step.state === 'success'),
+            's-step-warning': (step.state === 'warning'),
+            's-step-disabled': step.disabled,
+            's-step-visited': (i < activeIndex),
+            's-step-next': (i === activeIndex + 1),
+            's-step-active': (i === activeIndex),
+            's-step-previous': (i === activeIndex - 1)
+        }">
+
+            <div class="s-step-progress">
+                <div class="s-step-index" (click)="stepClick(step, i, $event)" [pTooltip]="step.label" tooltipPosition="top" showDelay="500">
+
+                    <span *ngIf="step.state !== 'warning' && (step.state === 'success' || activeIndex > i)" class="fa fa-fw fa-check" aria-hidden="true"
+                        [attr.aria-label]="i + 1"></span>
+                    <span *ngIf="step.state === 'warning'" class="fa fa-fw fa-exclamation-triangle" aria-hidden="true" [attr.aria-label]="i + 1"></span>
+                    <span *ngIf="step.state !== 'success' && step.state !== 'warning' && activeIndex <= i">{{i + 1}}</span>
+
+                    <div class="s-step-index-bg"></div>
+                </div>
+
+                <div class="s-step-progress-bar"></div>
+            </div>
+
+            <div class="s-step-label">
+                <span [pTooltip]="step.label" tooltipPosition="top" showDelay="500">{{step.label}}</span>
+            </div>
+
+            <div class="s-step-description">
+                <span [pTooltip]="step.description" tooltipPosition="top" showDelay="500">{{step.description}}</span>
+            </div>
+
+        </li>
+
+    </ul>
+</div>

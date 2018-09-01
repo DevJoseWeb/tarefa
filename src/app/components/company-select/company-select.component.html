@@ -1,0 +1,184 @@
+<div [class]="companyColStyleClass" [ngClass]="{'required': companyRequired}">
+    <label>{{companyLabel}}</label>
+    <multiSelect 
+        #multiSelectCompany
+        #multiSelectCompanies="ngModel"
+        *ngIf="companySelectionMode == 'multiple'"
+        [defaultLabel]="selectCompanyLabel"
+        [panelStyle]="{minWidth:'12em'}"
+        [filter]="true"
+        filterPlaceHolder="Busca"
+        maxSelectedLabels="2"
+        selectedItemsLabel="{0} itens selecionados"
+        [resetFilterOnHide]="true"
+        scrollHeight="200px"
+        [options]="companies" 
+        [inputId]="companyIdString"
+        [(ngModel)]="companyModel" 
+        dropdownIcon="fa fa-angle-down"
+        [filterBackEnd]="true"
+        [filterEndPoint]="companyFilterEndPoint"
+        [filterResponseField]="companyFilterResponseField"
+        (onChange)="onCompanyChange($event)"
+        [(unselectedOptions)]="unselectedCompanies"
+        [getAllEndPoint]="getAllCompaniesEndPoint"
+        [getAllResponseField]="getAllCompaniesResponseField"
+        (onAllOptionsAreSelected)="setAllCompaniesSelected($event)"
+        [allSelectedInputLabel]="allSelectedInputLabel"
+        [idVariableName]="companyIdVariableName"
+        [required]="companyRequired"
+        [getOneEndPoint]="getOneCompanyEndPoint"
+        [getOneResponseField]="getOneCompanyResponseField"
+        [filterOnInit]="true"
+        [resetFilterOnHide]="true"
+        [componentMode]="componentMode"
+        [disabled]="companyDisabled"
+        [fieldsForLabel]="fieldsForCompanyLabel"
+        [fieldsForList]="fieldsForCompanyList"
+        >
+        <ng-template let-emp pTemplate="item">
+            <div class="multiselect-option-item">{{emp.label}}</div>
+        </ng-template>
+    </multiSelect>
+    <div *ngIf="companySelectionMode == 'multiple' && multiSelectCompanies?.invalid && (multiSelectCompanies?.dirty || multiSelectCompanies?.touched)"
+        class="ui-message ui-messages-error">
+        <div *ngIf="multiSelectCompanies.errors.required">
+            {{companyErrorMsg}}
+        </div>
+    </div>
+    <single-select 
+        #singleSelectCompany="ngModel"
+        *ngIf="companySelectionMode == 'single'"    
+        [options]="companies" 
+        [(ngModel)]="companyModel" 
+        [style]="{'width':'100%'}"
+        dropdownIcon="fa fa-angle-down"
+        [filter]="true"
+        filterPlaceHolder="Busca"
+        [filterBackEnd]="true"
+        [filterEndPoint]="companyFilterEndPoint"
+        [filterResponseField]="companyFilterResponseField"
+        (onChange)="onCompanyChange($event)"
+        [placeholder]="selectCompanyLabel"
+        [idVariableName]="companyIdVariableName"
+        [required]="companyRequired"
+        [inputId]="companyIdString"
+        [getOneEndPoint]="getOneCompanyEndPoint"
+        [getOneResponseField]="getOneCompanyResponseField"
+        [componentMode]="componentMode"
+        [disabled]="companyDisabled"
+        [fieldsForLabel]="fieldsForCompanyLabel"
+        [fieldsForList]="fieldsForCompanyList"
+        >
+        <ng-template let-item pTemplate="selectedItem"> 
+            <span style="vertical-align:middle">{{item.label}}</span>
+        </ng-template> 
+        <ng-template let-emp pTemplate="item"> 
+            <div class="ui-helper-clearfix" style="position: relative;height:25px;">
+            <div class="multiselect-option-item">{{emp.label}}</div> </div>
+        </ng-template>
+    </single-select>
+    <div *ngIf="companySelectionMode == 'single' && singleSelectCompany?.invalid && (singleSelectCompany?.dirty || singleSelectCompany?.touched)"
+        class="ui-message ui-messages-error">
+        <div *ngIf="singleSelectCompany.errors.required">
+            {{companyErrorMsg}}
+        </div>
+    </div>
+</div>
+<div [class]="subCompanyColStyleClass" [ngClass]="{'required': subCompanyRequired}" *ngIf="hasSubCompany">
+    <label>{{subCompanyLabel}}</label>
+    <multiSelect 
+        #SingleSelectCompanyComponent
+        #multiSelectSubCompanies="ngModel"
+        *ngIf="subCompanySelectionMode == 'multiple'"
+        [inputId]="subCompanyIdString"
+        [defaultLabel]="selectSubCompanyLabel"
+        [options]="subCompanies"
+        [(ngModel)]="subCompanyModel" 
+        [panelStyle]="{minWidth:'12em'}"
+        [filter]="true"
+        filterPlaceHolder="Busca"
+        maxSelectedLabels="2"
+        selectedItemsLabel="{0} itens selecionados"
+        [resetFilterOnHide]="true"
+        scrollHeight="200px"
+        dropdownIcon="fa fa-angle-down"
+        [filterBackEnd]="true"
+        [filterEndPoint]="subCompanyFilterEndPoint"
+        [filterConditionalField]="subCompanyFilterConditionalField"        
+        [filterConditionalExcept]="unselectedCompanies"
+        [filterConditionalOnly]="companyModel"
+        [filterConditionalAll]="allCompaniesSelected"
+        [filterResponseField]="subCompanyFilterResponseField"
+        [disabled]="companyModel?.length === 0 || !companyModel || subCompanyDisabled"
+        [group]="subCompanyByGroup"
+        [(unselectedOptions)]="unselectedSubCompanies"
+        [getAllEndPoint]="getAllSubCompaniesEndPoint"
+        [getAllResponseField]="getAllSubCompaniesResponseField"
+        [getAllRequestField]="getAllSubCompaniesRequestField"
+        (onAllOptionsAreSelected)="setAllSubCompaniesSelected($event)"
+        (onChange)="onSubCompanyChange($event)"
+        [allSelectedInputLabel]="allSelectedInputLabel"
+        [idVariableName]="subCompanyIdVariableName"
+        [idVariableGroupMasterName]="idVariableGroupMasterName"
+        [required]="subCompanyRequired"
+        [selectAllWhenOpen]="selectAllSubCompaniesWhenOpen"
+        [getOneEndPoint]="getOneSubCompanyEndPoint"
+        [getOneResponseField]="getOneSubCompanyResponseField"
+        [resetFilterOnHide]="true"
+        [componentMode]="componentMode"
+        [fieldsForLabel]="fieldsForSubCompanyLabel"
+        [fieldsForList]="fieldsForSubCompanyList"
+        >
+        <ng-template let-fil pTemplate="item">
+            <div class="multiselect-option-item">{{fil.label}}</div>
+        </ng-template>
+    </multiSelect>
+    <div *ngIf="subCompanySelectionMode == 'multiple' && multiSelectSubCompanies?.invalid && (multiSelectSubCompanies?.dirty || multiSelectSubCompanies?.touched)"
+        class="ui-message ui-messages-error">
+        <div *ngIf="multiSelectSubCompanies.errors.required">
+            {{subCompanyErrorMsg}}
+        </div>
+    </div>
+    <single-select 
+        #singleSelectSubCompany="ngModel"
+        *ngIf="subCompanySelectionMode == 'single'"    
+        [options]="subCompanies" 
+        [(ngModel)]="subCompanyModel" 
+        [style]="{'width':'100%'}"
+        dropdownIcon="fa fa-angle-down"
+        [filter]="true"
+        filterPlaceHolder="Busca"
+        [filterBackEnd]="true"
+        [filterEndPoint]="subCompanyFilterEndPoint"
+        [filterConditionalOnly]="companyModel"
+        [filterConditionalField]="subCompanyFilterConditionalField"
+        [filterResponseField]="subCompanyFilterResponseField"
+        (onChange)="onSubCompanyChange($event)"
+        [placeholder]="selectSubCompanyLabel"
+        [idVariableName]="subCompanyIdVariableName"
+        [required]="subCompanyRequired"
+        [inputId]="subCompanyIdString"
+        [getOneEndPoint]="getOneSubCompanyEndPoint"
+        [getOneResponseField]="getOneSubCompanyResponseField"
+        [disabled]="!companyModel || subCompanyDisabled"
+        [componentMode]="componentMode"
+        [fieldsForLabel]="fieldsForSubCompanyLabel"
+        [fieldsForList]="fieldsForSubCompanyList"
+    >
+    <ng-template let-item pTemplate="selectedItem"> 
+        <span style="vertical-align:middle">{{item.label}}</span>
+    </ng-template> 
+    <ng-template let-fil pTemplate="item"> 
+        <div class="ui-helper-clearfix" style="position: relative;height:25px;">
+            <div class="multiselect-option-item">{{fil.label}}</div> </div>
+        </ng-template>
+    </single-select>
+    <div *ngIf="subCompanySelectionMode == 'single' && singleSelectSubCompany?.invalid && (singleSelectSubCompany?.dirty || singleSelectSubCompany?.touched)"
+        class="ui-message ui-messages-error">
+        <div *ngIf="singleSelectSubCompany.errors.required">
+            {{subCompanyErrorMsg}}
+        </div>
+    </div>
+</div>
+

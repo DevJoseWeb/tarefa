@@ -1,0 +1,112 @@
+@import "~@seniorsistemas/primeng-theme/dist/scss/_colors";
+@import "~@seniorsistemas/primeng-theme/dist/scss/_queries";
+
+s-lookup.ng-dirty.ng-invalid .ui-inputtext {
+    border-color: $error-color;
+}
+
+s-lookup .ui-inputtext {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+s-lookup .inputgroup p-autocomplete + button,
+s-lookup p-autocomplete .ui-autocomplete-dropdown.ui-button {
+    background-color: $default-color;
+    border-color: $default-primary-color;
+    border-width: 1px 1px 1px 0;
+    color: $primary-dark-text-color;
+    min-height: 34px;
+    height: auto !important;
+    min-width: auto;
+    width: 34px !important;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+s-lookup p-autocomplete span.ui-autocomplete-multiple,
+.ui-fluid s-lookup .inputgroup {
+    display: flex;
+}
+
+.ui-fluid s-lookup .inputgroup p-autocomplete {
+    display: inline-block;
+}
+
+.ui-fluid s-lookup .inputgroup p-autocomplete,
+.ui-fluid s-lookup p-autocomplete .ui-autocomplete-input {
+    width: calc(100% - 34px);
+}
+
+.ui-fluid s-lookup .inputgroup p-autocomplete .ui-autocomplete-input {
+    width: 100%;
+}
+
+s-lookup .inputgroup p-autocomplete + button:enabled:hover,
+s-lookup .inputgroup p-autocomplete + button:focus {
+    background-color: highlight($default-primary-color);
+    border-color: $default-primary-color;
+}
+
+s-lookup .inputgroup p-autocomplete .ui-widget .ui-inputtext {
+    border-right-width: 1px;
+    border-right-style: solid;
+}
+
+s-lookup .ui-autocomplete-input-token input {
+    width: 100%;
+}
+
+s-lookup .ui-autocomplete .ui-autocomplete-token {
+    max-width: 100%;
+}
+
+s-lookup .ui-autocomplete .ui-autocomplete-token-label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.s-lookup-modal {
+    border-radius: 0 !important;
+    top: 10vh !important;
+    height: 80vh !important;
+    max-width: 100vw !important;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+
+    .ui-dialog-content {
+        height: auto !important;
+        flex: 1;
+    }
+
+    .ui-dialog-header,
+    .ui-dialog-footer {
+        flex-shrink: 0;
+    }
+}
+
+@media #{$sm-devices} {
+    .s-lookup-modal {
+        border: none !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+    }
+}
+
+@media #{$md-devices} {
+    .s-lookup-modal {
+        left: 10vw !important;
+        width: 80vw !important;
+    }
+}
+
+@media #{$xl-devices} {
+    .s-lookup-modal {
+        left: 20vw !important;
+        width: 60vw !important;
+    }
+}

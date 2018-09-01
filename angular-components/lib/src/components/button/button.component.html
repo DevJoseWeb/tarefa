@@ -1,0 +1,21 @@
+<p-tieredMenu [id]="id + '-menu'" [popup]="true" appendTo="body"></p-tieredMenu>
+
+<button [id]="id" [type]="type" [class]="styleClass" [ngClass]="{
+    's-button-auxiliary': auxiliary,
+    's-button-with-icon': iconClass,
+    's-button-with-text': label,
+    's-button-empty': !iconClass && !label,
+    's-button-size-default': size === 'default',
+    's-button-size-small': size === 'small',
+    's-button-priority-default': priority === 'default',
+    's-button-priority-primary': priority === 'primary',
+    's-button-priority-secondary': priority === 'secondary',
+    's-button-priority-link': priority === 'link',
+    's-button-multiple': model && model.length,
+    's-button-active': isOpen()
+}" [disabled]="disabled" [pTooltip]="tooltip || label" tooltipPosition="top" showDelay="500" (click)="onClick.emit($event)">
+    <span *ngIf="iconClass" [class]="iconClass" [ngClass]="{'s-button-icon': true}" aria-hidden="true"></span>
+    <span *ngIf="label" class="s-button-text">{{label}}</span>
+    <ng-content></ng-content>
+    <span *ngIf="model && model.length" class="fa fa-fw fa-caret-down s-button-menu-icon" aria-hidden="true"></span>
+</button>

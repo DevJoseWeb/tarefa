@@ -1,0 +1,17 @@
+<form [formGroup]="formFiltro" novalidate>
+    <p-tabView (onChange)="carregaAba($event)">
+        <p-tabPanel header="{{'erp_fin.tcr_baixa.titulo_dados_gerais' | translate}}">
+            <filtro-geral [(formGroup)]="formFiltro.controls.filtrosGerais" [localeConfig]="localeConfig"></filtro-geral>
+        </p-tabPanel>
+        <p-tabPanel header="{{'erp_fin.tcr_baixa.titulo_titulos_baixar' | translate}}">
+            <filtro-titulo-receber [dadosGerais]="formFiltro.controls.filtrosGerais" [(formGroup)]="formFiltro.controls.filtrosTitulosReceber" [localeConfig]="localeConfig"></filtro-titulo-receber>
+        </p-tabPanel>
+        <p-tabPanel header="{{'erp_fin.tcr_baixa.titulo_aproveitar' | translate}}">
+            <filtro-credito *ngIf="mostraTituloAproveitar" [dadosGerais]="formFiltro.controls.filtrosGerais" [(formGroup)]="formFiltro.controls.filtrosCreditos" [localeConfig]="localeConfig"></filtro-credito>
+        </p-tabPanel>
+        <p-tabPanel header="{{'erp_fin.tcr_baixa.titulo_titulos_compensar' | translate}}">
+            <filtro-titulos-pagar *ngIf="mostraTituloCompensar" [dadosGerais]="formFiltro.controls.filtrosGerais" [(formGroup)]="formFiltro.controls.filtrosTitulosPagar" [localeConfig]="localeConfig"></filtro-titulos-pagar>
+        </p-tabPanel>
+    </p-tabView>
+    <p-confirmDialog id="confirm-dialog-filtro-feature" key="filtroFeature" acceptLabel="{{'yes' | translate}}" rejectLabel="{{'no' | translate}}"></p-confirmDialog>
+</form>

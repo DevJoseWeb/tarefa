@@ -1,0 +1,25 @@
+<div [id]="id" [ngClass]="{
+    's-stats-card-light': lightMode,
+    's-stats-card-color': !lightMode
+}" class="s-stats-card-container">
+
+    <div [id]="id + '-info-container'" class="s-stats-card-info-container">
+        <div class="s-stats-card-info-inner-container">
+
+            <div [id]="id + '-icon-container'" class="s-stats-card-icon-container" [ngStyle]="{'background-color': lightMode && color || ''}">
+                <span [id]="id + '-icon'" [class]="iconClass" [ngClass]="{'s-stats-card-icon': true}" [ngStyle]="{'color': !lightMode && color || ''}"
+                    aria-hidden="true"></span>
+            </div>
+
+            <div [id]="id + '-text-container'" class="s-stats-card-text-container">
+                <h4 [id]="id + '-label'" class="s-stats-card-label" [pTooltip]="label" tooltipPosition="top" showDelay="500">{{label}}</h4>
+                <span [id]="id + '-value'" class="s-stats-card-value" [pTooltip]="value" tooltipPosition="top" showDelay="500">{{displayValue}}</span>
+            </div>
+
+        </div>
+    </div>
+
+    <div [id]="id + '-overlay'" class="s-stats-card-overlay"></div>
+    <div [id]="id + '-background'" class="s-stats-card-background" [ngStyle]="{'background-color': !lightMode && color || ''}"></div>
+
+</div>

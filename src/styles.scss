@@ -1,0 +1,176 @@
+@import "~primeng/resources/primeng.min.css";
+@import "~@seniorsistemas/primeng-theme/dist/theme.min.css";
+
+.ui-paginator .ui-paginator-right-content {
+    margin-left: auto;
+}
+
+/* Empresa e Filial */
+
+company-select .ui-multiselect-trigger {
+    background: #fff;
+}
+
+company-select multiselect .ui-multiselect-panel {
+    max-width: 100%;
+    padding: 10px !important;
+}
+
+company-select multiselect .ui-multiselect .ui-multiselect-header .ui-multiselect-filter-container {
+    width: calc(100% - 27px);
+    margin-left: 0 !important;
+}
+
+company-select .ui-multiselect-label-container {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+company-select multiselect .ui-multiselect .ui-multiselect-item {
+    padding: 10px 10px 10px 0;
+}
+
+company-select multiselect .ui-multiselect-panel .ui-multiselect-item {
+    align-items: center;
+}
+
+company-select multiselect .multiselect-option-item {
+    font-size: 14px;
+    float: right;
+}
+
+company-select multiselect .grouped-options {
+    padding: 0 !important;
+    margin-top: 10px;
+}
+
+company-select multiselect .grouped-options label {
+    font-weight: bold;
+}
+
+company-select multiselect .grouped-options li {
+    padding-left: 17px !important;
+}
+
+company-select multiselect .multi-select-li {
+    display: flex !important;
+    align-items: center !important;
+    padding: 5px 10px 5px 0 !important;
+    border-radius: 0 !important;
+}
+
+company-select multiselect .multi-select-li.ui-state-highlight {
+    background-color: transparent !important;
+    color: #333 !important;
+}
+
+company-select multiselect .multi-select-li:hover {
+    background-color: #efefef !important;
+}
+
+company-select multiselect .multi-select-li.ui-chkbox{
+    display: flex !important;
+    align-items: center !important;
+}
+
+company-select multiselect .multi-select-li .ui-chkbox.ui-state-highlight{
+    border: none !important;
+}
+
+company-select single-select .single-select-ul {
+    padding: 10px !important;
+}
+
+company-select single-select .single-select-li {
+    display: flex !important;
+    align-items: center !important;
+    padding: 5px 0 0px !important;
+}
+
+company-select single-select .single-select-li.ui-state-highlight {
+    background-color: transparent !important;
+    color: #333 !important;
+}
+
+company-select single-select .single-select-li:hover {
+    background-color: #efefef !important;
+}
+
+company-select single-select .single-select-input {
+    min-height: auto !important;
+    line-height: 20px !important;
+}
+
+company-select single-select .single-select-label {
+    line-height: 20px !important;
+}
+
+company-select single-select .single-select-checkbox {
+    height: 21px !important;
+    margin-right: 10px;
+    border: none !important;
+}
+
+company-select single-select .single-select-filter-input {
+    padding-top: 10px !important;
+}
+
+
+company-select multiselect .multi-select-li .ui-chkbox-box,
+company-select single-select .single-select-checkbox .ui-chkbox,
+company-select single-select .single-select-checkbox .ui-chkbox-box,
+company-select multiselect .multi-select-select-all .ui-chkbox-box{
+    border: 1px solid #ccc !important;
+    border-radius: 0;
+    background-color: #fff !important;
+}
+
+company-select multiselect .multi-select-select-all {
+    margin-right: 7px !important;
+}
+
+company-select .grouped-options li label {
+    font-weight: normal !important;
+}
+
+company-select multiselect .multi-select-li .ui-chkbox.ui-widget {
+    border: none !important;
+}
+
+company-select multiselect .group-master-li {
+    opacity: 0.6;
+}
+
+company-select .dropdown-button {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0px !important;
+    padding: 8px !important;
+}
+
+company-select multiselect.ng-dirty.ng-invalid>.ui-multiselect {
+    border-color: #c13018;
+}
+
+company-select single-select.ng-touched.ng-invalid>.ui-dropdown {
+    border-color: #c13018;
+}
+
+/* Custom prime */
+.ui-multiselect-panel { width: 100%; }
+
+/* TODO: Após a liberação do componente Tiles, apagar o conteúdo abaixo */
+.card-operacao {
+    text-align: center;
+    &_content {
+        padding: 25px;
+        color: #429CDE;
+        font-size: 14px;
+        cursor: pointer;
+    }
+}
+
+.ui-dropdown .ui-dropdown-clear-icon {
+    right: 3em;
+}

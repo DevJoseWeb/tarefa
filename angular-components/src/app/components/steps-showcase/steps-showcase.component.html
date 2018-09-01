@@ -1,0 +1,31 @@
+<s-steps [steps]="steps" [activeIndex]="activeIndex" (stepSelected)="stepSelected($event)"></s-steps>
+
+<p-panel>
+    <p-header>
+        <span>Steps</span>
+    </p-header>
+
+    <div class="ui-g">
+
+        <div class="ui-g-12">
+            <label>Linear:</label>
+            <p-inputSwitch [(ngModel)]="linear" (onChange)="onLinearChange($event)"></p-inputSwitch>
+        </div>
+
+        <div class="ui-g-6">
+            <label>Step disabled:</label>
+            <p-inputSwitch [(ngModel)]="steps[activeIndex].disabled" [disabled]="linear"></p-inputSwitch>
+        </div>
+
+        <div class="ui-g-6">
+            <label>Step state:</label>
+            <p-dropdown [options]="stateOptions" [(ngModel)]="steps[activeIndex].state"></p-dropdown>
+        </div>
+
+        <div class="ui-g-12">
+            <s-button label="Voltar step" [disabled]="activeIndex === 0" (onClick)="changeStep(activeIndex - 1)"></s-button>
+            <s-button label="Avançar step" [disabled]="activeIndex === steps.length - 1" (onClick)="changeStep(activeIndex + 1)"></s-button>
+        </div>
+    </div>
+
+</p-panel>

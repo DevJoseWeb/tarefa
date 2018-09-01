@@ -1,0 +1,25 @@
+{
+    "$schema": "../node_modules/ng-packagr/package.schema.json",
+    "name": "@seniorsistemas/angular-components",
+    "scripts": {
+        "build": "ng-packagr"
+    },
+    "repository": {
+        "type": "git",
+        "url": "http://git.senior.com.br/arquitetura/angular-components"
+    },
+    "ngPackage": {
+        "dest": "../dist/",
+        "workingDirectory": ".ng_build",
+        "lib": {
+            "entryFile": "src/public-api.ts",
+            "languageLevel": ["dom", "es2017"]
+        },
+        "whitelistedNonPeerDependencies": ["json-cycle"]
+    },
+    "version": "{version}",
+    "peerDependencies": {},
+    "dependencies": {
+        "json-cycle": "1.3.0"
+    }
+}

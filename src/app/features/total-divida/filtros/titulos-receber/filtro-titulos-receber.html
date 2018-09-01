@@ -1,0 +1,74 @@
+<div [formGroup]="formGroup">
+    <div class="ui-fluid">
+        <div class="ui-g">
+            <div class="ui-g-12 ui-md-4 ui-sm-6 required">
+                <label for="tipoTitulo">{{"erp_fin.tcr_baixa.label_tipo_titulo" | translate}}</label>
+                <p-multiSelect
+                    inputId="tipoTitulo"
+                    name="tipoTitulo"
+                    formControlName="tipoTituloId"
+                    defaultLabel="{{ 'select_one_option' | translate }}"
+                    optionLabel="label"
+                    [style]="{'width':'100%'}"
+                    [options]="tipoTituloOptions"
+                >
+                </p-multiSelect>
+            </div>
+            <div class="ui-g-12 ui-md-4 ui-sm-6 required">
+                <label for="transacaoEntradaTitulo">{{"erp_fin.tcr_baixa.label_transacao_entrada_titulo" | translate}}</label>
+                <p-multiSelect
+                    inputId="transacaoEntradaTitulo"
+                    name="transacaoEntradaTitulo"
+                    formControlName="transacaoEntradaId"
+                    defaultLabel="{{ 'select_one_option' | translate }}"
+                    optionLabel="label"
+                    [style]="{'width':'100%'}"
+                    [options]="transacaoTituloOptions"
+                >
+                </p-multiSelect>
+            </div>
+            <div class="ui-g-12 ui-md-4 ui-sm-6">
+                <label for="numeroTitulo">{{"erp_fin.tcr_baixa.label_numero_titulo" | translate}}</label>
+                <p-chips 
+                    inputId="numeroTitulo" 
+                    formControlName="numeroTitulo"
+                    [pKeyFilter]="bloqueiaCaracteres" 
+                    [addOnBlur]="true"
+                    (onAdd)="verificaNumeroTitulo($event)"
+                    (onRemove)="removeNumeroTitulo()"
+                    >
+                </p-chips>
+                <span class="ui-message ui-messages-error ng-star-inserted" *ngIf="validacaoNumeroTitulo">{{validacaoNumeroTitulo}}</span>
+                <!-- <input [maxlength]="15" type="text" id="numeroTitulo" [pKeyFilter]="bloqueiaCaracteres" [(uppercase)]="formGroup.value.numeroTitulo" formControlName="numeroTitulo" name="numeroTitulo" pInputText autocomplete="off"> -->
+            </div>
+            <div class="ui-g-12 ui-md-4 ui-sm-6">
+                <label for="dataVencimentoInicial">{{"erp_fin.tcr_baixa.label_data_vencimento_inicial" | translate}}</label>
+                <p-calendar 
+                    inputId="dataVencimentoInicial" 
+                    name="dataVencimentoInicial" 
+                    formControlName="dataVencimentoInicial" 
+                    [showIcon]="true" 
+                    [locale]="localeConfig.calendar"
+                    [dateFormat]="localeConfig.calendar.dateFormat"
+                    (onSelect)="verificarData()"
+                    (onBlur)="verificarData()">
+                </p-calendar>
+                <span class="ui-message ui-messages-error ng-star-inserted" *ngIf="mensagemValidacaoData">{{mensagemValidacaoData}}</span>
+            </div>
+            <div class="ui-g-12 ui-md-4 ui-sm-6">
+                <label for="dataVencimentoFinal">{{"erp_fin.tcr_baixa.label_data_vencimento_final" | translate}}</label>
+                <p-calendar 
+                    inputId="dataVencimentoFinal" 
+                    name="dataVencimentoFinal" 
+                    formControlName="dataVencimentoFinal" 
+                    [showIcon]="true" 
+                    [locale]="localeConfig.calendar"
+                    [dateFormat]="localeConfig.calendar.dateFormat"
+                    
+                    (onSelect)="verificarData()"
+                    (onBlur)="verificarData()">
+                </p-calendar>
+            </div>
+        </div>
+    </div>
+</div>

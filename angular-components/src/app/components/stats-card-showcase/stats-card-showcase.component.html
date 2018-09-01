@@ -1,0 +1,134 @@
+<div class="ui-g">
+    <div class="ui-g-12">
+        <label>Light Mode:</label>
+        <p-inputSwitch [(ngModel)]="lightMode"></p-inputSwitch>
+    </div>
+
+    <div class="ui-g-12">
+        <label>Em paineis:</label>
+        <p-inputSwitch [(ngModel)]="showPanels"></p-inputSwitch>
+    </div>
+</div>
+
+<div class="ui-g" *ngIf="showPanels">
+    <div class="ui-sm-12 ui-md-12">
+        <p-panel>
+            <p-header>
+                <span>Informações Salariais</span>
+            </p-header>
+
+            <ng-container *ngTemplateOutlet="salaries"></ng-container>
+
+        </p-panel>
+    </div>
+
+    <div class="ui-sm-12 ui-md-8">
+        <p-panel>
+            <p-header>
+                <span>Índices de atraso</span>
+            </p-header>
+
+            <ng-container *ngTemplateOutlet="delayIndexes"></ng-container>
+
+        </p-panel>
+    </div>
+
+    <div class="ui-sm-12 ui-md-4">
+        <p-panel>
+            <p-header>
+                <span>Índices de recebimento de títulos</span>
+            </p-header>
+
+            <ng-container *ngTemplateOutlet="receiptIndexes"></ng-container>
+
+        </p-panel>
+    </div>
+
+    <div class="ui-sm-12 ui-md-8 ui-lg-6">
+        <p-panel>
+            <p-header>
+                <span>Prazo médio de pagamento</span>
+            </p-header>
+
+            <ng-container *ngTemplateOutlet="paymentRates"></ng-container>
+
+        </p-panel>
+    </div>
+</div>
+
+<div class="ui-g" *ngIf="!showPanels">
+    <div class="ui-sm-12 ui-md-12">
+        <h3 class="sds-section-title">Informações Salariais</h3>
+        <ng-container *ngTemplateOutlet="salaries"></ng-container>
+    </div>
+
+    <div class="ui-sm-12 ui-md-8">
+        <h3 class="sds-section-title">Índices de atraso</h3>
+        <ng-container *ngTemplateOutlet="delayIndexes"></ng-container>
+    </div>
+
+    <div class="ui-sm-12 ui-md-4">
+        <h3 class="sds-section-title">Índices de recebimento de títulos</h3>
+        <ng-container *ngTemplateOutlet="receiptIndexes"></ng-container>
+    </div>
+
+    <div class="ui-sm-12 ui-md-6">
+        <h3 class="sds-section-title">Prazo médio de pagamento</h3>
+        <ng-container *ngTemplateOutlet="paymentRates"></ng-container>
+    </div>
+</div>
+
+<ng-template #salaries>
+    <div class="ui-g">
+        <div class="ui-g-12">
+            <s-button label="Alterar valores" (click)="changeValues()"></s-button>
+        </div>
+
+        <div class="ui-sm-12 ui-md-6 ui-lg-3">
+            <s-stats-card color="#6DA300" [lightMode]="lightMode" iconClass="fa fa-dollar" label="Massa salarial" [value]="totalSalary | localizedCurrency | async"></s-stats-card>
+        </div>
+        <div class="ui-sm-12 ui-md-6 ui-lg-3">
+            <s-stats-card color="#67ACBC" [lightMode]="lightMode" iconClass="fa fa-check" label="Total de aumentos" [value]="totalRaises | localizedCurrency | async"></s-stats-card>
+        </div>
+        <div class="ui-sm-12 ui-md-6 ui-lg-3">
+            <s-stats-card color="#008080" [lightMode]="lightMode" iconClass="fa fa-check-square-o" label="Aumentos em aprovação" [value]="raisesToApprove | localizedCurrency | async"></s-stats-card>
+        </div>
+        <div class="ui-sm-12 ui-md-6 ui-lg-3">
+            <s-stats-card color="#400753" [lightMode]="lightMode" iconClass="fa fa-users" label="Colaboradores com alterações" [value]="employeesWithChange"></s-stats-card>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #delayIndexes>
+    <div class="ui-g">
+        <div class="ui-sm-12 ui-md-6 ui-lg-4">
+            <s-stats-card color="#042534" [lightMode]="lightMode" iconClass="fa fa-bar-chart" label="Índice de atraso parcial (IAP)"
+                [value]="partialDelayIndex"></s-stats-card>
+        </div>
+        <div class="ui-sm-12 ui-md-6 ui-lg-4">
+            <s-stats-card color="#063951" [lightMode]="lightMode" iconClass="fa fa-bar-chart" label="Índice de atraso geral (IAG)" [value]="generalDelayIndex"></s-stats-card>
+        </div>
+        <div class="ui-sm-12 ui-md-6 ui-lg-4">
+            <s-stats-card color="#608190" [lightMode]="lightMode" iconClass="fa fa-bar-chart" label="Índice de contencioso" [value]="litigationIndex"></s-stats-card>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #receiptIndexes>
+    <div class="ui-g">
+        <div class="ui-sm-12 ui-md-12">
+            <s-stats-card color="#9ECAD4" [lightMode]="lightMode" iconClass="fa fa-percent" label="No mês" [value]="receiptIndex"></s-stats-card>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #paymentRates>
+    <div class="ui-g">
+        <div class="ui-sm-12 ui-md-6">
+            <s-stats-card color="#F45B5B" [lightMode]="lightMode" iconClass="fa fa-handshake-o" label="Clientes" [value]="clientPaymentRate"></s-stats-card>
+        </div>
+        <div class="ui-sm-12 ui-md-6">
+            <s-stats-card color="#F89696" [lightMode]="lightMode" iconClass="fa fa-truck" label="Fornecedores" [value]="providerPaymentRate"></s-stats-card>
+        </div>
+    </div>
+</ng-template>

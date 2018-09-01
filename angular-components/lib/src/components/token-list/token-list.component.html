@@ -1,0 +1,8 @@
+<div [id]="id" class="token-list">
+    <ng-container *ngFor="let token of tokens">
+        <span [id]="token.id" class="sds-token">
+            <a [id]="token.id + '-label'" (click)="tokenSelected.next(token)">{{token.label}}</a>
+            <span [id]="token.id + '-remove'" class="sds-token-icon fa fa-fw fa-close" *ngIf="removableTokens" (click)="tokenRemoved.next(token)"></span>
+        </span>
+    </ng-container>
+</div>

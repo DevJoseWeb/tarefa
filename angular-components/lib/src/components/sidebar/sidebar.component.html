@@ -1,0 +1,28 @@
+<p-sidebar [id]="id" [visible]="visible" (visibleChange)="visibleChange.emit($event)" [blockScroll]="blockScroll" [modal]="false"
+    [showCloseIcon]="false" position="right" appendTo="body" styleClass="s-sidebar-panel">
+
+    <div [id]="id + '-container'" class="s-sidebar-container">
+
+        <a href="#" role="button" class="s-sidebar-close" (click)="close($event)"><span class="fa fa-times" aria-hidden="true"></span></a>
+
+        <div [id]="id + '-header'" class="s-sidebar-header" *ngIf="header && !headerSection">
+            <s-header>
+                <h2 class="sds-panel-title">{{header}}</h2>
+            </s-header>
+        </div>
+
+        <div [id]="id + '-header'" class="s-sidebar-header" *ngIf="headerSection">
+            <ng-content select="s-header"></ng-content>
+        </div>
+
+        <p-scrollPanel [id]="id + '-content-container'" class="s-sidebar-content-container" styleClass="s-sidebar-content">
+            <ng-content></ng-content>
+        </p-scrollPanel>
+
+        <div [id]="id + '-footer'" class="s-sidebar-footer" *ngIf="footerSection">
+            <ng-content select="s-footer"></ng-content>
+        </div>
+
+    </div>
+
+</p-sidebar>

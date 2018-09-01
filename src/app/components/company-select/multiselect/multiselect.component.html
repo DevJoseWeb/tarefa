@@ -1,0 +1,86 @@
+<div #container [ngClass]="{'ui-multiselect ui-widget ui-state-default ui-corner-all':true,'ui-state-focus':focus,'ui-state-disabled': disabled}" [ngStyle]="style" [class]="styleClass"
+    (click)="onMouseclick($event,in)">
+    <div class="ui-helper-hidden-accessible">
+        <input #in type="text" readonly="readonly" [attr.id]="inputId + 'Input'" (focus)="onInputFocus($event)" (blur)="onInputBlur($event)" [disabled]="disabled" [attr.tabindex]="tabindex" (keydown)="onInputKeydown($event)">
+    </div>
+    <div class="ui-multiselect-label-container" [title]="valuesAsString.toString()">
+        <label class="ui-multiselect-label ui-corner-all">{{isAllChecked() && value && value.length > 0 ? allSelectedInputLabel : valuesAsString.toString()}}</label>
+    </div>  
+    <div [attr.id]="inputId + 'DropdownButton'" [ngClass]="{'ui-multiselect-trigger ui-state-default ui-corner-right':true}">
+        <span class="ui-clickable dropdown-button" [ngClass]="dropdownIcon"></span>
+    </div>
+    <div #panel [ngClass]="['ui-multiselect-panel ui-widget ui-widget-content ui-corner-all ui-shadow', panelStyleClass||'']" [ngStyle]="panelStyle"
+        [style.display]="overlayVisible ? 'block' : 'none'" (click)="panelClick=true">
+        <div class="ui-widget-header ui-corner-all ui-multiselect-header ui-helper-clearfix" [ngClass]="{'ui-multiselect-header-no-toggleall': !showToggleAll}">
+            <div [attr.id]="inputId + 'CheckAll'" class="ui-chkbox ui-widget multi-select-select-all" *ngIf="showToggleAll && !group">
+                <div class="ui-helper-hidden-accessible">
+                    <input #cb type="checkbox" readonly="readonly" [checked]="isAllChecked()">
+                </div>
+                <div class="ui-chkbox-box ui-widget ui-corner-all ui-state-default" [ngClass]="{'ui-state-active':isAllChecked()}" (click)="toggleAll(cb)">
+                    <span class="ui-chkbox-icon ui-clickable" [ngClass]="{'fa fa-check':isAllChecked()}"></span>
+                </div>
+            </div>
+            <div [attr.id]="inputId + 'CheckAll'" class="ui-chkbox ui-widget multi-select-select-all" *ngIf="showToggleAll && group">
+                <div class="ui-helper-hidden-accessible">
+                    <input #cbGroup type="checkbox" readonly="readonly" [checked]="isAllChecked()">
+                </div>
+                <div class="ui-chkbox-box ui-widget ui-corner-all ui-state-default" [ngClass]="{'ui-state-active':isAllChecked()}" (click)="toggleAllByGroup(cbGroup)">
+                    <span class="ui-chkbox-icon ui-clickable" [ngClass]="{'fa fa-check':isAllChecked()}"></span>
+                </div>
+            </div>
+            <div class="ui-multiselect-filter-container" *ngIf="filter">
+                <input [attr.autofocus]="true" [attr.id]="inputId + 'FilterInput'" *ngIf="filterBackEnd" #filterInput type="text" role="textbox" (input)="onFilterBackend($event)" [(ngModel)]="filterModel" class="ui-inputtext ui-widget ui-state-default ui-corner-all" [attr.placeholder]="filterPlaceHolder" >
+                <input [attr.autofocus]="true" [attr.id]="inputId + 'FilterInput'" *ngIf="!filterBackEnd" #filterInput type="text" role="textbox" (input)="onFilterFrontend($event)" [(ngModel)]="filterModel" class="ui-inputtext ui-widget ui-state-default ui-corner-all" [attr.placeholder]="filterPlaceHolder">
+                <span class="fa fa-fw fa-search"></span>
+            </div>
+            <a class="ui-multiselect-close ui-corner-all" href="#" (click)="close($event)">
+                <span class="fa fa-close"></span>
+            </a>
+        </div>
+        <div #infinite class="ui-multiselect-items-wrapper">
+            <ul *ngIf="!group" class="ui-multiselect-items ui-multiselect-list ui-widget-content ui-widget ui-corner-all ui-helper-reset" [style.max-height]="scrollHeight||'auto'">
+                <li [attr.id]="inputId + 'Option_' + option[this.idVariableName]" *ngFor="let option of options; let index = i" class="multi-select-li ui-multiselect-item ui-corner-all" (click)="onItemClick($event,option[this.idVariableName])" 
+                    [style.display]="isItemVisible(option) ? 'flex' : 'none'" [ngClass]="{'ui-state-highlight':isSelected(option[this.idVariableName])}">
+                    <div class="ui-chkbox ui-widget ">
+                        <div class="ui-helper-hidden-accessible">
+                            <input #itemcb type="checkbox" readonly="readonly" [checked]="isSelected(option[this.idVariableName])" (focus)="focusedItemCheckbox=itemcb" (blur)="focusedItemCheckbox=null" [attr.aria-label]="option.label">
+                        </div>
+                        <div class="ui-chkbox-box ui-widget ui-corner-all ui-state-default" [ngClass]="{'ui-state-active':isSelected(option[this.idVariableName]), 'ui-state-focus': (focusedItemCheckbox === itemcb)}">
+                            <span class="ui-chkbox-icon ui-clickable" [ngClass]="{'fa fa-check':isSelected(option[this.idVariableName])}"></span>
+                        </div>
+                    </div>
+                    <label *ngIf="!itemTemplate">{{option.label}}</label>
+                    <ng-container *ngTemplateOutlet="itemTemplate; context: {$implicit: option, index: i}"></ng-container>
+                </li>
+            </ul>
+            <ul *ngIf="group" class="ui-multiselect-items ui-multiselect-list ui-widget-content ui-widget ui-corner-all ui-helper-reset" [style.max-height]="scrollHeight||'auto'">
+                <li *ngFor="let option of options; let index = i">
+                    <ul class="grouped-options">
+                        <div class="ui-chkbox ui-widget multi-select-select-all group-master-li">
+                            <div class="ui-helper-hidden-accessible">
+                                <input #itemcb type="checkbox" readonly="readonly" [checked]="isAllByGroupChecked(option)" (focus)="focusedItemCheckbox=itemcb" (blur)="focusedItemCheckbox=null" [attr.aria-label]="option.label">
+                            </div>
+                            <div class="ui-chkbox-box ui-widget ui-corner-all ui-state-default" [ngClass]="{'ui-state-active':isAllByGroupChecked(option), 'ui-state-focus': (focusedItemCheckbox === itemcb)}">
+                                <span class="ui-chkbox-icon ui-clickable" [ngClass]="{'fa fa-check':isAllByGroupChecked(option)}"></span>
+                            </div>
+                        </div>
+                        <label class="group-master-li">{{option.label}}</label>
+                        <li [attr.id]="inputId + 'Option_' + item[this.idVariableName]" *ngFor="let item of option.filiais; let indexGroup = j" class="multi-select-li ui-multiselect-item ui-corner-all" (click)="onItemClick($event,item[this.idVariableName])" 
+                        [style.display]="isItemVisible(item) ? 'flex' : 'none'" [ngClass]="{'ui-state-highlight':isSelected(item[this.idVariableName])}">
+                            <div class="ui-chkbox ui-widget ">
+                                <div class="ui-helper-hidden-accessible">
+                                    <input #itemcb type="checkbox" readonly="readonly" [checked]="isSelected(item[this.idVariableName])" (focus)="focusedItemCheckbox=itemcb" (blur)="focusedItemCheckbox=null" [attr.aria-label]="item.label">
+                                </div>
+                                <div class="ui-chkbox-box ui-widget ui-corner-all ui-state-default" [ngClass]="{'ui-state-active':isSelected(item[this.idVariableName]), 'ui-state-focus': (focusedItemCheckbox === itemcb)}">
+                                    <span class="ui-chkbox-icon ui-clickable" [ngClass]="{'fa fa-check':isSelected(item[this.idVariableName])}"></span>
+                                </div>
+                            </div>
+                            <label *ngIf="!itemTemplate">{{item.label}}</label>
+                            <ng-container *ngTemplateOutlet="itemTemplate; context: {$implicit: item, indexGroup: i}"></ng-container>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

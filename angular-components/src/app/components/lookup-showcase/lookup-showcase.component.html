@@ -1,0 +1,137 @@
+<form [formGroup]="formGroup" novalidate>
+    <p-panel styleClass="form-group">
+        <p-header>
+            <span>Reactive Form</span>
+        </p-header>
+
+        <div class="ui-fluid">
+            <div class="ui-g">
+                <div class="ui-g-12 ui-md-6 required">
+                    <label>Sem modal de pesquisa - Single</label>
+
+                    <s-lookup dataKey="code" name="single" formControlName="single" (onLookupRequest)="autoCompleteRequest($event)" (onSearchRequest)="gridRequest($event)"
+                        [lookupSuggestions]="suggestions" [searchGridData]="gridData" [searchFields]="fields" [searchTotalRecords]="totalRecords"
+                        searchTotalRecordsLabel="Muitos registros encontrados" searchTitle="Localizador de país" lookupDisplayField="name"
+                        [showSearch]="false"></s-lookup>
+
+                    <s-control-errors [control]="formGroup.controls['single']" [errorMessages]="{
+                                required: 'Campo Obrigatório'
+                            }"></s-control-errors>
+                </div>
+
+                <div class="ui-g-12 ui-md-6 required">
+                    <label>Sem modal de pesquisa - Multiple</label>
+
+                    <s-lookup dataKey="code" name="multiple" formControlName="multiple" (onLookupRequest)="autoCompleteRequest($event)" (onSearchRequest)="gridRequest($event)"
+                        [lookupSuggestions]="suggestions" [searchGridData]="gridData" [searchFields]="fields" [searchTotalRecords]="totalRecords"
+                        searchTotalRecordsLabel="Muitos registros encontrados" searchTitle="Localizador de país" lookupDisplayField="name"
+                        [showSearch]="false" [multiple]="true"></s-lookup>
+
+                    <s-control-errors [control]="formGroup.controls['multiple']" [errorMessages]="{
+                                required: 'Campo Obrigatório'
+                            }"></s-control-errors>
+                </div>
+
+                <div class="ui-g-12 ui-md-6 required">
+                    <label>Com modal de pesquisa - Single</label>
+
+                    <s-lookup dataKey="code" name="single" formControlName="single" (onLookupRequest)="autoCompleteRequest($event)" (onSearchRequest)="gridRequest($event)"
+                        [lookupSuggestions]="suggestions" [searchGridData]="gridData" [searchFields]="fields" [searchTotalRecords]="totalRecords"
+                        searchTotalRecordsLabel="Muitos registros encontrados" searchTitle="Localizador de país" lookupDisplayField="name"></s-lookup>
+
+                    <s-control-errors [control]="formGroup.controls['single']" [errorMessages]="{
+                        required: 'Campo Obrigatório'
+                    }"></s-control-errors>
+                </div>
+
+                <div class="ui-g-12 ui-md-6 required">
+                    <label>Com modal de pesquisa - Multiple</label>
+
+                    <s-lookup dataKey="code" name="multiple" formControlName="multiple" (onLookupRequest)="autoCompleteRequest($event)" (onSearchRequest)="gridRequest($event)"
+                        [lookupSuggestions]="suggestions" [searchGridData]="gridData" [searchFields]="fields" [searchGridFields]="gridFields"
+                        [searchTotalRecords]="totalRecords" lookupDisplayField="name" [multiple]="true"></s-lookup>
+
+                    <s-control-errors [control]="formGroup.controls['multiple']" [errorMessages]="{
+                        required: 'Campo Obrigatório'
+                    }"></s-control-errors>
+                </div>
+
+                <div class="ui-g-12 ui-md-6 required">
+                    <label>Com modal de pesquisa sem campos - Multiple</label>
+
+                    <s-lookup dataKey="code" name="withoutSearch" formControlName="withoutSearch" (onLookupRequest)="autoCompleteRequest($event)"
+                        (onSearchRequest)="gridRequest($event)" [lookupSuggestions]="suggestions" [searchGridData]="gridData"
+                        [searchGridFields]="gridFields" [searchTotalRecords]="totalRecords" lookupDisplayField="name" [multiple]="true"></s-lookup>
+
+                    <s-control-errors [control]="formGroup.controls['withoutSearch']" [errorMessages]="{
+                        required: 'Campo Obrigatório'
+                    }"></s-control-errors>
+                </div>
+            </div>
+
+
+        </div>
+
+        <p-footer>
+            <s-button id="save" type="submit" label="Save" (click)="save()"></s-button>
+            <s-button id="cancel" type="button" priority="link" label="Clear" (click)="clear()"></s-button>
+        </p-footer>
+
+    </p-panel>
+
+</form>
+
+<form>
+    <p-panel>
+        <p-header>
+            <span>Template Form</span>
+        </p-header>
+
+        <div class="ui-fluid">
+            <div class="ui-g">
+
+                <div class="ui-g-12 ui-md-6 required">
+                    <label>Lookup Exemplo Desabilitado</label>
+
+                    <s-lookup dataKey="code" name="disabled" [disabled]="true" [required]="true" (onLookupRequest)="autoCompleteRequest($event)"
+                        (onSearchRequest)="gridRequest($event)" [lookupSuggestions]="suggestions" [searchGridData]="gridData"
+                        [searchFields]="fields" [searchTotalRecords]="totalRecords" searchTitle="Localizador de país" lookupDisplayField="name"></s-lookup>
+                </div>
+
+                <div class="ui-g-12 ui-md-6 required">
+                    <label>Lookup Exemplo</label>
+
+                    <s-lookup dataKey="code" name="single" [(ngModel)]="templateForm.single" [required]="true" (onLookupRequest)="autoCompleteRequest($event)"
+                        (onSearchRequest)="gridRequest($event)" [lookupSuggestions]="suggestions" [searchGridData]="gridData"
+                        [searchFields]="fields" [searchTotalRecords]="totalRecords" searchTitle="Localizador de país" lookupDisplayField="name"
+                        #single="ngModel"></s-lookup>
+
+                    <s-control-errors [control]="single" [errorMessages]="{
+                            required: 'Campo Obrigatório'
+                        }"></s-control-errors>
+                </div>
+
+                <div class="ui-g-12 ui-md-6 required">
+                    <label>Lookup Exemplo Multiple</label>
+
+                    <s-lookup dataKey="code" name="multiple" [(ngModel)]="templateForm.multiple" [required]="true" (onLookupRequest)="autoCompleteRequest($event)"
+                        (onSearchRequest)="gridRequest($event)" [lookupSuggestions]="suggestions" [searchGridData]="gridData"
+                        [searchFields]="fields" [searchGridFields]="gridFields" [searchTotalRecords]="totalRecords" lookupDisplayField="name"
+                        [multiple]="true" #multiple="ngModel"></s-lookup>
+
+                    <s-control-errors [control]="multiple" [errorMessages]="{
+                            required: 'Campo Obrigatório'
+                        }"></s-control-errors>
+                </div>
+
+            </div>
+
+
+        </div>
+
+        <p-footer>
+            <s-button id="save" type="submit" label="Save" (click)="saveTemplate(single, multiple)"></s-button>
+        </p-footer>
+
+    </p-panel>
+</form>

@@ -1,0 +1,14 @@
+<div [id]="id" class="container">
+    <div [id]="id + '-icon'" class="icon">
+        <i [attr.class]="iconClass ? iconClass : 'fa fa-cogs'" aria-hidden="true"></i>
+    </div>
+    <div [id]="id + '-title'" class="title">{{title}}</div>
+    <div [id]="id + '-description'" class="description" *ngIf="description">
+        <p>{{description}}</p>
+    </div>
+    <div [id]="id + '-actions'" class="actions" *ngIf="showPrimaryAction && primaryActionLabel">
+        <s-button [id]="id + '-primary-action'" type="button" [label]="primaryActionLabel" (click)="primaryAction.next()"></s-button>
+        <s-button [id]="id + '-secondary-action'" *ngIf="showSecondaryAction && secondaryActionLabel" id="secondaryAction" type="button"
+            [label]="secondaryActionLabel" priority="link" (click)="secondaryAction.next()"></s-button>
+    </div>
+</div>

@@ -1,0 +1,110 @@
+<form [formGroup]="formGroup">
+    <div class="ui-fluid">
+        <div class="ui-g">
+            <div class="ui-g-12 ui-md-4 ui-sm-6">
+                <div class="ui-g">
+                    <div class="ui-g-12">
+                        <label>{{"erp_fin.tcr_baixa.label_saldo_devedor" | translate}}</label>
+                        <input type="text" name="saldoDevedor" [value]="valorDivida | localizedCurrency | async" pInputText disabled>
+                    </div>
+                </div>
+                <div class="ui-g-12">
+                    <label for="valorBaixar">{{"erp_fin.tcr_baixa.label_valor_baixar" | translate}}</label>
+                    <input type="text" id="valorBaixar" formControlName="valorBaixar" name="valorBaixar" currencyMask [options]="localeConfig.currency" pInputText autocomplete="off"><!-- TODO: Inserir locale formatar moeda -->
+                </div>
+            </div>
+            <div class="ui-g-12 ui-md-8 ui-sm-6">
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-md-6 ui-sm-12 required">
+                        <label for="transacaoBaixaPagamento">{{"erp_fin.tcr_baixa.label_transacao_baixa_pagamento" | translate}}</label>
+                        <p-dropdown
+                            inputId="transacaoBaixaPagamento"
+                            formControlName="transacaoBaixaPagamento"
+                            placeholder="{{ 'select_one_option' | translate }}"
+                            appendTo="body"
+                            [options]="transacaoBaixaPagamentoOptions"
+                            [style]="{'width':'100%'}"
+                        >
+                        </p-dropdown>
+                    </div>
+                    <div class="ui-g-12 ui-md-6 ui-sm-12 required">
+                        <label for="transacaoMovimento">{{"erp_fin.tcr_baixa.label_transacao_movimento" | translate}}</label>
+                        <p-dropdown
+                            inputId="transacaoMovimento"
+                            formControlName="transacaoMovimento"
+                            placeholder="{{ 'select_one_option' | translate }}"
+                            appendTo="body"
+                            [options]="transacaoMovimentoOptions"
+                            [style]="{'width':'100%'}"
+                        >
+                        </p-dropdown>
+                    </div>
+                </div>
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-md-6 ui-sm-12 required">
+                        <label for="dataBaixa">{{"erp_fin.tcr_baixa.label_data_baixa" | translate}}</label>
+                        <p-calendar 
+                            inputId="dataBaixa" 
+                            name="dataBaixa" 
+                            formControlName="dataBaixa" 
+                            appendTo="body"
+                            [showIcon]="true"
+                            [locale]="localeConfig.calendar"
+                            [dateFormat]="localeConfig.calendar.dateFormat"
+                            (onSelect)="verificarDataBaixa()"
+                            (onBlur)="verificarDataBaixa()"
+                        >
+                        </p-calendar>
+                        <span class="ui-message ui-messages-error ng-star-inserted" *ngIf="!mensagemVerificaDatabaixa">{{"erp_fin.tcr_baixa.validacao_data_baixa_periodo_filial" | translate}}</span>
+                    </div>
+                    <div class="ui-g-12 ui-md-6 ui-sm-12 required">
+                        <label for="contaInterna">{{"erp_fin.tcr_baixa.label_conta_interna" | translate}}</label>
+                        <p-dropdown
+                            inputId="contaInterna"
+                            formControlName="contaInterna"
+                            placeholder="{{ 'select_one_option' | translate }}"
+                            appendTo="body"
+                            [options]="contaInternaOptions"
+                            [style]="{'width':'100%'}"
+                        >
+                        </p-dropdown>
+                    </div>
+                </div>
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-md-6 ui-sm-12">
+                        <label for="contaInternaTroco">{{"erp_fin.tcr_baixa.label_conta_interna_troco" | translate}}</label>
+                        <p-dropdown
+                            inputId="contaInternaTroco"
+                            formControlName="contaInternaTroco"
+                            placeholder="{{ 'select_one_option' | translate }}"
+                            appendTo="body"
+                            [options]="contaInternaTrocoOptions"
+                            [style]="{'width':'100%'}"
+                            [disabled]="mostraCampoAdicional"
+                        >
+                        </p-dropdown>
+                    </div>
+                    <div class="ui-g-12 ui-md-6 ui-sm-12" [class.required]="!mostraCampoAdicional">
+                        <label for="transacaoMovimentoTroco">{{"erp_fin.tcr_baixa.label_transacao_movimento_troco" | translate}}</label>
+                        <p-dropdown
+                            inputId="transacaoMovimentoTroco"
+                            formControlName="transacaoMovimentoTroco"
+                            placeholder="{{ 'select_one_option' | translate }}"
+                            appendTo="body"
+                            [options]="transacaoMovimentoTrocoOptions"
+                            [style]="{'width':'100%'}"
+                            [disabled]="mostraCampoAdicional"
+                        >
+                        </p-dropdown>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ui-g pull-right">
+        <div class="ui-g-12 ui-md-12">
+            <button id="cancelar" type="button" class="ui-button-link" pButton label="{{'cancel' | translate}}" (click)="btnCancelar()"></button>
+            <button id="visualizar" type="button" pButton label="{{'detail' | translate}}" (click)="btnVisualizar()"></button>
+        </div>
+    </div>
+</form>

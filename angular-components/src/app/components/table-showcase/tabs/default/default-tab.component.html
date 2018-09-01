@@ -1,0 +1,40 @@
+<p-selectButton [options]="options" [(ngModel)]="list" styleClass="form-group"></p-selectButton>
+
+<p-table [ngClass]="{'sds-list': list}" selectionMode="single" [(selection)]="selected" [value]="gridData" [columns]="gridColumns"
+    dataKey="id" rows="10" [paginator]="true" [totalRecords]="gridTotalRecords" [responsive]="true" [lazy]="true" (onLazyLoad)="updateGridData($event)"
+    *sLoadingState="gridLoading" sortMode="multiple" [rowsPerPageOptions]="[10, 20, 50, 100]">
+
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+                <div class="senior-header">
+                    <span class="senior-header-title">{{col.header}}</span>
+                    <p-sortIcon [field]="col.field"></p-sortIcon>
+                </div>
+            </th>
+        </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr [pSelectableRow]="rowData">
+            <td *ngFor="let col of columns">
+                <div class="ui-column-title">{{col.header}}</div>
+                <ng-container [ngSwitch]="col.field">
+
+                    <ng-container *ngSwitchCase="'birthday'">
+                        {{rowData[col.field] | localizedDate:"L"}}
+                    </ng-container>
+
+                    <ng-container *ngSwitchDefault>
+                        {{rowData[col.field]}}
+                    </ng-container>
+
+                </ng-container>
+            </td>
+        </tr>
+    </ng-template>
+
+    <ng-template pTemplate="paginatorright">
+        <span>{{gridTotalRecords}} registros encontrados</span>
+    </ng-template>
+</p-table>

@@ -1,0 +1,159 @@
+<p-panel styleClass="form-group">
+    <p-header>
+        <div class="header">
+            <span class="title">Button</span>
+            <div class="buttons">
+                <s-button priority="default" [disabled]="false" [auxiliary]="true" size="small" [iconClass]="'fa fa-fw fa-star' + (favorite ? '' : '-o')"
+                    styleClass="favorite" (onClick)="favorite = !favorite"></s-button>
+                <s-button [model]="getActions()" priority="default" [disabled]="false" [auxiliary]="true" size="small"></s-button>
+                <s-button label="Ações" priority="default" [model]="getActions()" [disabled]="false" [auxiliary]="true" size="small"></s-button>
+                <s-button label="Ações" priority="default" [model]="getActions()" [disabled]="false" [auxiliary]="true" size="small" iconClass="fa fa-th"></s-button>
+            </div>
+        </div>
+    </p-header>
+
+    <p-fieldset legend="Normal">
+        <div class="form-group">
+            <s-button label="Salvar" (onClick)="action('salvar')" priority="primary" [disabled]="false" [auxiliary]="false"></s-button>
+            <s-button label="Editar" (onClick)="action('editar')" priority="secondary" [disabled]="false" [auxiliary]="false"></s-button>
+            <s-button label="Ação" (onClick)="action('ação')" priority="default" [disabled]="false" [auxiliary]="false"></s-button>
+            <s-button label="Cancelar" (onClick)="action('cancelar')" priority="link" [disabled]="false" [auxiliary]="false"></s-button>
+        </div>
+
+        <div>
+            <s-button label="Salvar" (onClick)="action('salvar')" priority="primary" [disabled]="true" [auxiliary]="false"></s-button>
+            <s-button label="Editar" (onClick)="action('editar')" priority="secondary" [disabled]="true" [auxiliary]="false"></s-button>
+            <s-button label="Ação" (onClick)="action('cancelar')" priority="default" [disabled]="true" [auxiliary]="false"></s-button>
+            <s-button label="Cancelar" (onClick)="action('cancelar')" priority="link" [disabled]="true" [auxiliary]="false"></s-button>
+        </div>
+    </p-fieldset>
+
+    <p-fieldset legend="Normal com menu">
+        <div class="form-group">
+            <s-button label="Ações" priority="primary" [model]="getActions()" [disabled]="false" [auxiliary]="false"></s-button>
+            <s-button label="Ações" priority="secondary" [model]="getActions()" [disabled]="false" [auxiliary]="false"></s-button>
+            <s-button label="Ações" priority="default" [model]="getActions()" [disabled]="false" [auxiliary]="false"></s-button>
+            <s-button label="Ações" priority="link" [model]="getActions()" [disabled]="false" [auxiliary]="false"></s-button>
+        </div>
+
+        <div>
+            <s-button label="Ações" priority="primary" [model]="getActions()" [disabled]="true" [auxiliary]="false"></s-button>
+            <s-button label="Ações" priority="secondary" [model]="getActions()" [disabled]="true" [auxiliary]="false"></s-button>
+            <s-button label="Ações" priority="default" [model]="getActions()" [disabled]="true" [auxiliary]="false"></s-button>
+            <s-button label="Ações" priority="link" [model]="getActions()" [disabled]="true" [auxiliary]="false"></s-button>
+        </div>
+    </p-fieldset>
+
+    <p-fieldset legend="Auxiliar">
+        <div class="form-group">
+            <s-button label="Ações" priority="primary" (onClick)="action('salvar')" [disabled]="false" [auxiliary]="true"></s-button>
+            <s-button label="Ações" priority="secondary" (onClick)="action('editar')" [disabled]="false" [auxiliary]="true"></s-button>
+            <s-button label="Ações" priority="default" (onClick)="action('ação')" [disabled]="false" [auxiliary]="true"></s-button>
+            <s-button label="Ações" priority="link" (onClick)="action('cancelar')" [disabled]="false" [auxiliary]="true"></s-button>
+        </div>
+
+        <div>
+            <s-button label="Ações" priority="primary" (onClick)="action('salvar')" [disabled]="true" [auxiliary]="true"></s-button>
+            <s-button label="Ações" priority="secondary" (onClick)="action('editar')" [disabled]="true" [auxiliary]="true"></s-button>
+            <s-button label="Ações" priority="default" (onClick)="action('ação')" [disabled]="true" [auxiliary]="true"></s-button>
+            <s-button label="Ações" priority="link" (onClick)="action('cancelar')" [disabled]="true" [auxiliary]="true"></s-button>
+        </div>
+    </p-fieldset>
+
+    <p-fieldset legend="Auxiliar com menu">
+        <div class="form-group">
+            <s-button label="Ações" priority="primary" [model]="getActions()" [disabled]="false" [auxiliary]="true"></s-button>
+            <s-button label="Ações" priority="secondary" [model]="getActions()" [disabled]="false" [auxiliary]="true"></s-button>
+            <s-button label="Ações" priority="default" [model]="getActions()" [disabled]="false" [auxiliary]="true"></s-button>
+            <s-button label="Ações" priority="link" [model]="getActions()" [disabled]="false" [auxiliary]="true"></s-button>
+        </div>
+
+        <div>
+            <s-button label="Ações" priority="primary" [model]="getActions()" [disabled]="true" [auxiliary]="true"></s-button>
+            <s-button label="Ações" priority="secondary" [model]="getActions()" [disabled]="true" [auxiliary]="true"></s-button>
+            <s-button label="Ações" priority="default" [model]="getActions()" [disabled]="true" [auxiliary]="true"></s-button>
+            <s-button label="Ações" priority="link" [model]="getActions()" [disabled]="true" [auxiliary]="true"></s-button>
+        </div>
+    </p-fieldset>
+
+    <p-fieldset legend="Variações">
+        <div class="form-group">
+            <s-button label="Analytics" priority="default" [model]="getActions()" iconClass="fa fa-fw fa-th" [disabled]="false" [auxiliary]="true"></s-button>
+            <s-button label="Filter" priority="default" [model]="getActions()" iconClass="fa fa-fw fa-filter" [disabled]="false" [auxiliary]="true"
+                tooltip="50">
+                <span class="sds-badge-number sds-color-primary custom-badge">50</span>
+            </s-button>
+        </div>
+
+        <div>
+            <s-button priority="default" iconClass="fa fa-fw fa-arrow-right" [disabled]="false" [auxiliary]="true" tooltip="Seta para a direita"></s-button>
+            <s-button [model]="getActions()" priority="default" iconClass="fa fa-fw fa-globe" [disabled]="false" [auxiliary]="false"></s-button>
+            <s-button [model]="getActions()" priority="primary" iconClass="fa fa-fw fa-user" [disabled]="false" [auxiliary]="false"></s-button>
+            <s-button [model]="getActions()" priority="default" [disabled]="false" [auxiliary]="true">
+                <span class="sds-badge-number sds-semantic-yellow custom-badge">!</span>
+            </s-button>
+            <s-button [model]="getActions()" priority="primary" [disabled]="false" [auxiliary]="true"></s-button>
+            <s-button [model]="getActions()" priority="secondary" [disabled]="false" [auxiliary]="false"></s-button>
+        </div>
+    </p-fieldset>
+
+    <p-fieldset legend="Responsivo">
+        <div class="ui-fluid">
+            <div class="ui-g">
+                <div class="ui-sm-12 ui-md-4 ui-lg-2">
+                    <s-button label="Salvar" (onClick)="action('salvar')" priority="primary" [disabled]="false" [auxiliary]="false" styleClass="sds-button-block"></s-button>
+                </div>
+                <div class="ui-sm-12 ui-md-4 ui-lg-2">
+                    <s-button label="Editar" (onClick)="action('editar')" priority="secondary" [disabled]="false" [auxiliary]="false" styleClass="sds-button-block"></s-button>
+                </div>
+                <div class="ui-sm-12 ui-md-4 ui-lg-2">
+                    <s-button label="Ação" (onClick)="action('ação')" priority="default" [disabled]="false" [auxiliary]="false" styleClass="sds-button-block"></s-button>
+                </div>
+                <div class="ui-sm-12 ui-md-4 ui-lg-2">
+                    <s-button label="Cancelar" (onClick)="action('cancelar')" priority="link" [disabled]="false" [auxiliary]="false" styleClass="sds-button-block"></s-button>
+                </div>
+            </div>
+        </div>
+    </p-fieldset>
+
+</p-panel>
+
+
+<p-panel>
+    <p-header>
+        <span>Inside table</span>
+    </p-header>
+
+    <div class="form-group">
+        <s-button id="activate" [label]="disabled ? 'Ativar' : 'Desativar'" (onClick)="disabled = !disabled"></s-button>
+        <s-button id="auxiliary" [label]="auxiliary ? 'Normal' : 'Auxiliar'" (onClick)="auxiliary = !auxiliary"></s-button>
+    </div>
+
+    <p-table [value]="gridData" [columns]="gridColumns" dataKey="id" [rows]="5" [paginator]="true" [totalRecords]="gridData.length">
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th *ngFor="let col of columns">
+                    <div class="senior-header">
+                        <span class="senior-header-title">{{col.header}}</span>
+                    </div>
+                </th>
+                <th>
+                    <div class="senior-header">
+                        <span class="senior-header-title">Ações</span>
+                    </div>
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-columns="columns">
+            <tr>
+                <td *ngFor="let col of columns">
+                    {{rowData[col.field]}}
+                </td>
+                <td>
+                    <s-button label="Ações" priority="default" [model]="getActions(rowData)" [disabled]="disabled" [auxiliary]="auxiliary"></s-button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+</p-panel>

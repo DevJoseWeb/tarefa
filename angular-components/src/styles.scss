@@ -1,0 +1,10 @@
+@import "~primeng/resources/primeng.min.css";
+@import "~@seniorsistemas/primeng-theme/dist/theme.css";
+
+.favorite * {
+    color: #fcbf10 !important;
+}
+
+.ui-toast {
+    top: 80px;
+}

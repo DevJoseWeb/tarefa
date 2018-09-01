@@ -1,0 +1,10 @@
+<p-panel>
+    <p-header>
+        <span>Breadcrumb Example</span>
+    </p-header>
+
+    <s-empty-state iconClass="fa fa-exchange" title="Nada aqui" [primaryActionLabel]="showUp ? 'Navegar acima' : 'Navegar abaixo'"
+        secondaryActionLabel="Navegar abaixo" (primaryAction)="showUp ? navigateUp() : navigateDown()" (secondaryAction)="navigateDown()"
+        [showSecondaryAction]="showUp && showDown" description="Não há nada aqui. Clique no botão abaixo para navegar"></s-empty-state>
+
+</p-panel>

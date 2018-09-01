@@ -1,0 +1,14 @@
+<div class="ui-g" *ngIf="totalReceber">
+    <div class="ui-g-12 ui-md-3">
+        <s-stats-card color="#67ACBC" iconClass="fa fa-dollar" label="{{'erp_fin.tcr_baixa.total_divida' | translate}}" [value]="totalBaixar | localizedCurrency:{ precision: 2, prefix: '' } | async "></s-stats-card>
+    </div>
+    <div class="ui-g-12 ui-md-3">
+        <s-stats-card color="#67ACBC" iconClass="fa fa-dollar" label="{{'erp_fin.tcr_baixa.total_credito' | translate}}" [value]="totalAproveitar | localizedCurrency:{ precision: 2, prefix: '' } | async "></s-stats-card>
+    </div>
+    <div class="ui-g-12 ui-md-3">
+        <s-stats-card color="#67ACBC" iconClass="fa fa-dollar" label="{{'erp_fin.tcr_baixa.total_compensacao' | translate}}" [value]="totalCompensar | localizedCurrency:{ precision: 2, prefix: '' } | async "></s-stats-card>
+    </div>
+    <div class="ui-g-12 ui-md-3">
+        <s-stats-card color="#67ACBC" iconClass="fa fa-dollar" label="{{'erp_fin.tcr_baixa.total_receber' | translate}}" [value]="totalReceber | localizedCurrency:{ precision: 2, prefix: '' } | async "></s-stats-card>
+    </div>
+</div>

@@ -1,0 +1,65 @@
+<p-selectButton [options]="options" [(ngModel)]="list" styleClass="form-group"></p-selectButton>
+
+<p-table [ngClass]="{'sds-list': list}" [value]="gridData" [columns]="gridColumns"
+    dataKey="id" rows="10" [paginator]="true" [totalRecords]="gridTotalRecords" [responsive]="true" [lazy]="true" (onLazyLoad)="updateGridData($event)"
+    [resizableColumns]="true" *sLoadingState="gridLoading" sortMode="multiple">
+
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th *ngFor="let col of columns" pResizableColumn [pSortableColumn]="col.field">
+                <div class="senior-header">
+                    <span class="senior-header-title">{{col.header}}</span>
+                    <p-sortIcon [field]="col.field"></p-sortIcon>
+                </div>
+            </th>
+        </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr>
+            <td *ngFor="let col of columns" pEditableColumn class="ui-resizable-column">
+                <div class="ui-column-title">{{col.header}}</div>
+                <p-cellEditor>
+                    <ng-template pTemplate="input">
+                        <div class="ui-fluid">
+                            <ng-container [ngSwitch]="col.field">
+
+                                <ng-container *ngSwitchCase="'birthday'">
+                                    <p-calendar [(ngModel)]="rowData[col.field]" appendTo="body" [showIcon]="true"></p-calendar>
+                                </ng-container>
+
+                                <ng-container *ngSwitchCase="'gender'">
+                                    <p-autoComplete [(ngModel)]="rowData[col.field]" [suggestions]="genderOptions" appendTo="body" (completeMethod)="filterGenders($event)"
+                                        [dropdown]="true" [forceSelection]="true"></p-autoComplete>
+                                </ng-container>
+
+                                <ng-container *ngSwitchDefault>
+                                    <input pInputText type="text" [(ngModel)]="rowData[col.field]">
+                                </ng-container>
+
+                            </ng-container>
+                        </div>
+                    </ng-template>
+
+                    <ng-template pTemplate="output">
+                        <ng-container [ngSwitch]="col.field">
+
+                            <ng-container *ngSwitchCase="'birthday'">
+                                <span>{{rowData[col.field] | localizedDate:"L"}}</span>
+                            </ng-container>
+
+                            <ng-container *ngSwitchDefault>
+                                <span>{{rowData[col.field]}}</span>
+                            </ng-container>
+
+                        </ng-container>
+                    </ng-template>
+                </p-cellEditor>
+            </td>
+        </tr>
+    </ng-template>
+
+    <ng-template pTemplate="paginatorright">
+        <span>{{gridTotalRecords}} registros encontrados</span>
+    </ng-template>
+</p-table>

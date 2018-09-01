@@ -1,0 +1,15 @@
+<form [formGroup]="filtersForm" autocomplete="off">
+    <p-panel [toggleable]="true">
+        <p-header>
+            <span>Token List Example</span>
+            <s-token-list [tokens]="searchTokens" (tokenSelected)="select($event)" (tokenRemoved)="remove($event)" [removableTokens]="true"></s-token-list>
+        </p-header>
+
+        <s-dynamic-form [fields]="searchFields" [form]="filtersForm"></s-dynamic-form>
+
+        <p-footer>
+            <s-button id="filter-button" type="submit" label="Gerar" (click)="generate()"></s-button>
+            <s-button id="clear-button" type="button" label="Limpar" priority="link" (click)="clear()"></s-button>
+        </p-footer>
+    </p-panel>
+</form>

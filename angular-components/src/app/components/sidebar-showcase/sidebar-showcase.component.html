@@ -1,0 +1,29 @@
+<p-confirmDialog header="Confirmação"></p-confirmDialog>
+
+<s-sidebar [visible]="visible" header="Título do Sidebar" (visibleChange)="close(true)">
+
+    {{sidebarText}}
+
+    <s-footer>
+        <div class="ui-fluid">
+            <div class="ui-g">
+                <div class="ui-sm-12 ui-md-6 ui-lg-4">
+                    <s-button label="Continuar" (onClick)="close()"></s-button>
+                </div>
+                <div class="ui-sm-12 ui-md-6 ui-lg-4">
+                    <s-button label="Cancelar" priority="link" (onClick)="close(true)"></s-button>
+                </div>
+            </div>
+        </div>
+    </s-footer>
+</s-sidebar>
+
+
+<p-panel>
+    <p-header>
+        <span>Sidebar</span>
+    </p-header>
+
+    <s-button label="Abrir" type="button" (click)="open()"></s-button>
+    <s-button label="Fechar" type="button" (click)="close()"></s-button>
+</p-panel>

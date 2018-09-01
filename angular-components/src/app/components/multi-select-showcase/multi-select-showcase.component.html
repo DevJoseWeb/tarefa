@@ -1,0 +1,27 @@
+<form [formGroup]="formGroup" novalidate>
+    <p-panel styleClass="form-group">
+        <p-header>
+            <span>Multi Select</span>
+        </p-header>
+
+        <div class="ui-fluid">
+            <div class="ui-g">
+                <div class="ui-g-12 ui-md-6">
+                    <label>Países</label>
+                    <p-multiSelect [options]="suggestions" formControlName="countries"></p-multiSelect>
+                </div>
+                <div class="ui-g-12 ui-md-6 required">
+                    <label>Países</label>
+                    <p-multiSelect [options]="suggestions" formControlName="countriesRequired" appendTo="body"></p-multiSelect>
+                </div>
+            </div>
+        </div>
+
+        <p-footer>
+            <s-button id="save" type="submit" label="Save" (click)="save()"></s-button>
+            <s-button id="cancel" type="button" priority="link" label="Clear" (click)="clear()"></s-button>
+        </p-footer>
+
+    </p-panel>
+
+</form>

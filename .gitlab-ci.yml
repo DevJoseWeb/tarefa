@@ -1,0 +1,115 @@
+stages:
+  - build
+  - deploy
+  - release
+  - sonar
+
+cache:
+  untracked: true
+  key: "$CI_PROJECT_ID"
+  paths:
+    - node_modules/
+    - bower_components/
+
+.default_tags: &default_tags
+  tags:
+    - npm
+    - frontend
+
+build:
+  <<: *default_tags
+  stage: build
+  script:
+    - bash senior-ci/frontend/npm/scripts/ci.sh -b
+
+releaseSnapshot:
+  <<: *default_tags
+  stage: release
+  when: manual
+  script:
+    - bash senior-ci/frontend/npm/scripts/ci.sh -s $CI_COMMIT_REF_SLUG
+  except:
+    - master
+    - tags
+
+releasePatch:
+  <<: *default_tags
+  stage: release
+  when: manual
+  script:
+    - bash senior-ci/frontend/npm/scripts/ci.sh -r patch
+  only:
+    - develop
+
+releaseMinor:
+  <<: *default_tags
+  stage: release
+  when: manual
+  script:
+    - bash senior-ci/frontend/npm/scripts/ci.sh -r minor
+  only:
+    - develop
+
+releaseMajor:
+  <<: *default_tags
+  stage: release
+  when: manual
+  script:
+    - bash senior-ci/frontend/npm/scripts/ci.sh -r major
+  only:
+    - develop
+
+releaseTranslations:
+  <<: *default_tags
+  stage: release
+  when: manual
+  script:
+    - bash senior-ci/frontend/npm/scripts/ci.sh -t
+  only:
+    - develop
+  environment:
+    name: pcbnu002050.interno.senior.com.br
+    url: https://pcbnu002050.interno.senior.com.br:8243/t/senior.com.br/bridge/1.0/rest
+
+package:
+  <<: *default_tags
+  stage: release
+  script:
+    - bash senior-ci/frontend/npm/scripts/ci.sh -p
+  only:
+    - tags
+    - /^v?\d+\-\d+\-\d+\z/
+  except:
+    - master
+    - branches
+
+deploy:
+  <<: *default_tags
+  stage: deploy
+  when: manual
+  script:
+    - bash senior-ci/frontend/npm/scripts/ci.sh -k
+  except:
+    - master
+  environment:
+    name: pcbnu002050.interno.senior.com.br
+    url: https://pcbnu002050.interno.senior.com.br:8243/t/senior.com.br/bridge/1.0/rest
+
+sendInfoSonarQube:
+  <<: *default_tags
+  stage: sonar
+  script:
+    - bash senior-ci/frontend/npm/scripts/ci.sh -x $CI_PROJECT_NAME $CI_PROJECT_ID
+  only:
+    - master
+  allow_failure: false
+
+analysisSonarQube:
+  <<: *default_tags
+  stage: sonar
+  script:
+    - bash senior-ci/frontend/npm/scripts/ci.sh -z $CI_PROJECT_NAME $CI_PROJECT_ID $CI_BUILD_REF $CI_BUILD_REF_NAME
+  except:
+    - master
+    - develop
+  allow_failure: true

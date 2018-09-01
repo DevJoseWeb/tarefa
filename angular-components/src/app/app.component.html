@@ -1,0 +1,14 @@
+<p-toast></p-toast>
+
+<div class="header sds-container">
+    <h1 class="header-title">Angular Components</h1>
+
+    <s-button [model]="items" priority="default" iconClass="fa fa-fw fa-list" label="Components" [auxiliary]="true"></s-button>
+</div>
+
+<s-loading-state [loading]="pageLoading" [blockWindow]="true">
+    <div class="sds-container">
+        <s-breadcrumb></s-breadcrumb>
+        <router-outlet></router-outlet>
+    </div>
+</s-loading-state>

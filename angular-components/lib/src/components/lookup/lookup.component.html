@@ -1,0 +1,96 @@
+<div [ngClass]="{'inputgroup' : showSearch}">
+    <p-autoComplete [(ngModel)]="value" [disabled]="disabled" [dataKey]="dataKey" [multiple]="multiple" [inputId]="id + '-autocomplete'"
+        [forceSelection]="true" [suggestions]="getLookupSuggestions()" (completeMethod)="lazyLoadLookup($event)" (onSelect)="onSelect.next($event)"
+        (onBlur)="onBlur.next($event)" (onFocus)="onFocus.next($event)" (onUnselect)="onUnselect.next($event)" (onClear)="onClear.next($event)"
+        (onKeyUp)="onKeyUp.next($event)" [field]="lookupDisplayField" [emptyMessage]="lookupEmptyMessage" [dropdown]="!showSearch">
+    </p-autoComplete>
+
+    <button *ngIf="showSearch" pButton type="button" icon="fa fa-search" class="button-addon" [disabled]="disabled" (click)="showDialog()"></button>
+</div>
+
+<p-dialog appendTo="body" styleClass="s-lookup-modal" [header]="searchTitle" [(visible)]="dialogVisible"
+    [modal]="true" (onHide)="hideDialog()" [blockScroll]="true" [focusOnShow]="false" [draggable]="false" [resizable]="false">
+
+    <div *ngIf="dialogVisible">
+        <form [formGroup]="formGroupDialog" novalidate autocomplete="off">
+            <s-dynamic-form [fields]="searchFields" [form]="formGroupDialog"></s-dynamic-form>
+
+            <div class="ui-g" *ngIf="searchFields && searchFields.length">
+                <div class="ui-g-12">
+                    <s-button [id]="id + '-filter-button'" type="submit" [label]="filterLabel" (click)="search()"></s-button>
+                    <s-button [id]="id + '-clear-button'" type="button" [label]="clearLabel" (click)="clear()" priority="link"></s-button>
+                </div>
+            </div>
+
+            <s-empty-state [id]="id + '-empty-state'" *ngIf="!searchTotalRecords && !loading" [title]="searchEmptyTitle" [description]="searchEmptyDescription"></s-empty-state>
+
+            <div class="ui-g" [attr.data-hidden]="!searchTotalRecords && !loading">
+                <div class="ui-g-12">
+                    <p-table [dataKey]="dataKey" [value]="getGridData()" [columns]="searchGridFields" [resizableColumns]="true" [lazy]="true"
+                        [scrollable]="true" [paginator]="true" sortMode="multiple" [totalRecords]="searchTotalRecords" [rows]="10"
+                        [(selection)]="selected" (onLazyLoad)="lazyLoadGrid($event)" *sLoadingState="loading">
+                        <ng-template pTemplate="colgroup" let-columns>
+                            <colgroup>
+                                <col *ngFor="let col of columns" [style.width]="col.width">
+                            </colgroup>
+                        </ng-template>
+                        <ng-template pTemplate="header" let-columns>
+                            <tr>
+                                <th *ngIf="multiple" style="width: 37px">
+                                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                                </th>
+                                <th *ngFor="let col of columns" [pSortableColumn]="col.name" pResizableColumn>
+                                    <div class="senior-header">
+                                        <span class="senior-header-title">{{col.label}}</span>
+                                        <p-sortIcon [field]="col.name"></p-sortIcon>
+                                    </div>
+                                </th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-rowData let-columns>
+                            <tr [pSelectableRow]="rowData">
+                                <td *ngIf="multiple" style="width: 37px">
+                                    <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
+                                </td>
+                                <td (click)="selected = [rowData]" *ngFor="let col of searchGridFields" [ngSwitch]="col.type">
+                                    <ng-container *ngSwitchCase="'Boolean'">
+                                        <p-checkbox [(ngModel)]="rowData[col.name]" [ngModelOptions]="{standalone: true}" [disabled]="true" [binary]="true"></p-checkbox>
+                                    </ng-container>
+
+                                    <ng-container *ngSwitchCase="'Date'">
+                                        <span>{{rowData[col.name] | localizedDate:"L"}}</span>
+                                    </ng-container>
+
+                                    <ng-container *ngSwitchCase="'DateTime'">
+                                        <span>{{rowData[col.name] | localizedDate}}</span>
+                                    </ng-container>
+
+                                    <ng-container *ngSwitchCase="'Time'">
+                                        <span>{{rowData[col.name] | localizedTime}}</span>
+                                    </ng-container>
+
+                                    <ng-container *ngSwitchCase="'Money'">
+                                        <span>{{rowData[col.name] | localizedCurrency | async}}</span>
+                                    </ng-container>
+
+                                    <ng-container *ngSwitchDefault>
+                                        <span>{{rowData[col.name]}}</span>
+                                    </ng-container>
+                                </td>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="paginatorright">
+                            <span>{{searchTotalRecordsLabel || (searchTotalRecords + (searchTotalRecords === 1 ? " registro" :
+                                " registros"))}}</span>
+                        </ng-template>
+                    </p-table>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <p-footer>
+        <s-button [id]="id + '-select-button'" type="button" [label]="selectLabel" (click)="select()"></s-button>
+        <s-button [id]="id + '-cancel-button'" type="button" priority="link" [label]="cancelLabel" (click)="hideDialog()"></s-button>
+    </p-footer>
+</p-dialog>

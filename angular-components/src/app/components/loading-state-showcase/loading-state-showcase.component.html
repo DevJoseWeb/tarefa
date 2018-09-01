@@ -1,0 +1,64 @@
+<s-loading-state [loading]="pageLoading" [blockWindow]="true">
+
+    <div class="form-group">
+        <label>Bloquear página:</label>
+        <p-inputSwitch [(ngModel)]="pageLoading"></p-inputSwitch>
+    </div>
+
+    <div class="form-group">
+        <label>Bloquear container:</label>
+        <p-inputSwitch [(ngModel)]="containerLoading"></p-inputSwitch>
+    </div>
+
+    <div *sLoadingState="containerLoading">
+
+        <p-panel styleClass="form-group" *sLoadingState="true">
+            <p-header>
+                <span>Loading State - Panel</span>
+            </p-header>
+
+            <s-empty-state iconClass="fa fa-comments" title="Exemplo" description="Conteúdo de exemplo"></s-empty-state>
+
+        </p-panel>
+
+        <p-panel>
+            <p-header>
+                <span>Loading State - Table</span>
+            </p-header>
+
+            <div class="ui-g">
+                <div class="ui-g-12">
+                    <s-button id="activate" type="button" label="Ativar" (click)="activate()"></s-button>
+                    <s-button id="deactivate" priority="secondary" type="button" label="Desativar" (click)="deactivate()"></s-button>
+                </div>
+            </div>
+
+            <div class="ui-g" *sLoadingState="gridLoading">
+                <div class="ui-g-12">
+                    <p-table [value]="gridData" [columns]="gridColumns" dataKey="id" rows="5" [paginator]="true" [totalRecords]="gridTotalRecords"
+                        [responsive]="true" [lazy]="true" (onLazyLoad)="updateGridData($event)">
+                        <ng-template pTemplate="header" let-columns>
+                            <tr>
+                                <th *ngFor="let col of columns">
+                                    <div class="senior-header">
+                                        <span class="senior-header-title">{{col.header}}</span>
+                                    </div>
+                                </th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-rowData let-columns="columns">
+                            <tr [pSelectableRow]="rowData">
+                                <td *ngFor="let col of columns" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis">
+                                    <div class="ui-column-title">{{col.header}}</div>
+                                    {{rowData[col.field]}}
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+            </div>
+
+        </p-panel>
+
+    </div>
+</s-loading-state>

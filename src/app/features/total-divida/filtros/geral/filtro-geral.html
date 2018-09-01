@@ -1,0 +1,129 @@
+<div [formGroup]="formGroup">
+    <div class="ui-fluid">
+        <div class="ui-g">
+            <div class="ui-g-12 ui-md-6 ui-g-nopad">
+                <company-select
+                    [style.width]="'100%'"
+                    companyColStyleClass="ui-g-6 ui-md-6 required"
+                    subCompanyColStyleClass="ui-g-6 ui-md-6 required"                     
+                    companyIdString="id"
+                    subCompanyIdString="subCompanyId"
+                    [(companyModel)]="empresaId" 
+                    [(subCompanyModel)]="filialId" 
+                    companyFilterEndPoint="tcr_tituloreceber/queries/pesquisarEmpresa"
+                    subCompanyFilterEndPoint="tcr_tituloreceber/queries/pesquisarFilial"
+                    companyFilterResponseField="empresas"
+                    subCompanyFilterResponseField="filiais"
+                    subCompanyFilterConditionalField="empresaId"
+                    companySelectionMode="single"
+                    subCompanySelectionMode="multiple"
+                    [subCompanyByGroup]="false"
+                    [(unselectedCompanies)]="unselectedEmpresasSM"
+                    [(unselectedSubCompanies)]="unselectedFiliaisSM"
+                    getAllCompaniesEndPoint="tcr_tituloreceber/queries/buscarIdsTodasEmpresas"
+                    getAllSubCompaniesEndPoint="tcr_tituloreceber/queries/buscarIdsFiliaisPorEmpresas"
+                    companyIdVariableName="id"
+                    subCompanyIdVariableName="id"
+                    idVariableGroupMasterName="id"
+                    [companyRequired]="true"
+                    [subCompanyRequired]="true"
+                    [hasSubCompany]="true"
+                    [selectAllSubCompaniesWhenOpen]="true"
+                    getOneCompanyEndPoint="tcr_tituloreceber/entities/empresa"
+                    getOneSubCompanyEndPoint="tcr_tituloreceber/entities/filial"
+                    getOneCompanyResponseField=""
+                    getOneSubCompanyResponseField=""
+                    [companyDisabled]="false"
+                    [subCompanyDisabled]="false"
+                    [fieldsForCompanyLabel]="['codigo', 'nome']"
+                    [fieldsForSubCompanyLabel]="['codigo', 'nome']"
+                    [fieldsForCompanyList]="['codigo', 'nome']"
+                    [fieldsForSubCompanyList]="['codigo', 'nome']"
+                    companyLabel="{{ 'erp_fin.tcr_baixa.label_empresa' | translate }}"
+                    subCompanyLabel="{{ 'erp_fin.tcr_baixa.label_filial' | translate }}"
+                    selectCompanyLabel="{{ 'erp_fin.tcr_baixa.label_empresa' | translate }}"
+                    selectSubCompanyLabel="{{ 'erp_fin.tcr_baixa.label_filial' | translate }}"
+                    companyErrorMsg="{{ 'erp_fin.tcr_baixa.campo_obrigatorio' | translate }}"
+                    subCompanyErrorMsg="{{ 'erp_fin.tcr_baixa.campo_obrigatorio' | translate }}"
+                    (onCompanyModelChange)="enviaValorEmpresa()"
+                    (onSubCompanyModelChange)="enviaValorFilial()"
+                    >
+                </company-select>
+            </div>
+            <div class="ui-g-12 ui-md-3 ui-sm-6 required">
+                <label for="filialProcessamento">{{"erp_fin.tcr_baixa.label_filial_processamento" | translate}}</label>
+                <p-dropdown
+                    id="filial-id-processamento"
+                    name="filialIdProcessamento"
+                    placeholder="{{ 'select_one_option' | translate }}"
+                    formControlName="filialIdProcessamento"
+                    [options]="filialIdProcessamentoOptions"
+                    [style]="{'width':'100%'}"
+                >
+                </p-dropdown>
+            </div>
+            <div class="ui-g-12 ui-md-3 ui-sm-6 form-group">
+                <label for="formaPagamentoId">{{"erp_fin.tcr_baixa.label_forma_de_pagamento" | translate}}</label>
+                <p-dropdown
+                    id="forma-id-pagamento"
+                    name="formaPagamentoId"
+                    placeholder="{{ 'select_one_option' | translate }}"
+                    formControlName="formaPagamentoId"
+                    [options]="formaPagamentoIdOptions"
+                    [showClear]="formGroup.value.formaPagamentoId"
+                    [style]="{'width':'100%'}"
+                >
+                </p-dropdown>
+            </div>
+        </div>
+        <div class="ui-g">
+            <div class="ui-g-12 ui-md-3 ui-sm-6 form-group">
+                <label for="grupoEmpresaId">{{"erp_fin.tcr_baixa.label_grupo_empresa" | translate}}</label>
+                <p-dropdown
+                    id="grupo-empresaid"
+                    name="grupoEmpresaId"
+                    placeholder="{{ 'select_one_option' | translate }}"
+                    formControlName="grupoEmpresaId"
+                    [options]="grupoEmpresaIdOptions"
+                    [style]="{'width':'100%'}"
+                    [showClear]="formGroup.value.grupoEmpresaId"
+                    (onChange)="limpaCliente()"
+                >
+                </p-dropdown>
+            </div>
+            <div class="ui-g-12 ui-md-3 ui-sm-6 form-group required">
+                <label for="clienteId">{{"erp_fin.tcr_baixa.label_cliente" | translate}}</label>
+                <s-lookup 
+                    id="clienteId"
+                    name="clienteId"
+                    formControlName="clienteId"
+                    dataKey="id"
+                    lookupDisplayField="nome"
+                    [multiple]="false"
+                    [lookupSuggestions]="lookupCliente"
+                    [searchGridData]="clienteSearchGridData"
+                    [searchFields]="clienteSearchFields"
+                    [searchTotalRecords]="clienteSearchTotalRecords"
+                    (onLookupRequest)="obterTipoCliente($event, true)"
+                    (onSearchRequest)="obterTipoCliente($event)"
+                ></s-lookup>
+            </div>
+            <div class="ui-g-12 ui-md-3 ui-sm-6 form-group required">
+                <label for="dataBaixa">{{"erp_fin.tcr_baixa.label_data_baixa" | translate}}</label>
+                <p-calendar 
+                    inputId="dataBaixa" 
+                    name="dataBaixa" 
+                    formControlName="dataBaixa" 
+                    [disabled]="!formGroup.value.filialIdProcessamento || !formGroup.value.clienteId"
+                    [showIcon]="true" 
+                    [locale]="localeConfig.calendar"
+                    [dateFormat]="localeConfig.calendar.dateFormat"
+                    (onSelect)="verificacaoData()"
+                    (onBlur)="verificacaoData()">
+                </p-calendar>
+                <span class="ui-message ui-messages-error ng-star-inserted" *ngIf="!mensagemVerificaDatabaixa">{{"erp_fin.tcr_baixa.validacao_data_baixa_periodo_filial" | translate}}</span>
+            </div>
+        </div>
+    </div>
+    <p-confirmDialog id="confirm-dialog" acceptLabel="{{'yes' | translate}}" rejectLabel="{{'no' | translate}}"></p-confirmDialog>
+</div>

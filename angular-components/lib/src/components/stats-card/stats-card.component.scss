@@ -1,0 +1,151 @@
+@import "~@seniorsistemas/primeng-theme/dist/scss/_colors";
+@import "~@seniorsistemas/primeng-theme/dist/scss/_queries";
+
+$default-spacing: 15px;
+
+s-stats-card {
+    display: block;
+    position: relative;
+}
+
+s-stats-card .s-stats-card-overlay,
+s-stats-card .s-stats-card-background {
+    height: calc(100% - 2px);
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    width: calc(100% - 2px);
+}
+
+s-stats-card .s-stats-card-overlay {
+    background-color: black;
+    opacity: 0;
+    transition: opacity 200ms ease-out;
+    z-index: 1;
+}
+
+s-stats-card .s-stats-card-background {
+    background-color: $default-color;
+    z-index: 0;
+}
+
+s-stats-card .s-stats-card-container {
+    border: 1px solid transparent;
+    min-width: 120px;
+    overflow: hidden;
+
+    &:hover .s-stats-card-overlay {
+        opacity: 0.2;
+    }
+
+    &.s-stats-card-light:hover .s-stats-card-overlay {
+        opacity: 0.08;
+    }
+}
+
+s-stats-card .s-stats-card-container.s-stats-card-light {
+    border-color: $default-primary-color;
+}
+
+s-stats-card .s-stats-card-info-container {
+    padding: $default-spacing;
+    position: relative;
+    overflow: auto;
+    z-index: 2;
+}
+
+s-stats-card .s-stats-card-info-inner-container {
+    overflow: hidden;
+    position: relative;
+}
+
+p-panel s-stats-card .s-stats-card-container.s-stats-card-light {
+    border-color: transparent;
+}
+
+s-stats-card .s-stats-card-color .s-stats-card-icon-container {
+    background-color: $default-color;
+}
+
+s-stats-card .s-stats-card-icon-container {
+    float: left;
+    font-size: 24px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    transition: width 200ms ease-out;
+    width: 50px;
+}
+
+s-stats-card .s-stats-card-light * {
+    color: $primary-dark-text-color;
+
+    &.s-stats-card-icon {
+        color: $primary-light-text-color;
+    }
+
+    &.s-stats-card-label {
+        color: $secondary-dark-text-color;
+    }
+}
+
+s-stats-card .s-stats-card-text-container {
+    color: $primary-light-text-color;
+    float: left;
+    height: 50px;
+    max-width: calc(100% - 65px);
+    padding-left: $default-spacing;
+
+    &,
+    .s-stats-card-label,
+    .s-stats-card-value {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+}
+
+s-stats-card .s-stats-card-label {
+    font-weight: normal;
+    width: 100%;
+}
+
+s-stats-card .s-stats-card-value {
+    display: inline-block;
+    font-weight: bold;
+    font-size: 24px;
+    width: 100%;
+}
+
+@media #{$sm-devices} {
+    s-stats-card,
+    s-stats-card .s-stats-card-container,
+    s-stats-card .s-stats-card-text-container {
+        height: auto;
+    }
+
+    s-stats-card .s-stats-card-text-container {
+        max-width: calc(100% - 25px);
+        padding-left: 25px;
+
+        &,
+        .s-stats-card-label,
+        .s-stats-card-value {
+            overflow: visible;
+            white-space: normal;
+            word-break: break-all;
+        }
+    }
+
+    s-stats-card .s-stats-card-icon-container {
+        height: 100%;
+        left: 0;
+        position: absolute;
+        right: 0;
+        width: 10px;
+    }
+
+    s-stats-card .s-stats-card-icon {
+        display: none;
+    }
+}

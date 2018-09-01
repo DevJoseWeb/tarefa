@@ -1,0 +1,35 @@
+<p-panel styleClass="form-group">
+    <p-header>
+        <span>Dynamic Form</span>
+    </p-header>
+
+    <form novalidate>
+        <div class="ui-fluid">
+            <div class="ui-g">
+                <div class="ui-g-12">
+                    <textarea pInputTextarea name="fieldsConfig" [rows]="20" [(ngModel)]="fieldsConfig" style="resize: vertical;"></textarea>
+                </div>
+            </div>
+            <div class="ui-g" *ngIf="error">
+                <div class="ui-g-12">
+                    <div class="ui-messages ui-messages-error" style="display: block;">{{error}}</div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+</p-panel>
+
+<p-panel>
+    <p-header>
+        <span>Resultado</span>
+    </p-header>
+
+    <form [formGroup]="formGroup" novalidate>
+        <s-dynamic-form [fields]="dynamicFormFields" [form]="formGroup"></s-dynamic-form>
+    </form>
+
+    <p-footer>
+        <s-button id="save" type="submit" label="Save" (click)="save()"></s-button>
+    </p-footer>
+</p-panel>
