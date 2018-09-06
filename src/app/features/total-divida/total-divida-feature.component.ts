@@ -20,12 +20,12 @@ export class TotalDividaFeatureComponent implements OnInit {
     @ViewChild(TotalizadorFeatureComponent) public totalizadorFeature: TotalizadorFeatureComponent;
 
     constructor(
-        private activatedRoute: ActivatedRoute, 
-        private commonTitulo: CommonTitulosService, 
-        private commonFunctions: CommonFunctions) {}    
+        private activatedRoute: ActivatedRoute,
+        private commonTitulo: CommonTitulosService,
+        private commonFunctions: CommonFunctions) {}
 
     public ngOnInit() {
-        this.localeConfig()
+        this.localeConfig();
     }
 
     public localeConfig() {
@@ -44,8 +44,8 @@ export class TotalDividaFeatureComponent implements OnInit {
                 //this.totalizadorFeature.buscaTotais(response);
             },
             (error: Error) => {
-                this.commonFunctions.errorHandler(error)
-                console.error(error)
-            })
+                this.commonFunctions.errorHandler(error);
+                console.error(error);
+            });
     }
 }

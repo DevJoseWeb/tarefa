@@ -7,7 +7,7 @@ export class CommonTitulosService {
     private empresa: number;
     private filial: number;
     private titulo: any;
-    private filialProcessamento: number;
+    private filialProcessamento: number = 1; //TODO: Alterar para puxar informação do filtro
     private filiais: number[] = [46, 47]; //TODO: Alterar para puxar informação do filtro
     private totalDivida: number = 15000; //TODO: Alterar para puxar valor divida
     public filialOptions: any;
@@ -17,7 +17,7 @@ export class CommonTitulosService {
     public enviaEmpresaId(empresaId: number) {
         return this.empresa = empresaId;
     }
-    
+
     public enviaFilialId(filialId: number) {
         return this.filial = filialId;
     }

@@ -24,10 +24,10 @@ export class FiltrosServicesTCP {
                         fornecedor.label = `${fornecedor.idFornecedor} - ${fornecedor.nome}`;
                         fornecedor.value = fornecedor.idFornecedor;
                         return fornecedor;
-                    })
+                    });
                     return fornecedores;
                 })
-            )
+            );
     }
 
     public listarTransacoesTitulo(params: ITransacaoTituloInput): Observable<ITransacaoTituloOutput> {
@@ -38,10 +38,9 @@ export class FiltrosServicesTCP {
                         transacao.label = `${transacao.transacao} - ${transacao.descricao}`;
                         transacao.value = transacao.id;
                         return transacao;
-                    })
+                    });
                     return transacoes;
                 })
-            )
+            );
     }
-
 }

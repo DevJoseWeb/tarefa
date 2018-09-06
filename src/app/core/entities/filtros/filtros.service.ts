@@ -29,10 +29,10 @@ export class FiltrosServices extends EntityService<any> {
                     grupoEmpresa.label = `${grupoEmpresa.grupo} - ${grupoEmpresa.nomeGrupo}`;
                     grupoEmpresa.value = grupoEmpresa.id;
                     return grupoEmpresa;
-                })
+                });
                 return gruposEmpresas;
             })
-        )
+        );
     }
 
     public obterClientes(params: IObterClientesPorGrupoInput): Observable<IObterClientesPorGrupoOutput[]> {
@@ -43,10 +43,10 @@ export class FiltrosServices extends EntityService<any> {
                         cliente.label = `${cliente.id} - ${cliente.nome}`;
                         cliente.value = cliente.id;
                         return cliente;
-                    })
+                    });
                     return clientes;
                 })
-            )
+            );
     }
 
     public listarTipoTitulos(params: IObterTipoTituloInput): Observable<IObterTipoTitulosOutput> {
@@ -57,10 +57,10 @@ export class FiltrosServices extends EntityService<any> {
                         tipoTitulo.label = `${tipoTitulo.id} - ${tipoTitulo.descricao}`;
                         tipoTitulo.value = tipoTitulo.id;
                         return tipoTitulo;
-                    })
+                    });
                     return tiposTitulos;
                 })
-            )
+            );
     }
 
     public listarTransacoesTitulo(params: ITransacaoTituloInput): Observable<ITransacaoTituloOutput> {
@@ -71,14 +71,13 @@ export class FiltrosServices extends EntityService<any> {
                         transacao.label = `${transacao.transacao} - ${transacao.descricao}`;
                         transacao.value = transacao.id;
                         return transacao;
-                    })
+                    });
                     return transacoes;
                 })
-            )
+            );
     }
 
     public verificarDataBaixa(params: any) {
         return this.http.post(`${URL}/actions/verificarDataBaixa`, params)
     }
-
 }

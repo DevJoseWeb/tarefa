@@ -7,8 +7,12 @@ import { Component, Input } from "@angular/core";
 
 export class OperacoesBaixasComponent {
 
-    public baixaPorPagamento: boolean = true;
-    public baixaPorCancelamento: boolean = true;
+    public baixaPorPagamento: boolean = false;
+    public baixaPorCancelamento: boolean = false;
+    public baixaPorAbatimetno: boolean = false;
+    public baixaPorNegociacao: boolean = false;
+    public baixaPorLucroPerda: boolean = false;
+    public baixaPorDevolucao: boolean = false;
 
     @Input() public localeConfig: any;
 
@@ -30,4 +34,35 @@ export class OperacoesBaixasComponent {
        this.baixaPorCancelamento = event;
     }
 
+    public onBaixaPorAbatimento() {
+        this.baixaPorAbatimetno = true;
+    }
+
+    public fecharDialogAbatimento(event: boolean) {
+       this.baixaPorAbatimetno = event;
+    }
+
+    public onBaixaPorNegociacao() {
+        this.baixaPorNegociacao = true;
+    }
+
+    public fecharDialogNegociacao(event: boolean) {
+       this.baixaPorNegociacao = event;
+    }
+
+    public onBaixaPorLucroPerda() {
+        this.baixaPorLucroPerda = true;
+    }
+
+    public fecharDialogLucroPerda(event: boolean) {
+       this.baixaPorLucroPerda = event;
+    }
+
+    public onBaixaPorDevolucao() {
+        this.baixaPorDevolucao = true;
+    }
+
+    public fecharDialogDevolucao(event: boolean) {
+       this.baixaPorDevolucao = event;
+    }
 }

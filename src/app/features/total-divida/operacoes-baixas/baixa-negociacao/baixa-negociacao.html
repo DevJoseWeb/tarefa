@@ -1,0 +1,452 @@
+
+    
+    <form [formGroup]="formGroup">
+        <div class="ui-fluid">
+            <div class="ui-g">
+                <div class="ui-g-12 ui-md-8 ui-sm-6">
+                    <p-scrollPanel [style]="{width: '100%', height: '400px'}">
+                        <p-accordion [multiple]="true">
+
+                            <p-accordionTab header="Baixa por pagamento" [selected]="true">
+                            <!--Baixas por pagamento -->
+                              
+                                            <div class="ui-fluid">
+                                                <div class="ui-g">
+                                                    <div class="ui-g-12 ui-md-4 ui-sm-6">
+                                                        <div class="ui-g-12">
+                                                            <label for="valorBaixar">{{"erp_fin.tcr_baixa.label_valor_baixar" | translate}}</label>
+                                                            <input type="text" id="valorBaixar" formControlName="valorBaixar" name="valorBaixar" currencyMask [options]="localeConfig.currency" pInputText autocomplete="off"><!-- TODO: Inserir locale formatar moeda -->
+                                                        </div>
+                                                    </div>
+                                                    <div class="ui-g-12 ui-md-8 ui-sm-6">
+                                                        <div class="ui-g">
+                                                            <div class="ui-g-12 ui-md-6 ui-sm-12 required">
+                                                                <label for="transacaoBaixaPagamento">{{"erp_fin.tcr_baixa.label_transacao_baixa_pagamento_resumido" | translate}}</label>
+                                                                <p-dropdown
+                                                                    inputId="transacaoBaixaPagamento"
+                                                                    formControlName="transacaoBaixaPagamento"
+                                                                    placeholder="{{ 'select_one_option' | translate }}"
+                                                                    appendTo="body"
+                                                                    [options]="transacaoBaixaPagamentoOptions"
+                                                                    [style]="{'width':'100%'}"
+                                                                >
+                                                                </p-dropdown>
+                                                            </div>
+                                                            <div class="ui-g-12 ui-md-6 ui-sm-12 required">
+                                                                <label for="transacaoMovimento">{{"erp_fin.tcr_baixa.label_transacao_movimento" | translate}}</label>
+                                                                <p-dropdown
+                                                                    inputId="transacaoMovimento"
+                                                                    formControlName="transacaoMovimento"
+                                                                    placeholder="{{ 'select_one_option' | translate }}"
+                                                                    appendTo="body"
+                                                                    [options]="transacaoMovimentoOptions"
+                                                                    [style]="{'width':'100%'}"
+                                                                >
+                                                                </p-dropdown>
+                                                            </div>
+                                                        </div>
+                                                        <div class="ui-g">
+                                                            <div class="ui-g-12 ui-md-6 ui-sm-12 required">
+                                                                <label for="dataBaixa">{{"erp_fin.tcr_baixa.label_data_baixa" | translate}}</label>
+                                                                <p-calendar 
+                                                                    inputId="dataBaixa" 
+                                                                    name="dataBaixa" 
+                                                                    formControlName="dataBaixa" 
+                                                                    appendTo="body"
+                                                                    [showIcon]="true"
+                                                                    [locale]="localeConfig.calendar"
+                                                                    [dateFormat]="localeConfig.calendar.dateFormat"
+                                                                    (onSelect)="verificarDataBaixa()"
+                                                                    (onBlur)="verificarDataBaixa()"
+                                                                >
+                                                                </p-calendar>
+                                                                <span class="ui-message ui-messages-error ng-star-inserted" *ngIf="!mensagemVerificaDatabaixa">{{"erp_fin.tcr_baixa.validacao_data_baixa_periodo_filial" | translate}}</span>
+                                                            </div>
+                                                            <div class="ui-g-12 ui-md-6 ui-sm-12 required">
+                                                                <label for="contaInterna">{{"erp_fin.tcr_baixa.label_conta_interna" | translate}}</label>
+                                                                <p-dropdown
+                                                                    inputId="contaInterna"
+                                                                    formControlName="contaInterna"
+                                                                    placeholder="{{ 'select_one_option' | translate }}"
+                                                                    appendTo="body"
+                                                                    [options]="contaInternaOptions"
+                                                                    [style]="{'width':'100%'}"
+                                                                >
+                                                                </p-dropdown>
+                                                            </div>
+                                                        </div>
+                                                        <div class="ui-g">
+                                                            <div class="ui-g-12 ui-md-6 ui-sm-12">
+                                                                <label for="contaInternaTroco">{{"erp_fin.tcr_baixa.label_conta_interna_troco" | translate}}</label>
+                                                                <p-dropdown
+                                                                    inputId="contaInternaTroco"
+                                                                    formControlName="contaInternaTroco"
+                                                                    placeholder="{{ 'select_one_option' | translate }}"
+                                                                    appendTo="body"
+                                                                    [options]="contaInternaTrocoOptions"
+                                                                    [style]="{'width':'100%'}"
+                                                                    [disabled]="mostraCampoAdicional"
+                                                                >
+                                                                </p-dropdown>
+                                                            </div>
+                                                            <div class="ui-g-12 ui-md-6 ui-sm-12" [class.required]="!mostraCampoAdicional">
+                                                                <label for="transacaoMovimentoTroco">{{"erp_fin.tcr_baixa.label_transacao_movimento_troco_resumido" | translate}}</label>
+                                                                <p-dropdown
+                                                                    inputId="transacaoMovimentoTroco"
+                                                                    formControlName="transacaoMovimentoTroco"
+                                                                    placeholder="{{ 'select_one_option' | translate }}"
+                                                                    appendTo="body"
+                                                                    [options]="transacaoMovimentoTrocoOptions"
+                                                                    [style]="{'width':'100%'}"
+                                                                    [disabled]="mostraCampoAdicional"
+                                                                >
+                                                                </p-dropdown>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                
+                            </p-accordionTab>
+                            <!--Baixas por substituição -->
+                            <p-accordionTab header="Baixa por substituição">
+                
+                                            <div class="ui-fluid">
+                                                <div class="ui-g">
+
+                                                     <div class="ui-g-12 ui-md-8 ui-sm-6">
+                                                        <div class="ui-g">
+                                                            <div class="ui-g-12 ui-md-6 ui-sm-12 required">
+                                                                <label for="transacaoMovimentoSubstituicao">{{"erp_fin.tcr_baixa.label_baixa_substituicao" | translate}}</label>
+                                                                <p-dropdown
+                                                                    inputId="transacaoMovimentoSubstituicao"
+                                                                    formControlName="transacaoMovimentoSubstituicao"
+                                                                    placeholder="{{ 'select_one_option' | translate }}"
+                                                                    appendTo="body"
+                                                                    [options]="transacaoBaixaSubstituicaoOptions"
+                                                                    [style]="{'width':'100%'}"
+                                                                >
+                                                                </p-dropdown>
+                                                            </div>
+                                                            <div class="ui-g-12 ui-md-6 ui-sm-12 required">
+                                                                <label for="transacaoBaixaTransacaoEntradaSubistuicao">{{"erp_fin.tcr_baixa.label_transacao_movimento" | translate}}</label>
+                                                                <p-dropdown
+                                                                    inputId="transacaoBaixaTransacaoEntradaSubistuicao"
+                                                                    formControlName="transacaoBaixaTransacaoEntradaSubistuicao"
+                                                                    placeholder="{{ 'select_one_option' | translate }}"
+                                                                    appendTo="body"
+                                                                    [options]="transacaoBaixaTransacaoEntradaSubstituicaoOptions"
+                                                                    [style]="{'width':'100%'}"
+                                                                >
+                                                                </p-dropdown>
+                                                            </div>
+                                                      </div>
+                                                    </div>
+                                                    
+                                                    <div class="ui-g-12 ui-md-4 ui-sm-6">
+                                                            <div class="ui-g-12">
+                                                                    <label for="transacaoBaixaTransacaoEntradaSubistuicao">{{"erp_fin.tcr_baixa.label_transacao_movimento" | translate}}</label>
+                                                                    <p-spinner formControlName="quantidadeParcelas"  [min]="0" [max]="99"></p-spinner>
+                                                            </div>
+                                                    </div>
+                                                    
+                                                    <div class="ui-g-12 ui-md-8 ui-sm-6">
+                                                            <div class="ui-g">
+
+                                                                <div class="ui-g-12 ui-md-6 ui-sm-12 required">
+                                                                        <label for="dataVencimentoInicial">{{"erp_fin.tcr_baixa.label_data_vencimento_primeiro" | translate}}</label>
+                                                                        <p-calendar 
+                                                                            inputId="dataVencimentoInicial" 
+                                                                            name="dataVencimentoInicial" 
+                                                                            formControlName="dataVencimentoInicial" 
+                                                                            [showIcon]="true" 
+                                                                            [locale]="localeConfig.calendar"
+                                                                            [dateFormat]="localeConfig.calendar.dateFormat"
+                                                                            (onSelect)="verificarData()"
+                                                                            (onBlur)="verificarData()">
+                                                                        </p-calendar>
+                                                                        <span class="ui-message ui-messages-error ng-star-inserted" *ngIf="mensagemValidacaoData">{{mensagemValidacaoData}}</span>
+                                                                          
+                                                                </div>
+                                                                <div class="ui-g-12 ui-md-6 ui-sm-12 required">
+                                                                        <label for="clienteId">{{"erp_fin.tcr_baixa.label_cliente" | translate}}</label>
+                                                                        <p-dropdown
+                                                                            inputId="clienteId"
+                                                                            formControlName="clienteId"
+                                                                            placeholder="{{ 'select_one_option' | translate }}"
+                                                                            appendTo="body"
+                                                                            [options]="transacaoMovimentoTrocoOptions"
+                                                                            [style]="{'width':'100%'}"
+                                                                        >
+                                                                        </p-dropdown>
+                                                                </div>
+                                                          </div>
+                                                        </div>
+                                                        <div class="ui-g-12 ui-md-4 ui-sm-6">
+                                                                <div class="ui-g-12">
+                                                                <label for="valorBaixar">{{"erp_fin.tcr_baixa.label_valor_baixar_subistituir" | translate}}</label>
+                                                                <input type="text" id="valorBaixar" formControlName="valorBaixar" name="valorBaixar" currencyMask [options]="localeConfig.currency"
+                                                                    pInputText autocomplete="off" pInputText ><!-- TODO: Inserir locale formatar moeda -->
+                                                                </div>   
+                                                        </div>
+                                                </div>
+                                        </div>
+                
+                            </p-accordionTab>
+                            <!--Baixas por crédito -->
+                            <p-accordionTab header="Baixa por crédito">
+                                 <form [formGroup]="formGroup">
+                                            <div class="ui-fluid">
+                                                <div class="ui-g">
+                                                    <div class="ui-g-12 ui-md-4 ui-sm-6">
+                                                        <div class="ui-g-12">
+                                                            <label for="valorBaixar">{{"erp_fin.tcr_baixa.label_valor_baixar" | translate}}</label>
+                                                            <input type="text" id="valorBaixar" formControlName="valorBaixar" name="valorBaixar" currencyMask [options]="localeConfig.currency" pInputText autocomplete="off"><!-- TODO: Inserir locale formatar moeda -->
+                                                        </div>
+                                                    </div>
+                                                    <div class="ui-g-12 ui-md-8 ui-sm-6">
+                                                        <div class="ui-g">
+                                                            <div class="ui-g-12 ui-md-6 ui-sm-12 required">
+                                                                <label for="transacaoBaixaPagamento">{{"erp_fin.tcr_baixa.label_transacao_baixa_pagamento" | translate}}</label>
+                                                                <p-dropdown
+                                                                    inputId="transacaoBaixaPagamento"
+                                                                    formControlName="transacaoBaixaPagamento"
+                                                                    placeholder="{{ 'select_one_option' | translate }}"
+                                                                    appendTo="body"
+                                                                    [options]="transacaoBaixaPagamentoOptions"
+                                                                    [style]="{'width':'100%'}"
+                                                                >
+                                                                </p-dropdown>
+                                                            </div>
+                                                            <div class="ui-g-12 ui-md-6 ui-sm-12 required">
+                                                                <label for="transacaoMovimento">{{"erp_fin.tcr_baixa.label_transacao_movimento" | translate}}</label>
+                                                                <p-dropdown
+                                                                    inputId="transacaoMovimento"
+                                                                    formControlName="transacaoMovimento"
+                                                                    placeholder="{{ 'select_one_option' | translate }}"
+                                                                    appendTo="body"
+                                                                    [options]="transacaoMovimentoOptions"
+                                                                    [style]="{'width':'100%'}"
+                                                                >
+                                                                </p-dropdown>
+                                                            </div>
+                                                        </div>
+                                                        <div class="ui-g">
+                                                            <div class="ui-g-12 ui-md-6 ui-sm-12 required">
+                                                                <label for="dataBaixa">{{"erp_fin.tcr_baixa.label_data_baixa" | translate}}</label>
+                                                                <p-calendar 
+                                                                    inputId="dataBaixa" 
+                                                                    name="dataBaixa" 
+                                                                    formControlName="dataBaixa" 
+                                                                    appendTo="body"
+                                                                    [showIcon]="true"
+                                                                    [locale]="localeConfig.calendar"
+                                                                    [dateFormat]="localeConfig.calendar.dateFormat"
+                                                                    (onSelect)="verificarDataBaixa()"
+                                                                    (onBlur)="verificarDataBaixa()"
+                                                                >
+                                                                </p-calendar>
+                                                                <span class="ui-message ui-messages-error ng-star-inserted" *ngIf="!mensagemVerificaDatabaixa">{{"erp_fin.tcr_baixa.validacao_data_baixa_periodo_filial" | translate}}</span>
+                                                            </div>
+                                                            <div class="ui-g-12 ui-md-6 ui-sm-12 required">
+                                                                <label for="contaInterna">{{"erp_fin.tcr_baixa.label_conta_interna" | translate}}</label>
+                                                                <p-dropdown
+                                                                    inputId="contaInterna"
+                                                                    formControlName="contaInterna"
+                                                                    placeholder="{{ 'select_one_option' | translate }}"
+                                                                    appendTo="body"
+                                                                    [options]="contaInternaOptions"
+                                                                    [style]="{'width':'100%'}"
+                                                                >
+                                                                </p-dropdown>
+                                                            </div>
+                                                        </div>
+                                                        <div class="ui-g">
+                                                            <div class="ui-g-12 ui-md-6 ui-sm-12">
+                                                                <label for="contaInternaTroco">{{"erp_fin.tcr_baixa.label_conta_interna_troco" | translate}}</label>
+                                                                <p-dropdown
+                                                                    inputId="contaInternaTroco"
+                                                                    formControlName="contaInternaTroco"
+                                                                    placeholder="{{ 'select_one_option' | translate }}"
+                                                                    appendTo="body"
+                                                                    [options]="contaInternaTrocoOptions"
+                                                                    [style]="{'width':'100%'}"
+                                                                    [disabled]="mostraCampoAdicional"
+                                                                >
+                                                                </p-dropdown>
+                                                            </div>
+                                                            <div class="ui-g-12 ui-md-6 ui-sm-12" [class.required]="!mostraCampoAdicional">
+                                                                <label for="transacaoMovimentoTroco">{{"erp_fin.tcr_baixa.label_transacao_movimento_troco" | translate}}</label>
+                                                                <p-dropdown
+                                                                    inputId="transacaoMovimentoTroco"
+                                                                    formControlName="transacaoMovimentoTroco"
+                                                                    placeholder="{{ 'select_one_option' | translate }}"
+                                                                    appendTo="body"
+                                                                    [options]="transacaoMovimentoTrocoOptions"
+                                                                    [style]="{'width':'100%'}"
+                                                                    [disabled]="mostraCampoAdicional"
+                                                                >
+                                                                </p-dropdown>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                 </form>
+                            </p-accordionTab>
+                            <!--Baixas por compensação -->
+                            <p-accordionTab header="Baixa por compensação">
+                                 <form [formGroup]="formGroup">
+                                    <div class="ui-fluid">
+                                                <div class="ui-g">
+                                                    <div class="ui-g-12 ui-md-4 ui-sm-6">
+                                                        <div class="ui-g-12">
+                                                            <label for="valorBaixar">{{"erp_fin.tcr_baixa.label_valor_baixar" | translate}}</label>
+                                                            <input type="text" id="valorBaixar" formControlName="valorBaixar" name="valorBaixar" currencyMask [options]="localeConfig.currency" pInputText autocomplete="off"><!-- TODO: Inserir locale formatar moeda -->
+                                                        </div>
+                                                    </div>
+                                                    <div class="ui-g-12 ui-md-8 ui-sm-6">
+                                                        <div class="ui-g">
+                                                            <div class="ui-g-12 ui-md-6 ui-sm-12 required">
+                                                                <label for="transacaoBaixaPagamento">{{"erp_fin.tcr_baixa.label_transacao_baixa_pagamento" | translate}}</label>
+                                                                <p-dropdown
+                                                                    inputId="transacaoBaixaPagamento"
+                                                                    formControlName="transacaoBaixaPagamento"
+                                                                    placeholder="{{ 'select_one_option' | translate }}"
+                                                                    appendTo="body"
+                                                                    [options]="transacaoBaixaPagamentoOptions"
+                                                                    [style]="{'width':'100%'}"
+                                                                >
+                                                                </p-dropdown>
+                                                            </div>
+                                                            <div class="ui-g-12 ui-md-6 ui-sm-12 required">
+                                                                <label for="transacaoMovimento">{{"erp_fin.tcr_baixa.label_transacao_movimento" | translate}}</label>
+                                                                <p-dropdown
+                                                                    inputId="transacaoMovimento"
+                                                                    formControlName="transacaoMovimento"
+                                                                    placeholder="{{ 'select_one_option' | translate }}"
+                                                                    appendTo="body"
+                                                                    [options]="transacaoMovimentoOptions"
+                                                                    [style]="{'width':'100%'}"
+                                                                >
+                                                                </p-dropdown>
+                                                            </div>
+                                                        </div>
+                                                        <div class="ui-g">
+                                                            <div class="ui-g-12 ui-md-6 ui-sm-12 required">
+                                                                <label for="dataBaixa">{{"erp_fin.tcr_baixa.label_data_baixa" | translate}}</label>
+                                                                <p-calendar 
+                                                                    inputId="dataBaixa" 
+                                                                    name="dataBaixa" 
+                                                                    formControlName="dataBaixa" 
+                                                                    appendTo="body"
+                                                                    [showIcon]="true"
+                                                                    [locale]="localeConfig.calendar"
+                                                                    [dateFormat]="localeConfig.calendar.dateFormat"
+                                                                    (onSelect)="verificarDataBaixa()"
+                                                                    (onBlur)="verificarDataBaixa()"
+                                                                >
+                                                                </p-calendar>
+                                                                <span class="ui-message ui-messages-error ng-star-inserted" *ngIf="!mensagemVerificaDatabaixa">{{"erp_fin.tcr_baixa.validacao_data_baixa_periodo_filial" | translate}}</span>
+                                                            </div>
+                                                            <div class="ui-g-12 ui-md-6 ui-sm-12 required">
+                                                                <label for="contaInterna">{{"erp_fin.tcr_baixa.label_conta_interna" | translate}}</label>
+                                                                <p-dropdown
+                                                                    inputId="contaInterna"
+                                                                    formControlName="contaInterna"
+                                                                    placeholder="{{ 'select_one_option' | translate }}"
+                                                                    appendTo="body"
+                                                                    [options]="contaInternaOptions"
+                                                                    [style]="{'width':'100%'}"
+                                                                >
+                                                                </p-dropdown>
+                                                            </div>
+                                                        </div>
+                                                        <div class="ui-g">
+                                                            <div class="ui-g-12 ui-md-6 ui-sm-12">
+                                                                <label for="contaInternaTroco">{{"erp_fin.tcr_baixa.label_conta_interna_troco" | translate}}</label>
+                                                                <p-dropdown
+                                                                    inputId="contaInternaTroco"
+                                                                    formControlName="contaInternaTroco"
+                                                                    placeholder="{{ 'select_one_option' | translate }}"
+                                                                    appendTo="body"
+                                                                    [options]="contaInternaTrocoOptions"
+                                                                    [style]="{'width':'100%'}"
+                                                                    [disabled]="mostraCampoAdicional"
+                                                                >
+                                                                </p-dropdown>
+                                                            </div>
+                                                            <div class="ui-g-12 ui-md-6 ui-sm-12" [class.required]="!mostraCampoAdicional">
+                                                                <label for="transacaoMovimentoTroco">{{"erp_fin.tcr_baixa.label_transacao_movimento_troco" | translate}}</label>
+                                                                <p-dropdown
+                                                                    inputId="transacaoMovimentoTroco"
+                                                                    formControlName="transacaoMovimentoTroco"
+                                                                    placeholder="{{ 'select_one_option' | translate }}"
+                                                                    appendTo="body"
+                                                                    [options]="transacaoMovimentoTrocoOptions"
+                                                                    [style]="{'width':'100%'}"
+                                                                    [disabled]="mostraCampoAdicional"
+                                                                >
+                                                                </p-dropdown>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                    </div>
+                                 </form>
+                            </p-accordionTab>
+             
+                        </p-accordion>
+                    </p-scrollPanel>
+
+                </div>
+
+                <div class="ui-g-12 ui-md-4 ui-sm-6">
+                    <p-fieldset legend="Negociação simulada">
+
+                            <div class="ui-g-12 ui-md-8 ui-sm-6">
+                                  <div class="ui-g">
+                                        <div class="ui-g-12">
+                                            <label>{{"erp_fin.tcr_baixa.label_saldo_devedor_re" | translate}}</label>
+                                            <input type="text" name="saldoDevedor" [value]="valorDivida | localizedCurrency | async" pInputText disabled>
+                                        </div>
+                                    </div>
+                            </div> 
+
+                            <div class="ui-g">
+                                         
+                                            <label>{{"erp_fin.tcr_baixa.label_saldo_devedor_re" | translate}}</label>
+                                            <input type="text" name="saldoDevedor" [value]="valorDivida | localizedCurrency | async" pInputText disabled>
+                                    
+                                    </div>
+                                    <div class="ui-g-12 ui-md-8 ui-sm-6">
+                                            <div class="ui-g">
+                                                  <div class="ui-g-12">
+                                                      <label>{{"erp_fin.tcr_baixa.label_saldo_devedor_re" | translate}}</label>
+                                                      <input type="text" name="saldoDevedor" [value]="valorDivida | localizedCurrency | async" pInputText disabled>
+                                                  </div>
+                                              </div>
+                                      </div> 
+                                    <div class="ui-g">
+                                                 
+                                            <label>{{"erp_fin.tcr_baixa.label_saldo_devedor_re" | translate}}</label>
+                                            <input type="text" name="saldoDevedor" [value]="valorDivida | localizedCurrency | async" pInputText disabled>
+                                               
+                                     </div>
+                        
+                    </p-fieldset>
+                </div>
+            </div>
+        </div>
+      </form>
+
+    <p-footer>
+            <div class="ui-g pull-right">
+                <div class="ui-g-12 ui-md-12">
+                    <button id="cancelar" type="button" class="ui-button-link" pButton label="{{'cancel' | translate}}"
+                        (click)="btnCancelar()"></button>
+                    <button id="visualizar" type="button" pButton label="{{'detail' | translate}}"
+                        (click)="btnVisualizar()"></button>
+                </div>
+            </div>
+    </p-footer>

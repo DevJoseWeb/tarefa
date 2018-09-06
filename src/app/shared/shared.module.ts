@@ -30,6 +30,10 @@ import { KeyFilterModule } from 'primeng/keyfilter';
 import { UppercaseDirective } from "~app/core/directives/uppercase.directive";
 import { ChipsModule } from 'primeng/chips';
 import { DialogModule } from "primeng/dialog";
+import { AccordionModule } from 'primeng/accordion';
+import { FieldsetModule } from 'primeng/fieldset';
+import { ScrollPanelModule } from 'primeng/scrollpanel';
+import { SpinnerModule } from 'primeng/spinner';
 
 @NgModule({
     exports: [
@@ -62,7 +66,11 @@ import { DialogModule } from "primeng/dialog";
         KeyFilterModule,
         UppercaseDirective,
         DialogModule,
-        ChipsModule
+        ChipsModule,
+        AccordionModule,
+        FieldsetModule,
+        ScrollPanelModule,
+        SpinnerModule
     ],
     declarations: [ UppercaseDirective ]
   })

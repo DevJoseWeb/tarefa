@@ -17,5 +17,5 @@ export class ListarContaInterna {
         public empresaId: number,
         public filiaisIds: number[],
         public tipoConta: number[]
-    ){}
+    ) {}
 }

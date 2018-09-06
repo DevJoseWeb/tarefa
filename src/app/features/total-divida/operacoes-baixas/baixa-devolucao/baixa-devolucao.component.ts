@@ -13,13 +13,13 @@ import { CommonFunctions } from "~src/app/shared/common-function.service";
 import { CommonTitulosService } from "~src/app/shared/common-titulos.service";
 
 @Component({
-    selector: "baixa-cancelamento",
-    templateUrl: "./baixa-cancelamento.html"
+    selector: "baixa-devolucao",
+    templateUrl: "./baixa-devolucao.html"
 })
 
-export class BaixaCancelamentoComponent implements OnInit {
+export class BaixaDevolucaoComponent implements OnInit {
     public formGroup: FormGroup;
-    public transacaoBaixaCancelamentoOptions: any;
+    public transacaoBaixaDevolucaoOptions: any;
     public transacaoMovimentoOptions: any;
     public contaInternaOptions: any;
     public contaInternaTrocoOptions: any;
@@ -48,36 +48,35 @@ export class BaixaCancelamentoComponent implements OnInit {
         this.empresaId = this.commonTituloService.empresaId;
         this.filialId = this.commonTituloService.filiaisId;
         this.filialProcessamentoId = this.commonTituloService.filialProcessamentoId;
-      }
+    }
 
-        public ngOnInit() {
-            this.createForm();
-            this.obterTransacaoBaixaCancelamento();
-        }
+    public ngOnInit() {
+        this.createForm();
+        this.obterTransacaoBaixaDevolucao();
+    }
 
-        public createForm() {
-            this.formGroup = this.formBuilder.group({
-                id: ['', Validators.required],
-                dataBaixa: [moment().toDate(), Validators.required],
-                transacaoBaixaCancelamento: ['', Validators.required],
-                valorBaixar: [this.valorDivida]
-            });
-        }
+    public createForm() {
+        this.formGroup = this.formBuilder.group({
+            dataBaixa: [moment().toDate(), Validators.required],
+            transacaoBaixaDevolucao: ['', Validators.required],
+            valorBaixar: [this.valorDivida]
+        });
+    }
 
-       public obterTransacaoBaixaCancelamento() {
+    public obterTransacaoBaixaDevolucao() {
         const params = new TransacaoEntradaTituloInput(
             this.empresaId,
             3,
             "CRB",
-            "CA",
+            "LP",
             "A"
         );
 
         this.filtrosServices.listarTransacoesTitulo(params)
-            .subscribe(response => this.transacaoBaixaCancelamentoOptions = response.transacoes);
+            .subscribe(response => this.transacaoBaixaDevolucaoOptions = response.transacoes);
     }
 
-    public verificarDataBaixa() {
+     public verificarDataBaixa() {
         const params = {
             filialProcessamentoId: this.filialProcessamentoId,
             dataBaixa: this.commonFunctions.converterData(this.formGroup.value.dataBaixa)
@@ -87,14 +86,12 @@ export class BaixaCancelamentoComponent implements OnInit {
             .subscribe((response: any) => this.mensagemVerificaDatabaixa = response.dataValida);
     }
 
-       public btnVisualizar() { }
+    public btnVisualizar() { }
 
-       public btnCancelBaixarTitulos() {
-           this.formGroup.reset();
-           this.ngOnInit();
-           this.fecharDialog.emit(false);
-       }
+    public btnCancelar() {
+        this.formGroup.reset();
+        this.ngOnInit();
+        this.fecharDialog.emit(false);
+    }
 }
-
-
 

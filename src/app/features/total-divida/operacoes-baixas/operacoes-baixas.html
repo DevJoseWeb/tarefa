@@ -2,7 +2,7 @@
     <div class="ui-g-4 ui-md-4 ui-sm-6 card-operacao">
         <p-card>
             <div class="card-operacao_content">
-                <p-button styleClass="ui-button-link">{{"erp_fin.tcr_baixa.baixa_abatimento" | translate}}
+                <p-button styleClass="ui-button-link" (onClick)="onBaixaPorAbatimento()">{{"erp_fin.tcr_baixa.baixa_abatimento" | translate}}
                 </p-button>
             </div>
         </p-card>
@@ -18,7 +18,7 @@
     <div class="ui-g-4 ui-md-4 ui-sm-6 card-operacao">
         <p-card>
             <div class="card-operacao_content">
-                <p-button styleClass="ui-button-link">{{"erp_fin.tcr_baixa.baixa_devolucao" | translate}}
+                <p-button styleClass="ui-button-link" (onClick)="onBaixaPorDevolucao()">{{"erp_fin.tcr_baixa.baixa_devolucao" | translate}}
                 </p-button>
             </div>
         </p-card>
@@ -26,7 +26,7 @@
     <div class="ui-g-4 ui-md-4 ui-sm-6 card-operacao">
         <p-card>
             <div class="card-operacao_content">
-                <p-button styleClass="ui-button-link">{{"erp_fin.tcr_baixa.baixa_lucros_perdas" | translate}}
+                <p-button styleClass="ui-button-link" (onClick)="onBaixaPorLucroPerda()">{{"erp_fin.tcr_baixa.baixa_lucros_perdas" | translate}}
                 </p-button>
             </div>
         </p-card>
@@ -34,7 +34,7 @@
     <div class="ui-g-4 ui-md-4 ui-sm-6 card-operacao">
         <p-card>
             <div class="card-operacao_content">
-                <p-button styleClass="ui-button-link">{{"erp_fin.tcr_baixa.baixa_negociacao" | translate}}
+                <p-button styleClass="ui-button-link" (onClick)="onBaixaPorNegociacao()">{{"erp_fin.tcr_baixa.baixa_negociacao" | translate}}
                 </p-button>
             </div>
         </p-card>
@@ -49,19 +49,64 @@
     </div>
 </div>
 
+<!--Painel Baixa por Pagamento-->
 <p-dialog 
     header="Baixa por Pagamento" 
     [(visible)]="baixaPorPagamento" 
     [modal]="true" 
     [width]="960"
+ 
 >
 <baixa-pagamento [localeConfig]="localeConfig" (fecharDialog)="fecharDialogPagamento($event)"></baixa-pagamento>
 </p-dialog>
 
+<!--Painel Baixa por Cancelamento-->
 <p-dialog header="Baixa por Cancelamento"
     [(visible)]="baixaPorCancelamento" 
     [modal]="true" 
     [width]="960"
+   
 >
 <baixa-cancelamento [localeConfig]="localeConfig" (fecharDialog)="fecharDialogCancelamento($event)"></baixa-cancelamento>
 </p-dialog> 
+
+<!--Painel Baixa por Abatimento-->
+<p-dialog header="Baixa por Abatimento"
+    [(visible)]="baixaPorAbatimetno" 
+    [modal]="true" 
+    [width]="960"
+    
+>
+<baixa-abatimento [localeConfig]="localeConfig" (fecharDialog)="fecharDialogAbatimento($event)"></baixa-abatimento>
+</p-dialog>
+
+<!--Painel Baixa por Negociação-->
+<p-dialog header="Baixa por Negociação"
+    [(visible)]="baixaPorNegociacao" 
+    [modal]="true" 
+    [width]="960"
+    [height]="600"
+>
+<baixa-negociacao [localeConfig]="localeConfig" (fecharDialog)="fecharDialogNegociacao($event)"></baixa-negociacao>
+</p-dialog>
+
+<!--Painel Baixa por Lucro Perda-->
+<p-dialog header="Baixa por Lucro Perda"
+    [(visible)]="baixaPorLucroPerda" 
+    [modal]="true" 
+    [width]="960"
+    
+ 
+>
+<baixa-lucroperda [localeConfig]="localeConfig" (fecharDialog)="fecharDialogLucroPerda($event)"></baixa-lucroperda>
+</p-dialog>
+
+<!--Painel Baixa por Devolução-->
+<p-dialog header="Baixa por Devolução"
+    [(visible)]="baixaPorDevolucao" 
+    [modal]="true" 
+    [width]="960"
+  
+>
+<baixa-devolucao [localeConfig]="localeConfig" (fecharDialog)="fecharDialogDevolucao($event)"></baixa-devolucao>
+</p-dialog>
